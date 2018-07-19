@@ -1,0 +1,29 @@
+<canvas id="myCanvas" height=500 width=500>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function draw()
+{     
+   var canvas=document.getElementById("myCanvas");
+   if(canvas == null)
+         return false;
+    var context = canvas.getContext("2d");
+     //先绘制画布的底图
+     context.fillStyle="yellow";
+     context.fillRect(0,0,400,350);     
+     //用循环绘制10个圆形
+     var n = 0;
+     for(var i=0 ;i<10;i++){
+         //开始创建路径，因为圆本质上也是一个路径，这里向canvas说明要开始画了，这是起点
+        context.beginPath();
+        context.arc(i*25,i*25,i*10,0,Math.PI*2,true);
+        context.fillStyle="rgba(255,0,0,0.25)";
+        context.fill();        //填充刚才所画的圆形
+     }
+  }
+window.addEventListener("load", draw, true);
+</script>
+
+
+
+
+
+

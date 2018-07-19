@@ -1,0 +1,15 @@
+<HTML>
+<HEAD><TITLE>变量的作用域实例</TITLE></HEAD>
+<BODY>
+<Script Language ="JavaScript">
+	var a = 100;			// 全局变量
+	function setNumber() {
+		var a = 10;	// 局部变量
+		document.write(a);	// 打印局部变量a
+	} 
+	setNumber();
+	document.write("<BR>"); 
+	document.write(a);		// 打印全局变量a
+</Script>
+</BODY>
+</HTML>

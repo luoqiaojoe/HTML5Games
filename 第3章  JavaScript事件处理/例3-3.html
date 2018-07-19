@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>取消<a>标记的默认动作</title>
+</head>
+<body>
+<a id="demo" href="http://www.baidu.com" target="_blank">点击这里试试</a>
+<script type="text/javascript">
+    document.getElementById("demo").onclick=function(e){
+        var eve = e || window.event;
+        try{  // 使用 try...catch 语句避免浏览器出现错误提示
+            eve.preventDefault();  // 非 IE 浏览器
+        }catch(e){
+            eve.returnValue = false;  // IE8.0 及其以下版本
+        }
+    }
+</script>
+</body>
+</html>

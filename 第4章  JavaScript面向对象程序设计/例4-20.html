@@ -1,0 +1,17 @@
+<html>
+<HEAD><TITLE>演示节点本身</TITLE></HEAD>
+<body>
+<div id="demo">
+    <div id="thisNode">点击删除我</div>
+</div>
+<script type="text/javascript">
+    document.getElementById("thisNode").onclick=function(){
+        this.parentNode.removeChild(this);
+    }
+</script>
+</body>
+</html>
+
+
+
+

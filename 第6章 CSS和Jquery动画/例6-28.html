@@ -1,0 +1,24 @@
+<html>
+<head>
+<style type="text/css">
+div{
+  background:#060;
+  width:300px;
+  height:300px;
+  color:red
+}
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script> 
+$(document).ready(function(){
+  $("#up").click(function(){
+    $("div").fadeOut(5000,"linear",function(){alert('动画效果完成！')});
+  })
+})
+</script> 
+</head>
+<body>
+  <div></div>
+  <button id="up">点击查看效果</button>
+</body>
+</html>

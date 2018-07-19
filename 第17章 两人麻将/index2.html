@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body onkeydown="Press();">
+<canvas id="box" onclick="Click();" width=1400px height=760px style="background-color:black"></canvas>
+<div>
+ <input id="Mo_Cardbutton" type="button" value="摸  牌" onclick="Mo_Card()" disabled="false">
+ <input id="Peng_Cardbutton" type="button" value="碰  牌" onclick="Peng_Card()" disabled="false">
+ <input id="Gang_Cardbutton" type="button" value="杠  牌" onclick="Gang_Card()" disabled="false">
+  <input id="Hu_Cardbutton" type="button" value="胡  牌" onclick="PlayerHu_Card()" disabled="false">
+ <input id="Out_Cardbutton" type="button" value="出  牌" onclick="Out_Card()"disabled="false">
+ <input id="Infobutton" type="button" value="游戏说明" onclick="DoHelp()" disabled="true" >
+</div>
+
+<script src="api2.js"></script>
+<script src="main2.js"></script>
+
+<script type="text/javascript">	
+	var cxt;
+	var cardbg_img;
+	var cards=[]; 
+	//状态常量
+	var game_s_sessioninit = 1;
+	var game_s_sendcard = 2;
+
+	var game_s_com1 = 7;
+	var game_s_com2 = 8;
+	var game_s_human1 = 9;
+	var game_s_human2 = 10;
+	var game_s_seamo = 11;
+	var game_s_nohu = 12;
+	var game_s_sessionend = 13;
+	var game_s_score = 14;
+	var game_s = game_s_sessioninit ;//保存游戏现在的状态
+
+
+	var btn_down_touch = 0;
+	var AccOk = 1;
+	var Menu_Loop = true;
+	var Game_Loop = true;
+
+	var zhuang = 1;//1电脑是庄家，2玩家
+
+	var mark=[];
+	var clsmark=[];
+	var clsct=[];
+	//判断
+	var mk=[];
+	var jiang=0;
+	var mpos=1;
+	var clickpos=0;
+	var outpos=0;
+	//玩家金币数、id、暗牌列表、明牌列表、已出的牌列表
+	var player = { gold: 10000, id: 2, blacklist: [], whitelist: [], outedlist: [] };
+	//电脑金币数、id、暗牌列表、明牌列表、已出的牌列表
+	var computer ={gold:10000,id:1,blacklist:[],whitelist:[],outedlist:[]};
+    //桌面上的牌
+	var desktop ={cardlist:[],sealist:[],outedlist:[],outcount:0};
+	var winner,loser;//赢家输家
+	var xxs=0;
+	var xxx=0;
+	var tcls={};
+
+	var zipai=0;
+	var gangpai=0;
+	var sscore=0;
+    //是否能碰、杠、胡牌
+	var can_peng = false, can_gang = false, can_hu = false;
+
+	var sendticks = 0;
+	var scoreticks =0;
+        //图片
+	var img_hu,img_hu1,img_peng,img_peng1,img_gang,img_gang1,img_zhuang;
+        //声音
+	var mp3_getcard,mp3_click,mp3_peng,mp3_gang;
+	var mp3_zimo,mp3_fangpao;
+
+	initGame(); //程序入口，初始化游戏开始的资源
+	function Press(){
+		TestGame( );	
+				
+	}
+	function Click(){
+		var x = event.clientX-cxt.canvas.offsetLeft;
+		var y = event.clientY-cxt.canvas.offsetTop;
+		//console.log("x:"+x+" y:"+y);
+		mouseClick(x,y);
+	}
+	window.setInterval("display()",50);
+	window.setInterval("RunGame()",500);
+	
+</script>
+
+</body>
+</html>

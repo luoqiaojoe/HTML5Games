@@ -1,0 +1,17 @@
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   //jQuery
+   $(window).bind('beforeunload', function() {
+   var message = "I'm really going to miss you if you go.";
+   return message;
+   });
+});
+</script>
+</head>
+<body>
+<p>当您点击 <a href="http://w3school.com.cn">这个链接</a> 时，会触发一个警告框。</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="lufylegend-1.9.7.min.js"></script> 
+</head>
+<body>
+<div id="mylegend">loading...</div>
+<script type="text/javascript">
+init(50,"mylegend",500,350,main);
+function main(){  
+   var graphics = new LGraphics();
+   addChild(graphics);
+   graphics.drawVertices(1,'#000000',[[50,20],[80,20],[100,50],[80,80],[50,80],[30,50]]);
+   graphics.drawVertices(1,'#000000',[[150,20],[180,20],[200,50],[180,80],[150,80],[130,50]],true,'#cccccc');
+}  
+</script>
+</body>
+</html>

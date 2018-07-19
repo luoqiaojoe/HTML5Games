@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>getAttribute </title>
+  </head>
+  <body>
+  <div id="div1">
+       <div id="div2">div2</div>
+       <div id="div3">div3</div>
+  </div>
+  <script language="javascript">
+  var list=document.getElementsByTagName("div");
+  var mydiv=list["div2"].getAttribute("id");
+  alert('用list["div2"]取到第2个id的属性的属性值:'+mydiv);
+  </script>
+  </body>
+</html>
+
+
+
+

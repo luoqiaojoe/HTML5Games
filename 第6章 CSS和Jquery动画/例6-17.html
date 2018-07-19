@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+   <style>
+   button { font-size:12px; margin:2px; }
+   p { width:150px; border:1px red solid; }
+   div { color:red; font-weight:bold; }
+   </style>
+   <script src="jquery.js"></script>
+</head>
+<body>
+   <button id="getp">获取段落尺寸</button>
+   <button id="getd">获取文档尺寸</button>
+   <div>&nbsp;</div>
+   <p>用于测试尺寸的段落。</p>
+   <script>  
+   function showHeight(ele, h) {
+      $("div").text(ele + " 的高度为 " + h + "px." );
+     }
+   $("#getp").click(function () {
+      showHeight("段落", $("p").height());
+      });
+   $("#getd").click(function () {
+      showHeight("文档", $(document).height());
+      });
+   </script> 
+</body>
+</html>
+
+
+

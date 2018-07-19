@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+  <button>线性切换</button>
+  <button>快速切换</button>
+  <p>我是p1.我会以慢速、线性的方式切换显示和隐藏。</p>
+  <p>我是p2.我会快速地切换显示和隐藏。</p>
+  <script>
+  $("button:first").click(function() {
+    $("p:first").fadeToggle("slow", "linear");
+  });
+  $("button:last").click(function () {
+    $("p:last").fadeToggle("fast");
+  });
+</script> 
+</body>
+</html>
+
+</body>
+</html>

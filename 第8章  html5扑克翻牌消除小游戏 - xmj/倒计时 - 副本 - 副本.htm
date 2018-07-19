@@ -1,0 +1,29 @@
+<html>
+<head></head>
+<body onload="time()">
+<script type="text/javascript">
+var count = 11;
+function time(){
+    count--;
+    if(count <= 0){
+        count = 6;
+        time1();
+        return;
+    }
+    document.getElementById('msg').innerHTML = '购买倒计时还剩0分'+count+'秒';
+    setTimeout(time,1000);
+}
+function time1(){
+    count --;
+    if(count <= 0){
+        count = 11;
+        time();
+        return;
+    }
+    document.getElementById('msg').innerHTML = '付款倒计时还剩0分'+count+'秒';
+    setTimeout(time1,1000);
+}
+ 
+</script>
+<div id="msg"></div>
+</body>

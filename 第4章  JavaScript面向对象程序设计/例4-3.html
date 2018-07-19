@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+    <TITLE>添加原型属性和原型方法</TITLE>
+</HEAD>
+<BODY>
+
+<script>
+// 定义类
+function Person(name,sex) {
+    this.name=name;  // 定义一个属性 name
+    this.sex=sex;  // 定义一个属性 sex
+    this.say=function(){  // 定义一个方法 say()
+        return "大家好，我的名字是 " + this.name + " ，性别是 " + this.sex + " 。";
+    }
+}
+// 创建对象
+var zhangsan=new Person("张三","男");
+zhangsan.say();
+// 动态添加属性和方法
+zhangsan.tel="029-81892332";
+zhangsan.run=function(){
+   return  " 我跑得很快！ ";
+}
+// 弹出警告框
+alert("姓名："+zhangsan.name);
+alert("姓别："+zhangsan.sex);
+alert(zhangsan.say());
+alert("电话："+zhangsan.tel);
+alert(zhangsan.run());
+var lisi=new Person("李四","男");
+alert(lisi.run());//出现错误
+
+
+
+</script>
+<br/>
+</BODY>
+</HTML>
+
+
+
+
+

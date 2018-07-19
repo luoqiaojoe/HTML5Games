@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 Canvas实现游戏人物的跑步动画</title>
+  </head>
+  <script type="text/javascript"> 
+    var imageObj = new Image(); // 创建图像对象
+    var x =300; 
+    var n =0;                   // 计数器
+    function init(){
+      imageObj.src = 'Snap1.jpg';
+      imageObj.onload = function(){
+         setInterval(draw,100);// 定时器，每0.1秒执行一次draw()函数
+      };
+    }
+    function draw()
+    {
+        var canvas=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+        var ctx = canvas.getContext("2d"); //获取canvas对象的上下文
+         
+           ctx.clearRect(0,0,300,300); // 清除canvas画布  
+           //从原图(60*n)位置开始截取中间一块宽60*高80的区域，显示在屏幕(x,0)处           
+           ctx.drawImage(imageObj, 60*n, 0, 60, 80, x, 0, 60, 80);
+           if(n>=8){
+              n=0;
+           }else{
+              n++;
+           }
+           if(x>=0){
+              x=x-30;  //前移30像素
+           }else{
+              x=300;   //回到右侧
+           }       
+    }
+    window.addEventListener("load", init, true);
+  </script>
+
+  <body>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+  </body>
+</html>
+

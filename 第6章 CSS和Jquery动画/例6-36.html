@@ -1,0 +1,21 @@
+<html>
+<head>
+  <style>
+div { position: absolute; width: 60px; height: 60px; float: left; }
+.first { background-color: #3f3; left: 0;}
+.second { background-color: #33f; left: 80px;}
+</style>
+<script type="text/javascript" src="jquery.js"></script></head>
+<body>
+ 
+<p><button>Run</button></p>
+<div class="first"></div>
+<div class="second"></div>
+<script>
+    $("button").click(function() {
+      $("div.first").slideUp(300).delay(800).fadeIn(400);
+      $("div.second").slideUp(300).fadeIn(400);
+    });</script>
+ 
+</body>
+</html>

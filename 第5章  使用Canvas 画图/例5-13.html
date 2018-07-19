@@ -1,0 +1,25 @@
+<canvas id="myCanvas" height=550 width=550>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function draw()
+{
+  var canvas=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+  var context = canvas.getContext("2d"); //获取canvas对象的上下文
+  context.save(); //保存了当前context的状态
+  context.fillStyle = "#EEEEFF";
+  context.fillRect(0, 0, 400, 300);
+  context.fillStyle = "rgba(255,0,0,0.1)";
+  context.fillRect(0, 0, 100, 100);      //正方形
+  //平移 缩放 旋转  1 2 3        
+  context.translate(100, 100);           //坐标原点平移(100, 100)
+  context.scale(0.5, 0.5);               //x,y轴是原来一半
+  context.rotate(Math.PI / 4);           //旋转45度
+  context.fillRect(0, 0, 100, 100);      //平移 缩放 旋转后的正方形
+  context.restore(); // 恢复之前保存的绘图状态
+  context.beginPath();  //  开始绘图路径
+  context.arc(200, 50, 50, 0,  2 * Math.PI, false); 
+  context.stroke();
+  context.fill();
+
+}
+window.addEventListener("load", draw, true);
+</script>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>人机五子棋对战</title>
+    <style type="text/css">
+        body {
+            margin: 10px;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        var canvas;
+        var context;
+        var isWhite = false;//设置是否该轮到白棋
+        var isWell = false;//设置该局棋盘是否赢了，如果赢了就不能再走了
+        var img_b = new Image();
+        img_b.src = "images/w.png";//白棋图片
+        var img_w = new Image();
+        img_w.src = "images/b.png";//黑棋图片
+
+        var chessData = new Array(15);//这个为棋盘的二维数组用来保存棋盘信息，初始化0为没有走过的，1为白棋走的，2为黑棋走的
+        for (var x = 0; x < 15; x++) {
+            chessData[x] = new Array(15);
+            for (var y = 0; y < 15; y++) {
+                chessData[x][y] = 0;
+            }
+        }
+       		var KONG = 0;//空位置KONG
+		var BLACK = 1;//黑色棋子
+		var WHITE = 2;//白色棋子
+		var N = 0;//空位置
+		var B = 1;//有黑色棋子（人的棋）
+		var W = 2;//有白色棋子（电脑的棋）
+		var S = 3;//需要下子的位置
+		//数组Chess存储棋谱
+		var Chess  =  [	
+			//一个棋子的情况
+			[   N,	N,	N,	S,	B ],
+			[   B,	S,	N,	N,	N ],
+			[   N,	N,	N,	S,	B ],	
+			[   N,	B,	S,	N,	N ],		
+			[   N,	N,	S,	B,	N ],
+			[   N,	N,	B,	S,	N ],
+			[   N,	N,	N,	S,	W ],
+			[   W,	S,	N,	N,	N ],
+			[   N,	N,	N,	S,	W ],	
+			[   N,	W,	S,	N,	N ],		
+			[   N,	N,	S,	W,	N ],
+			[   N,	N,	W,	S,	N ],
+			//两个棋子的情况
+			[ B,	B,	S,	N,	N ],
+			[ N,	N,	S,	B,	B ],
+			[ B,	S,	B,	N,	N ],
+			[ N,	N,	B,	S,	B ],
+			[ N,	B,	S,	B,	N ],
+			[ N,	B,	B,	S,	N ],
+			[ N,	S,	B,	B,	N ],
+			[ W,	W,	S,	N,	N ],
+			[ N,	N,	S,	W,	W ],
+			[ W,	S,	W,	N,	N ],
+			[ N,	N,	W,	S,	W ],
+			[ N,	W,	S,	W,	N ],
+			[ N,	W,	W,	S,	N ],
+			[ N,	S,	W,	W,	N ],
+			//三个棋子的情况
+			[N,	S,	B,	B,	B ],
+			[B,	B,	B,	S,	N ],
+			[N,	B,	B,	B,	S ],	
+			[N,	B,	S,	B,	B ],
+			[B,	B,	S,	B,	N ],
+			[N,	S,	W,	W,	W ],
+			[W,	W,	W,	S,	N ],
+			[N,	W,	W,	W,	S ],	
+			[N,	W,	S,	W,	W ],
+			[W,	W,	S,	W,	N ],
+			//四个棋子的情况
+			[   S, 	B,  B,  B,  B 	],	
+			[   B, 	S,  B,  B,  B 	],
+			[   B,  B,  S,	B,  B 	],
+			[   B,  B,  B, 	S,  B 	],
+			[   B,  B,  B,  B,  S 	],
+			[   S,  W,  W,  W,  W 	],	
+			[   W, 	S,  W,  W,  W 	],
+			[   W,  W,  S, 	W,  W 	],
+			[   W,  W,  W, 	S,  W 	],
+			[   W,  W,  W,  W,  S 	]];
+		 var m_nCurCol = -1;//电脑最近一次下棋位置的列号
+		 var m_nCurRow = -1;//电脑最近一次下棋位置的行号
+
+		function Point(x,y)
+		{ 
+		   this.x=x;
+		   this.y=y;
+		}
+
+		//获取电脑下子位置
+		function GetComputerPos()//Point
+	        {
+			return  new Point(m_nCurCol,m_nCurRow);
+		}
+		//电脑的输入，参数grid为棋盘格子
+		 function Input(grid){//grid是Array
+			var rowSel,colSel,nLevel;
+			var index,nLevel;
+			var j;
+			m_nCurCol = -1;//存储临时的选择位置
+			m_nCurRow = -1;
+			nLevel = -1;//存储临时选择的棋谱级别
+			var bFind;//是否符合棋谱的标志
+			for (var row = 0; row < 15; row ++)
+			{//遍历棋盘的所有行
+				for (var col = 0; col < 15; col ++)
+				{//遍历棋盘的所有列
+					for (var i = Chess.length - 1; i >= 0; i --)
+					{//遍历所有级别的棋谱
+					//查看从当前棋子开始的横向五个棋子是否符合该级别的棋谱
+						if ( col + 4 < 15 )
+						{
+							rowSel = -1;
+							colSel = -1;
+							bFind = true;
+							for ( j = 0; j < 5; j ++)
+							{
+								index = grid[col + j][row];
+								if ( index == KONG )
+								{//如果该位置没有棋子，对应的棋谱位置上只能是S或N
+									if (Chess[i][j] == S)
+									{//如果是S，则保存位置
+										rowSel = row;
+										colSel = col + j;
+									}
+									else if ( Chess[i][j] != N )
+									{//不是S也不是N，则不符合这个棋谱，结束循环
+										bFind = false;
+										break;
+									}
+								}
+								if ( index == BLACK && Chess[i][j] != B )
+								{//如果是黑色棋，对应的棋谱位置上应是B，否则结束循环
+									bFind = false;
+									break;
+								}
+								if ( index == WHITE && Chess[i][j] != W )
+								{//如果是白色棋，对应的棋谱位置上应是W，否则结束循环
+									bFind = false;
+									break;
+								}
+							}
+							if ( bFind && i > nLevel )
+							{//如果符合此棋谱，且该棋谱比上次找到棋谱的级别高
+								nLevel = i;//保存级别
+								m_nCurCol = colSel;//保存位置
+								m_nCurRow = rowSel;
+								break;//遍历其他级别的棋谱
+							}
+						}
+
+						//查看从当前棋子开始的纵向五个棋子是否符合该级别的棋谱
+						if ( row + 4 < 15 )
+						{
+							rowSel = -1;
+							colSel = -1;
+							bFind = true;
+							for (j = 0; j < 5; j ++)
+							{
+								index = grid[col][row + j];
+								if ( index == KONG )
+								{//如果该位置没有棋子，对应的棋谱位置上只能是S或N
+									if (Chess[i][j] == S)
+									{//如果是S，则保存位置
+										rowSel = row + j;
+										colSel = col;
+									}
+									else if ( Chess[i][j] != N )
+									{//不是S也不是N，则不符合这个棋谱，结束循环
+										bFind = false;
+										break;
+									}
+								}
+								if ( index == BLACK )
+								{//如果是黑色棋，对应的棋谱位置上应是B，否则结束循环
+									if (Chess[i][j] != B)
+									{
+										bFind = false;
+										break;
+									}
+								}
+								if ( index == WHITE && Chess[i][j] != W )
+								{//如果是白色棋，对应的棋谱位置上应是W，否则结束循环
+									bFind = false;
+									break;
+								}
+							}
+							if ( bFind && i > nLevel )
+							{//如果符合此棋谱，且该棋谱比上次找到棋谱的级别高
+								nLevel = i;//保存级别
+								m_nCurCol = colSel;//保存位置
+								m_nCurRow = rowSel;
+								break;//遍历其他级别的棋谱
+							}
+						}
+
+						//查看从当前棋子开始的斜45度向下的五个棋子是否符合该级别的棋谱
+						if ( col - 4 >= 0 && row + 4 < 15 )
+						{
+							rowSel = -1;
+							colSel = -1;
+							bFind = true;
+							for (j = 0; j < 5; j ++)
+							{
+								index = grid[col - j][row + j];
+								if ( index == KONG )
+								{//如果该位置没有棋子，对应的棋谱位置上只能是S或N
+									if (Chess[i][j] == S)
+									{//如果是S，则保存位置
+										rowSel = row + j;
+										colSel = col - j;
+									}
+									else if ( Chess[i][j] != N )
+									{//不是S也不是N，则不符合这个棋谱，结束循环
+										bFind = false;
+										break;
+									}
+								}
+								if ( index == BLACK && Chess[i][j] != B )
+								{//如果是黑色棋，对应的棋谱位置上应是B，否则结束循环
+									bFind = false;
+									break;
+								}
+								if ( index == WHITE && Chess[i][j] != W )
+								{//如果是白色棋，对应的棋谱位置上应是W，否则结束循环
+									bFind = false;
+									break;
+								}
+							}
+							if ( bFind && i > nLevel )
+							{//如果符合此棋谱，且该棋谱比上次找到棋谱的级别高
+								nLevel = i;//保存级别
+								m_nCurCol = colSel;//保存位置
+								m_nCurRow = rowSel;
+								break;//遍历其他级别的棋谱
+							}
+						}
+
+						//斜135度的五个棋子
+						if ( col + 4 < 15 && row + 4 < 15 )
+						{//查看从当前棋子开始的斜135度向下的五个棋子是否符合该级别的棋谱
+							rowSel = -1;
+							colSel = -1;
+							bFind = true;
+							for (j = 0; j < 5; j ++)
+							{
+								index = grid[col + j][row + j];
+								if ( index == KONG )
+								{//如果该位置没有棋子，对应的棋谱位置上只能是S或N
+									if (Chess[i][j] == S)
+									{//如果是S，则保存位置
+										rowSel = row + j;
+										colSel = col + j;
+									}
+									else if ( Chess[i][j] != N )
+									{//不是S也不是N，则不符合这个棋谱，结束循环
+										bFind = false;
+										break;
+									}
+								}
+								if ( index == BLACK && Chess[i][j] != B )
+								{//如果是黑色棋，对应的棋谱位置上应是B，否则结束循环
+									bFind = false;
+									break;
+								}
+								if ( index == WHITE && Chess[i][j] != W )
+								{//如果是白色棋，对应的棋谱位置上应是W，否则结束循环
+									bFind = false;
+									break;
+								}
+							}
+							if ( bFind && i > nLevel )
+							{//如果符合此棋谱，且该棋谱比上次找到棋谱的级别高
+								nLevel = i;//保存级别
+								m_nCurCol = colSel;//保存位置
+								m_nCurRow = rowSel;
+								break;//遍历其他级别的棋谱
+							}
+						}
+					}
+				}
+			}
+			if ( m_nCurRow != -1 )
+			{//如果选择了一个最佳位置
+				grid[m_nCurCol][m_nCurRow]= WHITE ;
+				return true;
+			}
+			//如果所有棋谱都不符合,则随便找一个空位置			
+			while(true)
+			{
+				var col;
+				var row;
+				col=parseInt(Math.random()*15);
+				row=parseInt(Math.random()*15);
+				if (grid[col][row] == KONG)
+				{
+					grid[col][row] = WHITE ;
+					m_nCurCol = col;
+					m_nCurRow = row;
+					return true;
+				}
+			}
+			return false;
+		}
+
+
+
+        function drawRect() {//页面加载完毕调用函数，初始化棋盘
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            context.fillStyle = "orange";
+            context.fillRect(0,0,640,640);
+            context.fillStyle = "#000000";;
+            for (var i = 0; i <= 640; i += 40) {//绘制棋盘的线
+                context.beginPath();
+                context.moveTo(0, i);
+                context.lineTo(640, i);
+                context.closePath();
+                context.stroke();
+
+                context.beginPath();
+                context.moveTo(i, 0);
+                context.lineTo(i, 640);
+                context.closePath();
+                context.stroke();
+            }
+        }
+        function play(e) {//鼠标点击时发生
+            var x = parseInt((e.clientX - 20) / 40);//计算鼠标点击的区域，如果点击了（65，65），那么就是点击了（1，1）的位置
+            var y = parseInt((e.clientY - 20) / 40);
+
+            if (chessData[x][y] != 0) {//判断该位置是否被下过了
+                alert("你不能在这个位置下棋");
+                return;
+            }
+
+            if (isWhite) {
+                //isWhite = false;
+                //drawChess(1, x, y);
+            }
+            else {
+                drawChess(2, x, y);
+                //isWhite = true;
+                //轮到电脑（白方）走
+                Input(chessData);
+                var p=GetComputerPos();//获取电脑落子位置P
+                drawChess(1,p.x,p.y);
+            }
+
+        }
+        function drawChess(chess, x, y) {//参数为，棋（1为白棋，2为黑棋），数组位置
+            if (isWell == true) {
+                alert("已经结束了，如果需要重新玩，请刷新");
+                return;
+            }
+            if (x >= 0 && x < 15 && y >= 0 && y < 15) {
+                if (chess == 1) {
+                    context.drawImage(img_w, x * 40 + 20, y * 40 + 20);//绘制白棋
+                    chessData[x][y] = 1;
+                }
+                else {
+                    context.drawImage(img_b, x * 40 + 20, y * 40 + 20);
+                    chessData[x][y] = 2;
+                }
+                judge(x, y, chess);
+            }
+        }
+        function judge(x, y, chess) {//判断该局棋盘是否赢了
+            var count1 = 0;
+            var count2 = 0;
+            var count3 = 0;
+            var count4 = 0;
+
+            //左右判断
+            for (var i = x; i >= 0; i--) {
+                if (chessData[i][y] != chess) {
+                    break;
+                }
+                count1++;
+            }
+            for (var i = x + 1; i < 15; i++) {
+                if (chessData[i][y] != chess) {
+                    break;
+                }
+                count1++;
+            }
+            //上下判断
+            for (var i = y; i >= 0; i--) {
+                if (chessData[x][i] != chess) {
+                    break;
+                }
+                count2++;
+            }
+            for (var i = y + 1; i < 15; i++) {
+                if (chessData[x][i] != chess) {
+                    break;
+                }
+                count2++;
+            }
+            //左上右下判断
+            for (var i = x, j = y; i >= 0, j >= 0; i--, j--) {
+                if (chessData[i][j] != chess) {
+                    break;
+                }
+                count3++;
+            }
+            for (var i = x + 1, j = y + 1; i < 15, j < 15; i++, j++) {
+                if (chessData[i][j] != chess) {
+                    break;
+                }
+                count3++;
+            }
+            //右上左下判断
+            for (var i = x, j = y; i >= 0, j < 15; i--, j++) {
+                if (chessData[i][j] != chess) {
+                    break;
+                }
+                count4++;
+            }
+            for (var i = x + 1, j = y - 1; i < 15, j >= 0; i++, j--) {
+                if (chessData[i][j] != chess) {
+                    break;
+                }
+                count4++;
+            }
+
+            if (count1 >= 5 || count2 >= 5 || count3 >= 5 || count4 >= 5) {
+                if (chess == 1) {
+                    alert("白棋赢了");
+                }
+                else {
+                    alert("黑棋赢了");
+                }
+                isWell = true;//设置该局棋盘已经赢了，不可以再走了
+            }
+        }
+    </script>
+</head>
+<body onload="drawRect()">
+    <script type="text/javascript" src="computer.js"></script>
+    <div>
+        <canvas width="640" id="canvas" onmousedown="play(event)" height="640">你的浏览器不支持HTML5 canvas ，请使用 google chrome 浏览器 打开.
+        </canvas>
+    </div>
+    
+</body>
+</html>

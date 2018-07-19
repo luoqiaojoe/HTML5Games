@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="lufylegend-1.9.7.min.js"></script> 
+</head>
+<body>
+<div id="mylegend">loading...</div>
+<script type="text/javascript">
+var loader,anime,layer;  
+init(200,"mylegend",500,350,main);
+function main(){  
+    loader = new LLoader();  
+    loader.addEventListener(LEvent.COMPLETE,loadBitmapdata);  
+    loader.load("chara.png","bitmapData");  
+}  
+function loadBitmapdata(event){  
+    var bitmapdata = new LBitmapData(loader.content,0,0,64,64);  
+    var list = LGlobal.divideCoordinate(256,256,4,4);
+    var str=list.join("|")
+    alert(str);
+    for(i=0;i<list.length;i++)
+        for(j=0;j<list.length;j++)
+          ;//alert(list[i][j]);
+    console.log(list);
+    //¼ÓÈë²ãLSprite
+    layer = new LSprite();
+    addChild(layer);
+    anime = new LAnimation(layer,bitmapdata,list);
+    layer.addEventListener(LEvent.ENTER_FRAME,onframe);
+}  
+function onframe(){
+    anime.onframe();
+}
+</script>
+</body>
+</html>

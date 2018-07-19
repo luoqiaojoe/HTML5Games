@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script>
+    function handler(event) {
+      alert(event.data.sex);
+    }
+    $(document).ready(function(){
+       $("input").bind("click", { sex: "男" }, handler);
+    });
+  </script>
+</head>
+<body>
+  <input id="name"></<input >
+</body>
+</html>
+
+
+
+
+
+

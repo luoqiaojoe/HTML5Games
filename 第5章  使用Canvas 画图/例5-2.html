@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="myCanvas" height=1000 width=1000>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function drawline()
+{
+  var c=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+  var ctx=c.getContext("2d");  //获取canvas对象的上下文
+  var dx=150;
+  var dy=150;
+  var s = 100;
+  ctx.beginPath();  //  开始绘图路径
+  var x = Math.sin(0);
+  var y = Math.cos(0);
+  var dig=Math.PI/15*11;
+  for(var i = 0;i<30;i++){
+     var x = Math.sin(i*dig); 
+     var y = Math.cos(i*dig);
+    //用三角函数计算顶点
+     ctx.lineTo(dx+x*s,dy+y*s);
+  }  
+  ctx.closePath();
+  ctx.stroke();  
+}
+window.addEventListener("load", drawline, true);
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<canvas id="myCanvas" height=500 width=500>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function draw()
+{
+  var c=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+  var ctx=c.getContext("2d");  //获取canvas对象的上下文
+  var radius = 100;
+  var startingAngle = 0;
+  var endingAngle = 2 * Math.PI;
+  ctx.beginPath();  //  开始绘图路径
+  ctx.arc(150, 150, radius, startingAngle, endingAngle, false); 
+  ctx.stroke();
+}
+window.addEventListener("load", draw, true);
+</script>
+
+
+
+

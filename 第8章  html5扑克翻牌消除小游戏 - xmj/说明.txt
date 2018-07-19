@@ -1,0 +1,44 @@
+适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。
+
+
+
+opacity: 0
+设置div的不透明度为0
+也可以使用visibility: hidden;来实现，这两个效果都是让元素不显示，但存在/占位
+visibility: hidden 意思是让元素不可见，但会占据页面上的空间
+
+jquery的addClass和removeClass使用方法？
+以此例说明：
+就比如有一个<div class="menu">
+<a href="../123/342.html">123</a>
+<a href="../789/098.html">789</a>
+</div>
+怎么使用jquery实现，当点击123的时候自动添加个class=“select”，代码自动就变成
+<div class="menu">
+<a class="select" href="../123/342.html>123</a>
+<a href="../789/098.html">789</a>
+</div>
+然后点击789，又变成
+<div class="menu">
+<a href="../123/342.html">123</a><a class="select" href="../789/098.html">789</a>
+</div>
+jquery的代码怎么写？
+答案：
+$(document).ready(function(){
+   $("a").click(function(){
+         $("a").each(function(){
+             $(this).removeClass("select")}),
+             $(this).addClass("select"),
+             return false})
+})
+
+$('a:contains(123)').addClass("select");//增加
+$('a:contains(789)').removeClass("select");//删除
+
+addClass描述:为每个匹配的元素添加指定的样式类名
+    .addClass( className ),className为一个String字符串，为指定元素添加这个classname的类
+    .addClass( function(index, currentClass) )，这个函数返回一个或更多用空格隔开的要增加的样式名。接收index 参数表示元素在匹配集合中的索引位置和html 参数表示元素上原来的 HTML 内容。在函数中this指向匹配元素集合中的当前元素。
+removeClass描述: 
+移除集合中每个匹配元素上一个，多个或全部样式。
+.removeClass( [className ] )，每个匹配元素移除的一个或多个用空格隔开的样式名。
+.removeClass( function(index, class) )，这个函数，返回一个或多个将要被移除的样式名。index 参数表示在所有匹配元素的集合中当前元素的索引位置。class 参数表示原有的样式名。

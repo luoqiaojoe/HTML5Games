@@ -1,0 +1,15 @@
+<canvas id="myCanvas" height=500 width=500> </canvas>
+<script type="text/javascript">
+function draw() {
+var ctx = document.getElementById('myCanvas').getContext('2d');
+ctx.fillStyle = 'red'
+ctx.fillRect(0,0,150,150); // 使用红色填充矩形
+ctx.save(); // 保存当前的绘图状态
+ctx.fillStyle = 'green' // 
+ctx.fillRect(45,45,60,60); //使用绿色填充矩形
+ctx.restore(); //  恢复再之前保存的绘图状态，即ctx.fillStyle = 'red'
+ctx.fillRect(60,60,30,30); //  使用红色填充矩形
+}
+window.addEventListener("load", draw, true);
+</script>
+

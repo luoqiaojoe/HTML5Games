@@ -1,0 +1,19 @@
+<html>
+<body>
+<div id="demo">
+    <div id="thisNode">点击这里添加新节点</div>
+</div>
+<script type="text/javascript">
+document.getElementById("thisNode").onclick=function(){
+    var ele_div=document.createElement("div");
+    var ele_text=document.createTextNode("这是新节点");
+    ele_div.appendChild(ele_text);
+    this.parentNode.insertBefore(ele_div , this);
+}
+</script>
+</body>
+</html>
+
+
+
+

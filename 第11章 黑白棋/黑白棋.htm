@@ -1,0 +1,29 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> 黑白棋 </title>
+  <meta http-equiv=content-type content="text/html; charset=utf-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+
+ </head>
+
+ <body onload="init()" onkeydown="DoKeyDown(event)">
+  <canvas id="myCanvas" width="720" height="720">你的浏览器还不支持哦</canvas> 
+  <div id="message_txt"></div>
+ <img id="whitestone" src="img/whitestone.png" style="display:none;">
+ <img id="blackstone" src="img/blackstone.png" style="display:none;">
+ <img id="qi_pan1" src="img/qi_pan1.jpg" style="display:none;">
+ <img id="Info2" src="img/Info2.png" style="display:none;">
+
+
+ <input type="button" value="撤    销" onclick="Redo()">
+ <input type="button" value="重玩本关" onclick="NextLevel(0)">
+ <input type="button" value="走棋提示" onclick="DoHelp()">
+
+  <script type="text/javascript" src="Main.js"></script>
+
+ </body>
+</html>

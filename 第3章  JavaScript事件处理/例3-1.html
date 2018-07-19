@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>获取鼠标的坐标信息</title>
+</head>
+<body>
+<div>获取鼠标的坐标信息</div>
+<div id="demo">点击这里</div>
+<script type="text/javascript">
+document.getElementById("demo").onclick=function(e){
+    var eve = e || window.event;
+    var x = eve.clientX,  // 相对于客户端的X坐标
+        y = eve.clientY,  // 相对于客户端的Y坐标
+        x1 = eve.screenX,  // 相对于计算机屏幕的X坐标
+        y1 = eve.screenY;  // 相对于计算机屏幕的Y坐标
+    alert(
+        "相对客户端的坐标：\n"+
+        "x = "+x+"\n"+
+        "y = "+y+"\n\n"+
+        "相对屏幕的坐标：\n"+
+        "x = "+x1+"\n"+
+        "y = "+y1
+    );
+}
+</script>
+</body>
+</html>
+
+
+
+

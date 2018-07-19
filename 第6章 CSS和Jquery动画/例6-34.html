@@ -1,0 +1,30 @@
+<html>
+<head>  
+  <script type="text/javascript" src="jquery.js"></script>
+  <script>
+	function runIt() {  
+		var div = $("div");
+		div.animate({height:300},"slow");
+		div.animate({width:300},"slow");
+		div.animate({height:100},"slow");
+		div.animate({width:100},"slow");
+	}
+	$(document).ready(function(){
+		$("button").click(function(){
+			runIt();
+			$("span").text($("div").queue("fx").length);   
+		});
+	});
+  </script>
+</head>
+<body>
+<button>开始演示动画</button>
+<p>队列长度为: <span></span></p>
+<div style="width:50px;height:50px;position:absolute;background-color:red;"></div>
+</body>
+</html>
+
+
+
+
+

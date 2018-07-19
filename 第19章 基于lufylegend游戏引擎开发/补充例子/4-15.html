@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="lufylegend-1.9.7.min.js"></script> 
+</head>
+<body style="background-color:#000">
+<div id="mylegend">loading...</div>
+<script type="text/javascript">
+var loader;  
+init(50,"mylegend",500,350,main);
+
+function main(){  
+    loader = new LLoader();  
+    loader.addEventListener(LEvent.COMPLETE,loadBitmapdata);  
+    loader.load("face.jpg","bitmapData");  
+}  
+function loadBitmapdata(event){  
+    var bitmapdata = new LBitmapData(loader.content);  
+    var backLayer = new LSprite();
+    backLayer.x=100;
+    addChild(backLayer);
+
+    vertices = new Array();
+    vertices.push(0, 0);
+    vertices.push(0-50, 120);//这里将原坐标的x坐标左移50
+    vertices.push(0, 240);
+    vertices.push(120, 0);
+    vertices.push(120, 120);
+    vertices.push(120, 240);
+    vertices.push(240, 0);
+    vertices.push(240+50, 120);//这里将原坐标的x坐标右移50
+    vertices.push(240, 240);
+
+    indices = new Array();
+    indices.push(0, 3, 1);
+    indices.push(3, 1, 4);
+    indices.push(1, 4, 2);
+    indices.push(4, 2, 5);
+    indices.push(3, 6, 4);
+    indices.push(6, 4, 7);
+    indices.push(4, 7, 5);
+    indices.push(7, 5, 8);
+
+    uvtData = new Array();
+    uvtData.push(0, 0);
+    uvtData.push(0, 0.5);
+    uvtData.push(0, 1);
+    uvtData.push(0.5, 0);
+    uvtData.push(0.5, 0.5);
+    uvtData.push(0.5, 1);
+    uvtData.push(1, 0);
+    uvtData.push(1, 0.5);
+    uvtData.push(1, 1);
+
+    backLayer.graphics.beginBitmapFill(bitmapdata);
+    backLayer.graphics.drawTriangles(vertices, indices, uvtData);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<canvas id="myCanvas" height=500 width=500>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function drawRect()
+{
+  var c=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+  var ctx=c.getContext("2d");  //获取canvas对象的上下文
+  //绘制起始点、控制点、终点
+  ctx.beginPath();  //  开始绘图路径
+  ctx.rect(20,20, 100, 50);  
+  ctx.stroke();				// 通过线条绘制轮廓（边框）
+}
+window.addEventListener("load", drawRect, true);
+</script>
+
+

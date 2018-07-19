@@ -1,0 +1,27 @@
+<html>  
+<body>  
+<script type="text/javascript">  
+    function  Parent(name){      //父类
+        this.name=name;  
+        this.sayParent=function(){  
+            alert("Parent:"+this.name);  
+        }  
+    }  
+
+    function  Child(name,age){    //子类
+        this.tempMethod=Parent;  
+        this.tempMethod(name);  
+        this.age=age;  
+        this.sayChild=function(){  
+            alert("Child:"+this.name+"age:"+this.age);  
+        }  
+    }  
+
+    var parent=new Parent("张海");  
+    parent.sayParent(); //输出：“Parent:张海”  
+    var child=new Child("李鸣",24); //输出：“Child:李鸣 age:24”  
+    child.sayChild();
+    child.sayParent();  
+</script>  
+</body>  
+</html>

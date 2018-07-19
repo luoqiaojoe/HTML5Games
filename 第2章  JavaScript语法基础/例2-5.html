@@ -1,0 +1,22 @@
+<HTML>
+<HEAD><TITLE>使用switch语句实现按分数输出其等级</TITLE></HEAD>
+<BODY>
+<Script Language ="JavaScript">
+    var MyScore = prompt("请输入成绩");
+    score= parseInt (MyScore) ; 
+    switch(score) {
+       case  10:
+       case  9: 
+            document.write("优");  break;
+       case  8: 
+            document.write("良");  break;
+       case  7: 
+             document.write("中");  break;
+       case  6: 
+             document.write("及格"); break;
+       default: 
+            document.write ("不及格");
+    }
+</Script>
+</BODY>
+</HTML>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小游戏之贪吃蛇2次重写(面向对象)</title>
+    <style>
+      #canvas{border: 1px solid red;}
+    </style>
+</head>
+<body>
+    <canvas  id='canvas' width='800' height='600'></canvas>
+    <script>
+       var canvas=document.getElementById("canvas");
+       var ctx=canvas.getContext('2d');
+       var gridWidth=20;
+       var foods=new Array(),snakes=new Array();//放食物和蛇的数组
+       //原料初始化
+       function Node(x,y,w){
+           var t=this;
+           t.x=x;
+           t.y=y;
+           t.w=w;
+           //食物
+           t.foodInit=function(){
+//               ctx.fillStyle='red';
+//               ctx.fillRect(x,y,w,w);
+               //画一个实心圆
+               ctx.beginPath();
+               ctx.arc(x+w/2, y+w/2, w/2, 0, 360, false);
+               ctx.fillStyle = "red"; //填充颜色,默认是黑色
+               ctx.fill(); //画实心圆
+               ctx.closePath();
+           }  
+           //蛇
+           t.snakeHead = function () {
+               //画一个实心圆
+               ctx.beginPath();
+               ctx.arc(x + w / 2, y + w / 2, w / 2, 0, 360, false);
+               ctx.fillStyle = "yellow"; //填充颜色,默认是黑色
+               ctx.fill(); //画实心圆
+//               ctx.closePath();
+//                 ctx.fillStyle='black';
+//                 ctx.strokeStyle = 'white';
+//                 ctx.fillRect(x,y,w,w);
+//                 ctx.strokeRect(x,y,w,w);
+           }
+           t.snakeInit = function () {
+               //画一个实心圆
+               ctx.beginPath();
+               ctx.arc(x + w / 2, y + w / 2, w / 2, 0, 360, false);
+               ctx.fillStyle = "blue"; //填充颜色,默认是黑色
+               ctx.fill(); //画实心圆
+               //               ctx.closePath();
+               //                 ctx.fillStyle='black';
+               //                 ctx.strokeStyle = 'white';
+               //                 ctx.fillRect(x,y,w,w);
+               //                 ctx.strokeRect(x,y,w,w);
+           }
+           //清除蛇尾
+           t.clear=function(){
+             ctx.fillStyle='white';
+             ctx.strokeStyle='white';
+             ctx.fillRect(x,y,w,w);
+             ctx.strokeRect(x,y,w,w);
+           } 
+           //判断是否重合
+           t.equal=function(node){
+              if(this.x==node.x&&this.y==node.y) {
+                return true;
+              }else{
+                return false;
+              } 
+           }
+       }
+
+       //生成一个画布和食物
+       function Farm(){
+            var t=this;
+            ctx.fillStyle='white';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+         //随机生成食物
+         t.addfood=function(){
+            var x=parseInt(canvas.width/gridWidth*Math.random())*gridWidth;
+            var y=parseInt(canvas.height/gridWidth*Math.random())*gridWidth;
+            var food=new Node(x,y,gridWidth);
+            food.foodInit();
+            foods.push(food);
+         }
+       }
+       //画蛇
+       function Snake(x,y,len,speed){
+          var t=this;
+          t.x=x;
+          t.y=y;
+          t.dir='R';
+          //t.len=len;
+          var nx=x;ny=y;
+          t.init = function () {
+              for (var i = 0; i < len; i++) {
+                  var tempNode;
+                  if (i == 0) {
+                      tempNode = new Node(nx, ny, gridWidth);
+                      tempNode.snakeHead();
+                  }
+                  else {
+                      tempNode = new Node(nx, ny, gridWidth);
+                      tempNode.snakeInit();
+                  }
+                  nx -= gridWidth;
+                  snakes.push(tempNode);
+              };
+              snake_interval = setInterval(t.move, speed)
+          }
+          
+          //取得键盘方向
+          document.onkeydown=function(e){
+                var code=e.keyCode;
+                t.odir=t.dir;
+                switch(code){
+                   case 37:
+                     t.dir='L';
+                   break;
+                   case 38:
+                     t.dir='U';
+                   break;
+                   case 39:
+                      t.dir='R';
+                   break;
+                   case 40:
+                      t.dir='D';
+                   break;
+                } 
+          }
+           //移动蛇
+          t.move=function(){
+             var newHead; 
+             //初始化蛇头的位置从而确定方向
+             if (snakes[0].x + snakes[0].w >= canvas.width || snakes[0].x - snakes[0].w < 0 ||
+                     snakes[0].y-snakes[0].w<0||snakes[0].y+snakes[0].w>canvas.height)
+             {
+                  gameover();
+             }
+             else{
+                  if(t.dir=='R'){
+                   newHead=new Node(snakes[0].x+gridWidth,snakes[0].y,gridWidth);
+                 }else if(t.dir=='L'){
+                   newHead=new Node(snakes[0].x-gridWidth,snakes[0].y,gridWidth); 
+                 }else if(t.dir=='D'){
+                   newHead=new Node(snakes[0].x,snakes[0].y+gridWidth,gridWidth);
+                 }else if(t.dir=='U'){
+                   newHead=new Node(snakes[0].x,snakes[0].y-gridWidth,gridWidth);  
+                 }
+             }
+
+            //禁止反向跑
+            if(newHead.x==snakes[1].x&&newHead.y==snakes[1].y){
+                  t.dir=t.odir; 
+                  return;                                 
+            }
+
+
+             //画蛇头
+             newHead.snakeHead();
+             //追加到数组中(长度会自动加)
+             snakes.unshift(newHead);            
+             //清除尾部
+             snakes[snakes.length-1].clear();
+             //并从数组中移除(长度会自动减)
+             snakes.pop();
+             
+             //判断食物是否和蛇头相撞
+             for (var i = 0; i < foods.length; i++) {
+               if(foods[i].equal(snakes[0])){
+                 //给蛇增加长度
+                 t.addFood();
+                 clearInterval(snake_interval);
+                 speed=speed<20?speed:speed-10;
+                 snake_interval=setInterval(t.move,speed);
+               }         
+             }
+
+             //判断是否与自己相撞
+             for (var i = 1; i < snakes.length; i++) {
+                if(snakes[i].equal(snakes[0])){
+                     gameover();
+                }
+             };
+          
+            //给蛇增加长度(在尾巴加)
+            t.addFood=function(){
+              var tail1=snakes[snakes.length-1];
+              var tail2=snakes[snakes.length-2];
+              var addNode;
+              if(tail1.x==tail2.x){
+                  if(tail1.y>=tail2.y) 
+                    addNode=new Node(tail1.x,tail1.y+gridWidth,gridWidth);
+                  else
+                    addNode=new Node(tail1.x,tail1.y-gridWidth,gridWidth);
+                }
+                else{
+                  if(tail1.x>=tail2.x) 
+                    addNode=new Node(tail1.x+gridWidth,tail1.y,gridWidth);
+                  else
+                    addNode=new Node(tail1.x-gridWidth,tail1.y,gridWidth);
+              }
+
+              //数组加入尾部
+              snakes.push(addNode);
+              addNode.snakeInit();  
+              console.log(snakes.length); 
+
+            }//addFood函数
+        }//move函数结束
+
+       }/*snake函数结束*/
+
+       //开始游戏
+       function gameStart(){
+          var farm=new Farm();
+          food_interval=setInterval(farm.addfood,2000);
+
+          //画蛇
+          snakes=[];//重新初始化数组，不要把前一次的数组元素遗留
+          var snake=new Snake(100,100,5,500);
+          snake.init();
+       }
+       gameStart();
+       //结束
+       function gameover(){
+        var  judge=confirm("游戏结束，是否重新开始");
+        clearInterval(snake_interval);
+        clearInterval(food_interval);
+        while(!judge){
+              //res= confirm("游戏结束，是否重新开始"); 
+                return false;
+            }
+            gameStart();
+        
+       }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script></head>
+<body>
+  <p>单击我，我会变透明。</p> 
+  <p>用于比较。</p>
+  <script>
+    $("p:first").click(function () {
+      $(this).fadeTo("slow", 0.4);
+    });
+  </script> 
+</body>
+</html>

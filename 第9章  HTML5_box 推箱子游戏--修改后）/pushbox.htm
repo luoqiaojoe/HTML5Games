@@ -1,0 +1,35 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta http-equiv=content-type content="text/html; charset=utf-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+
+ </head>
+
+ <body onload="init()" onkeydown="DoKeyDown(event)">
+  <canvas id="myCanvas" width="560" height="560">你的浏览器还不支持哦</canvas> 
+  <div id="msg"></div>
+ <img id="block" src="img/block.gif" style="display:none;">
+ <img id="wall" src="img/wall.gif" style="display:none;">
+ <img id="ball" src="img/ball.gif" style="display:none;">
+ <img id="box" src="img/box.gif" style="display:none;">
+ <img id="redbox" src="img/redbox.gif" style="display:none;">
+ <img id="pleft" src="img/left.png" style="display:none;">
+ <img id="pright" src="img/right.png" style="display:none;">
+ <img id="pup" src="img/up.png" style="display:none;">
+ <img id="pdown" src="img/down.png" style="display:none;">
+ <input type="button" value="上一关" onclick="NextLevel(-1)">
+ <input type="button" value="下一关" onclick="NextLevel(1)">
+ <input type="button" value="撤销移动" onclick="Redo()">
+ <input type="button" value="重玩本关" onclick="NextLevel(0)">
+ <input type="button" value="游戏说明" onclick="DoHelp()">
+ <script type="text/javascript" src="mapdata100.js"></script>
+ <script type="text/javascript" src="pushbox1.js"></script>
+
+
+ </body>
+</html>

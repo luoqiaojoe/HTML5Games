@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="lufylegend-1.7.6.min.js"></script> 
+</head>
+<body>
+<div id="mylegend">loading...</div>
+<script type="text/javascript">
+init(50,"mylegend",500,350,main);
+function main(){  
+   var layer = new LSprite();
+   addChild(layer);
+   var field = new LTextField();
+   field.x = 50;
+   field.y = 50;
+   field.text = "Hello World!";
+   field.size = 25;
+   field.color = "#333333";
+   field.weight = "bolder";
+   layer.addChild(field);
+}  
+</script>
+</body>
+</html>

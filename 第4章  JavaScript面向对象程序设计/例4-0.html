@@ -1,0 +1,26 @@
+<HTML>
+<HEAD><TITLE>演示直接初始化对象</TITLE></HEAD>
+<BODY>
+<script>
+//直接初始化对象
+var zhangsan={
+     name:"张三",
+     sex:"男",
+     say:say
+};
+//定义对象的方法
+function say()
+{
+    document.write("大家好，我的名字是 " + this.name + " ，性别是 " + this.sex);
+}
+zhangsan.say();
+</script>
+
+<br/>
+</BODY>
+</HTML>
+
+
+
+
+

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+  <head> <title>setAttribute </title> </head>
+  <body>
+  <script language="JavaScript">
+    function change() {
+        var input = document.getElementById("p1");        
+        input.setAttribute("style", "color:yellow");
+        alert(input.getAttribute("style"));
+    }
+  </script>
+  <p id="p1" style="color:red;">你好</p>
+  <input type="button" value="改变颜色" onclick="change();">
+  </body>
+</html>
+
+
+
+

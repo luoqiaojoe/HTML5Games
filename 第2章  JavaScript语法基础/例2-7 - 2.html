@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>计算区间数字的和</title>
+</head>
+<body>
+<table style="width:350px;">
+	<tbody>
+		<tr>
+			<td style="text-align: center; ">
+			计算从<input id="demo1" size="4" type="text" />到
+				<input id="demo2" size="4" type="text" />的值
+			</td>
+		</tr>
+		<tr>
+		   <td style="text-align: center;"><input id="calc" type="button" value="显示结果"/></td>
+		</tr>
+	</tbody>
+</table>
+<script type="text/javascript">
+document.getElementById("calc").onclick=function(){
+	var beginNum=parseInt(document.getElementById("demo1").value);
+	var endNum=parseInt(document.getElementById("demo2").value);
+	var total=0;
+	if( !isNaN(beginNum) && !isNaN(endNum) && (endNum>beginNum) ){
+		for(var i=beginNum; i<=endNum; i++){
+			total+=i;
+		}
+		alert(total);
+	}else{
+		alert("你输入的数字没有意义！");
+	}
+}
+</script>
+</body>
+</html>

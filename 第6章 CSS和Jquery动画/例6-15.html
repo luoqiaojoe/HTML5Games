@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<script src="jquery.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$("p:last").removeClass("intro").addClass("main");
+	});
+});
+</script>
+<style>
+.intro{	color:red;}
+.main{	background-color:yellow;}
+</style>
+</head>
+<body>
+<p>这是另一个段落。</p>
+<p class="intro">这是一个段落。</p>
+<button>修改第二个P元素的类名</button>
+</body>
+</html>
+
+
+
+
+

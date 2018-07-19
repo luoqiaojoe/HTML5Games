@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+    <TITLE>演示访问zhangsan对象属性和方法</TITLE>
+</HEAD>
+<BODY>
+<script>
+function Person() {
+    this.name=" 张三 ";  // 定义一个属性 name
+    this.sex=" 男 ";  // 定义一个属性 sex
+    this.age=22;  // 定义一个属性 age
+    this.say=function(){  // 定义一个方法 say()
+        return "我的名字是 " + this.name + " ，性别是" + this.sex + "，今年" + this.age +"岁!";
+    }
+}
+var zhangsan=new Person();
+alert("姓名："+zhangsan.name);  // 使用“.”来访问对象属性
+alert("性别："+zhangsan.sex);
+alert("年龄："+zhangsan["age"]);  // 使用“[ ]”来访问对象属性
+alert(zhangsan.say());             // 使用“.”来访问对象方法
+</script>
+<br/>
+</BODY>
+</HTML>
+
+
+
+
+

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>飞机大战2016-12-11</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<canvas id="myCanvas" width="320" height="480" style="border:solid">
+    你的浏览器不支持canvas画布元素，请更新浏览器获得演示效果。
+</canvas>
+<div id="message_txt" style="display:block;">飞机大战</div>
+<div id="score_txt" style="display:block;">分数：0分</div>
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+	document.addEventListener("keydown", onkeydown);
+	var Plan = function (image, x, y, n) {
+	    this.image = image;
+	    this.x = x;
+	    this.y = y;
+	    this.originX = x;
+	    this.originY = y;
+	    this.width = image.width / n;
+	    this.height = image.height;
+	    this.isCaught = false;
+	    this.frm = 0;
+	    this.dis = 0;
+	    this.n = n;
+	};
+    Plan.prototype.getCaught = function (bool) {
+        this.isCaught = bool;
+        if (bool == false) {
+            this.originX = 0;
+            this.originY = this.y;
+        }
+    };
+    Plan.prototype.testPoint = function (x, y) {
+        var betweenX = (x >= this.x) && (x <= this.x + this.width);
+        var betweenY = (y >= this.y) && (y <= this.y + this.height);
+        return betweenX && betweenY;
+    };
+    Plan.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+    };
+	Plan.prototype.Y = function ( ) {
+        return this.y;
+    };
+	//不断下移地画飞机
+    Plan.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, this.frm *this.width, 0 , this.width, this.height, 0, 0, this.width, this.height);
+        ctx.restore();
+	    this.y++;
+        this.x = this.originX + 20 * Math.sin(Math.PI / 100 * this.y);
+        this.dis++;
+        if (this.dis >= 3) {//3帧换图
+            this.dis = 0;
+            this.frm++;
+            if (this.frm >= this.n) this.frm = 0;
+        }
+    };
+	//原地不动画飞机
+    Plan.prototype.draw2 = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, this.frm *this.width, 0 , this.width, this.height, 0, 0, this.width, this.height);
+        ctx.restore();
+        this.dis++;
+        if (this.dis >= 3) {//3帧换图
+            this.dis = 0;
+            this.frm++;
+            if (this.frm >= this.n) this.frm = 0;
+        }
+    };
+	//飞机碰撞检测
+	//将所有子弹对象的矩形区域与敌机对象的矩形区域逐一检测，如果重叠则说明子弹与敌机的碰撞。
+	Plan.prototype.hitTestObject = function (planobj) {
+	    //if (this.x >= planobj.x	&& this.x <= planobj.x + planobj.width
+		//		&& this.y >= planobj.y && this.y <= planobj.y - planobj.height
+		//	)
+		if(isColliding(this.x,this.y,this.width,this.height,
+				planobj.x,planobj.y,planobj.width,planobj.height))
+         			//发生碰撞 
+			return true;
+		else
+			return false;
+	
+	}
+	
+	function  isColliding( ax, ay, aw, ah,  bx,  by,  bw,  bh)
+    { 
+       if(ay > by + bh || by > ay + ah 
+           || ax > bx + bw || bx > ax + aw) 
+         return false; 
+       else
+         return true; 
+    } 
+
+	
+	//子弹类
+    var Bullet = function (image, x, y) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.originX = x;
+        this.originY = y;
+        this.width = image.width/4;
+        this.height = image.height ;
+        this.isCaught = false;
+        this.frm = 0;
+        this.dis = 0;
+    };
+    Bullet.prototype.testPoint = function (x, y) {
+        var betweenX = (x >= this.x) && (x <= this.x + this.width);
+        var betweenY = (y >= this.y) && (y <= this.y + this.height);
+        return betweenX && betweenY;
+    };
+    Bullet.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+    };
+	Bullet.prototype.Y = function ( ) {
+        return this.y;
+    };
+
+    Bullet.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, this.frm *this.width, 0 , this.width, this.height, 0, 0, this.width, this.height);
+        ctx.restore();
+	    this.y--;
+        
+        this.dis++;
+        if (this.dis >= 10) {//10帧换图
+            this.dis = 0;
+            this.frm++;
+            if (this.frm >= 4) this.frm = 0;
+        }
+    };	
+	Bullet.prototype.hitTestObject = function (planobj) {
+		if(isColliding(this.x,this.y,this.width,this.height,
+				planobj.x,planobj.y,planobj.width,planobj.height))//发生碰撞 
+			return true;
+		else
+			return false;
+	
+	}
+	//爆炸动画
+	var Bomb= function (image, x, y) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+		this.width = image.width/6;
+        this.height = image.height ;
+		this.frm = 0;
+	    this.dis = 0;
+    };
+    Bomb.prototype.draw2 = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+		if (this.frm >= 6) return ;
+        ctx.drawImage(this.image, this.frm *this.width, 0 , this.width, this.height, 0, 0, this.width, this.height);
+        ctx.restore();     
+        this.dis++;
+        if (this.dis >= 10) {//10帧换图
+            this.dis = 0;
+            this.frm++;
+            //if (this.frm >= 6) this.frm = 0;
+        }
+    };		
+    var plan1, plan2, plan3, plan4, caughtplan = null;
+    var isClicked = false;
+    var mouseX, mouseY, preX, preY;
+    var plans=[];
+    var bullets = [];
+	var bombs = [];
+	var score=0;
+	var overflag=false;//游戏是否结束，true为结束
+    var myplane;//己方飞机
+    var image = new Image();
+    var image2 = new Image();
+    var image3 = new Image();
+    var image4 = new Image();
+	var image5 = new Image();
+    var background = new Image();
+    background.src = "map_0.png";
+    image.src = "plan.png";//自己飞机图片
+    image.onload = function () {
+
+    };
+    image2.src = "bomb.png";//爆炸图片
+    image2.onload = function () {
+
+    };
+    image3.src = "enemy.png";//敌机图片
+    image3.onload = function () {
+        //plan1 = new Plan(image, 100, 20);
+        //plan2 = new Plan(image2, 20, 200);
+        //plan3 = new Plan(image3, 240, 50);
+        //plan4 = new Plan(image4, 200, 110);
+        myplane = new Plan(image, 300 * Math.random(), 400, 6);
+        
+        plan_interval=setInterval(function () {
+            plans.push(new Plan(image3, 300 * Math.random(), 20 * Math.random(), 2));
+        }, 3000); //3秒产生1架敌机
+        setInterval(function () {
+            context.clearRect(0, 0, 320, 480);
+            context.drawImage(background, 0, 0);
+			//画自己方飞机
+			if(!overflag)//游戏没有结束
+				myplane.draw2(context);//原地不动
+            //画敌人飞机
+            for (var i = plans.length - 1; i >= 0; i--) {
+                if (plans[i].Y() > 400)
+                    plans.splice(i, 1); //删除敌机
+                else
+                    plans[i].draw(context);
+            }
+            //plan1.draw(context);
+            //plan2.draw(context);
+            //plan3.draw(context);
+            //plan4.draw(context);
+			//画子弹
+            for (var i = bullets.length - 1; i >= 0; i--) {
+                if (bullets[i].Y() < 100)
+                    bullets.splice(i, 1); //删除子弹
+                else
+                    bullets[i].draw(context);
+            }
+			//碰撞检测
+			//判断敌机碰到玩家自己飞机    
+			for (var i = plans.length - 1; i >= 0; i--) {
+				e1=plans[i];
+				if (e1!=null && myplane!=null && myplane.hitTestObject(e1))
+				{
+				   clearInterval(plan_interval);//清除定时器，不再产生敌机
+				   plans.splice(i, 1); //删除敌机				   
+				   bombs.push(new Bomb(image2, myplane.x, myplane.y));
+				   //bomb_interval=setInterval(function () {
+				   //    bomb.draw2(context);//原地不动
+				   //}, 1000 / 60);				   
+				   message_txt.innerHTML="敌机碰到玩家自己飞机,游戏结束";
+				   overflag=true;				   
+				}
+			}
+			
+			//判断子弹碰到敌机
+			for (var j = bullets.length - 1; j >= 0; j--) {
+				var b1=bullets[j];			
+				for (var i = plans.length - 1; i >= 0; i--) {
+					e1=plans[i];
+					if (e1!=null && b1!=null && b1.hitTestObject(e1))//击中敌机
+					{
+					   plans.splice(i, 1); //删除敌机
+					   bullets.splice(i, 1); //删除此颗子弹
+					   bombs.push(new Bomb(image2, b1.x, b1.y-36));
+		   
+					   message_txt.innerHTML="敌机被击中，加20分";
+					   score+=20;
+					   score_txt.innerHTML="分数："+score+"分";			   
+					}
+				}
+			}
+			
+			//画炸弹
+			for (var i = bombs.length - 1; i >= 0; i--) {
+                if (bombs[i].frm >=6)
+                    bombs.splice(i, 1); //删除炸弹
+                else
+                    bombs[i].draw2(context);
+            }
+
+			
+        }, 1000 / 60);
+    };
+	image4.src = "bullet.png";//子弹图片
+    image4.onload = function () {
+
+    };
+
+    function onkeydown(e) {
+        if (e.keyCode==32) {//空格
+		   //发射子弹
+            //bullets.push(new Bullet(image4,300*Math.random(),420*Math.random()));		
+            bullets.push(new Bullet(image4, myplane.x, myplane.y-36));//
+        }else if (e.keyCode==37) {//向左
+            myplane.move(-10,0);
+        }else if (e.keyCode==39) {//向右
+            myplane.move(10,0);
+        }else if (e.keyCode==38) {//向上
+            myplane.move(0,-10);
+        }else if (e.keyCode==40) {//向下
+            myplane.move(0,10);
+        }
+    }
+
+</script>
+</body>
+</html>

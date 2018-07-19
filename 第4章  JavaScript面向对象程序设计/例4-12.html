@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+    <TITLE>演示访问zhangsan对象属性和方法</TITLE>
+</HEAD>
+<BODY>
+<script>
+function charNum(str){
+    var charObj=[];
+    for(i=0,len=str.length;i<len;i++){
+        if(charObj[str[i]]){
+            charObj[str[i]]++;
+        }else{
+            charObj[str[i]]=1;
+        }
+    }
+    var strTem="";  // 临时变量
+    for(value in charObj){
+        strTem+='"'+value+'"的个数：'+charObj[value]+'\n';
+    }
+    return strTem;
+}
+document.write(charNum("Hello"));
+</script>
+<br/>
+</BODY>
+</HTML>
+
+
+
+
+

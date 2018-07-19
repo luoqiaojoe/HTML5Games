@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+<button id="btnlinear">线性切换</button>
+<button id="btnfast">快速切换</button>
+ <br>
+<img src="01.jpg">
+<script>
+  $("#btnlinear").click(function() {
+    $("img").fadeToggle("slow", "linear");
+  });
+  $("#btnfast").click(function () {
+    $("img").fadeToggle("fast");
+  });
+</script> 
+</body>
+</html>

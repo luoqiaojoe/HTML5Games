@@ -1,0 +1,30 @@
+<HTML>
+<HEAD><TITLE>显示当前系统日期</TITLE></HEAD>
+<BODY>
+<Script Language ="JavaScript">
+	d=new Date();
+	document.write("今天是");
+	if(d.getDay()==1) {
+		document.write("星期一");
+	}
+	else if(d.getDay()==2) {
+		document.write("星期二");
+	}
+	else if(d.getDay()==3) {
+		document.write("星期三");
+	}
+	else if(d.getDay()==4) {
+		document.write("星期四");
+	}
+	else if(d.getDay()==5) {
+		document.write("星期五");
+	}
+	else if(d.getDay()==6) {
+		document.write("星期六");
+	}	
+	else {
+		document.write("星期日");
+	}	
+</Script>
+</BODY>
+</HTML>

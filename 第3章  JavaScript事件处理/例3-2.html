@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>获取事件源</title>
+</head>
+<body>
+<div id="demo">点击这里</div>
+<script type="text/javascript">
+    document.getElementById("demo").onclick=function(e){
+        var eve = e || window.event;
+        var srcNode = eve.target || eve.srcElement;  // 兼容所有浏览器
+        alert(srcNode);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+    <TITLE>演示访问zhangsan对象属性和方法</TITLE>
+</HEAD>
+<BODY>
+<script>
+//直接初始化对象
+var zhangsan={}
+zhangsan.name = "张三";
+zhangsan.sex = "男";
+zhangsan.say = function(){
+    return "嗨！大家好，我来了。";
+}
+var strTem="";  // 临时变量
+for(value in zhangsan){
+    strTem+=value+'：'+zhangsan[value]+"\n";
+}
+alert(strTem);
+</script>
+<br/>
+</BODY>
+</HTML>
+
+
+
+
+

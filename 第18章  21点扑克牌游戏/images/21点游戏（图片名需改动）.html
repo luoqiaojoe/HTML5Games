@@ -1,0 +1,249 @@
+﻿<html>
+<head>
+    <title>黑桃J（21点游戏）</title>
+    <meta http-equiv="Content-Type" content="text/html"/>
+<script>
+    var MCard = function (n, s, pic) {//牌类
+        this.num = n; //牌面大小，值为0,1,…12（代表A,2,3,4,5,6,7,8,9,10,J,Q,K）
+        if (n > 10) n = 10; //set values for J, Q, K
+        this.value = n; //点数
+        this.suit = s; //牌面花色
+        this.picture = pic;
+        this.dealt = 0;  //发给那位牌手，未发0玩家1庄家2
+    };
+    //一副牌类
+    function Puke() {//一副牌
+        this.deck = [];				//52张牌数组
+    }
+    Puke.prototype.builddeck = function () {//构造一副牌 
+        var i = 0;
+        for (var si = 0; si < 4; si++) {
+            for (var n = 0; n < 13; n++) { 
+                this.deck[i] = new MCard(n + 1, suitnames[si], pics[i]);	 
+                i++;
+            }
+        }
+    }
+    Puke.prototype.shuffle = function () {//洗牌
+        var i = 0;
+        var s;
+        while (i < this.deck.length) {
+            s = Math.floor(Math.random() * (51 + 1));
+            this.swapindeck(s, i);
+            i++;
+        }
+    }
+    Puke.prototype.swapindeck = function (j, k) {//交换两张牌
+        var hold = this.deck[j]; //new MCard(deck[j].num, deck[j].suit, deck[j].picture);
+        this.deck[j] = this.deck[k];
+        this.deck[k] = hold;
+    }
+    Puke.prototype.dealfromdeck = function (who) {//给玩家或庄家发牌。玩家who=1;庄家who=2
+        var card;
+        var ch = 0;
+        console.log(this.deck[ch])
+        while ((this.deck[ch].dealt > 0)) //找到还没有发的牌
+        { 
+            ch++;
+            if (ch == 52)//如果一副牌发完，立即重洗一副牌
+            {
+                this.builddeck(); //重新构造一副牌
+                this.shuffle();
+                ch = 0;
+            }
+        }
+        this.deck[ch].dealt = who; //发给who
+        card = this.deck[ch];
+        return card; //返回这张牌
+    }
+
+</script>
+<script> 
+var cwidth = 800;var cheight = 600;
+var cardw = 75;var cardh = 107;
+var playerxp = 20;//玩家的第一张牌的x坐标
+var playeryp = 120;
+var housexp = 20;//庄家的第一张牌的x坐标
+var houseyp = 10;
+var housetotal;//庄家手中牌的点数和
+var playertotal;//玩家手中牌的点数和
+var pi = 0;var hi = 0;
+var puke;
+var playerhand = [];//玩家手中牌
+var househand = [];//庄家手中牌
+var pics = [];
+var back = new Image();//背面Image
+back.src = "55.jpg"//牌的背面
+//将所有扑克牌图片加载到pics数组中。
+suitnames = ["clubs", "hearts", "spades", "diamonds"];
+nums = ["a", "2", "3", "4", "5", "6", "7", "8", "9", "10", "j", "q", "k"];
+//缓存图像到pics[i]
+var i = 0;
+for (var si = 0; si < 4; si++) {
+    for (var n = 0; n < 13; n++) {
+        picname = suitnames[si] + "-" + nums[n] + "-75.png";
+        pics[i] = new Image();
+        pics[i].src = picname;
+        i++;
+    }
+}
+//游戏页面加载时执行init()，初始化一副牌puke，并且完成洗牌和发最初的四张牌。
+function init() {
+  ctx = document.getElementById('canvas').getContext('2d'); 
+  ctx.font="italic 20pt Georgia";
+  ctx.fillStyle = "blue";
+  puke = new Puke();
+  puke.builddeck();         //构造一副牌
+  canvas1 = document.getElementById('canvas');
+  window.addEventListener('keydown', getkey, false);
+  puke.shuffle();           //洗牌
+  newgame();
+}
+function newgame() {//开始新游戏
+    ctx.clearRect(0, 0, cwidth, cheight);//清屏
+    pi = 0;
+    hi = 0;
+    playerxp = 20;
+    housexp = 20;
+    dealstart(); //发最初的四张牌
+} 
+function dealstart() {//发四张牌
+    playerhand[pi] = puke.dealfromdeck(1); //第一张发给玩家
+    ctx.drawImage(playerhand[pi].picture,playerxp,playeryp,cardw,cardh);
+    playerxp = playerxp+30;
+    pi++;
+    househand[hi] = puke.dealfromdeck(2); //第二张发给庄家
+    ctx.drawImage(back,housexp,houseyp,cardw,cardh);//画背面
+    housexp = housexp+20;
+    hi++;
+    playerhand[pi] = puke.dealfromdeck(1); //第三张发给玩家
+    ctx.drawImage(playerhand[pi].picture,playerxp,playeryp,cardw,cardh);
+    playerxp = playerxp+30;
+    pi++;
+    househand[hi] = puke.dealfromdeck(2); //第四张发给庄家
+    ctx.drawImage(househand[hi].picture,housexp,houseyp,cardw,cardh);
+    housexp = housexp+20;
+    hi++;
+}
+//getkey(event)获取用户按键信息。根据不同字母键分别处理。
+function getkey(event) {//获取按键
+    var keyCode;
+    if (event == null) {
+        keyCode = window.event.keyCode;
+        window.event.preventDefault();
+    }
+    else {
+        keyCode = event.keyCode;
+        event.preventDefault();
+    }
+    switch (keyCode) {
+        case 68:  //按了d,玩家再要一张牌
+            deal();
+            break;
+        case 72:  //按了h，玩家不要牌了
+            playerdone();
+            break;
+        case 78: //按了n，开始新的游戏
+            newgame();
+            break;
+        default: //按了其它
+            alert("Press d, h, or n.");
+    }
+}  
+ 
+function deal() {//玩家再要一张
+    playerhand[pi] = puke.dealfromdeck(1);
+    ctx.drawImage(playerhand[pi].picture,playerxp,playeryp,cardw,cardh);
+    playerxp = playerxp+30;
+    pi++;
+    if (more_to_house()) {//同时发给庄家一张牌
+        househand[hi] = puke.dealfromdeck(2);
+        ctx.drawImage(househand[hi].picture,housexp,houseyp,cardw,cardh);
+        housexp = housexp+20;
+        hi++;
+    }
+}
+ 
+function more_to_house() {//计算庄家手中的牌的点数和是否小于17
+    var ac = 0; var i;
+    var sumup = 0;
+    for (i = 0; i < hi; i++) {
+        sumup += househand[i].value;
+        if (househand[i].value == 1) { ac++; }
+    }
+    // if aces, check if ace as 11 takes hand over
+    if (ac > 0) {//有A牌则可以当11所以加10
+        if ((sumup + 10) <= 21) {
+            sumup += 10;
+        }
+    }
+    housetotal = sumup;
+    if (sumup < 17) 
+        return true;
+    else 
+        return false;
+}
+ 
+function add_up_player() {//计算玩家手中的点数
+    var ac = 0; var i;
+    var sumup = 0;
+    for (i = 0; i < pi; i++) {
+        sumup += playerhand[i].value;
+        if (playerhand[i].value == 1) {
+            ac++;
+        }
+    }
+    if (ac > 0) {
+        if ((sumup + 10) <= 21) {
+            sumup += 10;
+        }
+    }
+    return sumup;
+}
+
+function playerdone() {//玩家按了h键，不要牌了。
+    while (more_to_house()) {//只要庄家手中的点数小于17，庄家就不停的要牌
+        househand[hi] = puke.dealfromdeck(2);
+        ctx.drawImage(back, housexp, houseyp, cardw, cardh);
+        housexp = housexp + 20;
+        hi++;
+    }
+    showhouse(); //显示庄家的所有牌
+    playertotal = add_up_player(); //玩家的总点数
+    if (playertotal > 21) {
+        if (housetotal > 21) 
+            ctx.fillText("你们都涨死了.", 30, 250);
+        else 
+            ctx.fillText("你胀死了.", 30, 250);
+    }
+    else
+        if (housetotal > 21) 
+            ctx.fillText("你赢了，庄家胀死了.", 30, 250);
+        else
+            if (playertotal >= housetotal) 
+                if (playertotal > housetotal) 
+                    ctx.fillText("你赢了. ", 30, 250);
+                else 
+                    ctx.fillText("平局!", 30, 250);
+            else
+                if (housetotal <= 21)
+                    ctx.fillText("你输了. ", 30, 250);
+                else 
+                    ctx.filltext("你赢了，因为庄家胀死了.", 30, 250);
+}   
+//showhouse()显示庄家手中所有的牌。
+function showhouse() {
+  var i;
+  housexp= 20;
+  for (i=0;i<hi;i++) {
+     ctx.drawImage(househand[i].picture,housexp,houseyp,cardw,cardh);
+     housexp = housexp+20;
+  }  
+}
+</script></head>
+<body onLoad="init();">  
+<header>按<b>d</b>键再发一张牌。 按<b>h</b>不要牌了。按<b>n</b>重新开始.</header>
+<p id="p1">loading...</p> 
+<canvas id="canvas" width="800" height="500">
+你的浏览器不支持canvas画布
+</canvas></body></html>

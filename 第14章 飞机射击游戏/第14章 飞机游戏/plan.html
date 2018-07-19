@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>鼠标拖动3</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<canvas id="myCanvas" width="320" height="480" style="border:solid">
+    你的浏览器不支持canvas画布元素，请更新浏览器获得演示效果。
+</canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+    //canvas.addEventListener("mousedown", onMouseDown, false);
+    //canvas.addEventListener("mousemove", onMouseMove, false);
+    //canvas.addEventListener("mouseup", onMouseUp, false);
+
+    var Plan = function (image, x, y) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.originX = x;
+        this.originY = y;
+        this.width = image.width/6;
+        this.height = image.height ;
+        this.isCaught = false;
+        this.frm = 0;
+        this.dis = 0;
+    };
+    Plan.prototype.getCaught = function (bool) {
+        this.isCaught = bool;
+        if (bool == false) {
+            this.originX = 0;
+            this.originY = this.y;
+        }
+    };
+    Plan.prototype.testPoint = function (x, y) {
+        var betweenX = (x >= this.x) && (x <= this.x + this.width);
+        var betweenY = (y >= this.y) && (y <= this.y + this.height);
+        return betweenX && betweenY;
+    };
+    Plan.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+    };
+    Plan.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, this.frm *this.width, 0 , this.width, this.height, 0, 0, this.width, this.height);
+        ctx.restore();
+	    this.y++;
+        this.x = this.originX + 20 * Math.sin(Math.PI / 100 * this.y);
+        this.dis++;
+        if (this.dis >= 3) {//3帧换图
+            this.dis = 0;
+            this.frm++;
+            if (this.frm >= 6) this.frm = 0;
+        }
+    };
+
+    var plan1, plan2, plan3, plan4, caughtplan = null;
+    var isClicked = false;
+    var mouseX, mouseY, preX, preY;
+
+    var image = new Image();
+    var image2 = new Image();
+    var image3 = new Image();
+    var image4 = new Image();
+    var background = new Image();
+    background.src = "map_0.png";
+    image.src = "plan.png";
+    image2.src = "plan.png";
+    image3.src = "plan.png";
+    image4.src = "plan.png";
+    image4.onload = function () {
+        plan1 = new Plan(image, 100, 20);
+        plan2 = new Plan(image2, 20, 200);
+        plan3 = new Plan(image3, 240, 50);
+        plan4 = new Plan(image4, 200, 110);
+        setInterval(function () {
+            context.clearRect(0, 0, 320, 480);
+            context.drawImage(background, 0, 0);
+
+            plan1.draw(context);
+            plan2.draw(context);
+            plan3.draw(context);
+            plan4.draw(context);
+        }, 1000 / 60);
+    };
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<canvas id="myCanvas" height=250 width=250>您的浏览器不支持 canvas。</canvas>
+<script type="text/javascript">
+function draw()
+{
+  var canvas=document.getElementById("myCanvas");  // 获取网页中的canvas对象
+  var ctx = canvas.getContext("2d"); //获取canvas对象的上下文
+  var imageObj = new Image();  // 创建图像对象
+  imageObj.src = "Snap1.jpg";
+  imageObj.onload = function(){   
+      //从原图(120, 0)位置开始截取中间一块宽60*高80的区域，原大小显示在屏幕(0,0)处
+      ctx.drawImage(imageObj, 120, 0, 60, 80, 0, 0, 60, 80);
+     };
+}
+window.addEventListener("load", draw, true);
+</script>

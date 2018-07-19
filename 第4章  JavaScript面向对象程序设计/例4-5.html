@@ -1,0 +1,26 @@
+<html>  
+<body>  
+<script type="text/javascript">  
+    function Person(name,age){  
+        this.name=name;  
+        this.age=age;  
+    }  
+    Person.prototype.sayHello=function(){  
+        alert("使用原型得到Name："+this.name);  
+    }  
+    var per=new Person("马小倩",21);  
+    per.sayHello(); //输出：使用原型得到Name:马小倩  
+
+    function Student(grade){                    //子类Student
+        this.grade=grade;
+    }
+    Student.prototype=new Person("张海",21);  //将Person定义为Student的父类
+    Student.prototype.intr=function(){  
+        alert("姓名 "+this.name+"，年级 "+this.grade);  
+    }
+    var stu=new Student(5);                  //创建Student对象  
+    stu.sayHello();//调用继承的sayHello()方法输出：使用原型得到Name:张海  
+    stu.intr();//输出：姓名 张海，年级 5  
+</script>  
+</body>  
+</html>

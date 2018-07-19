@@ -1,0 +1,13 @@
+<script language="JavaScript" type="text/javascript">
+function getTotal(m,n){
+    var total=0;
+    if(m>=n){
+        return false;  // n必需大于m，否则无意义
+    }
+    for(var i=m;i<=n;i++){
+        total+=i;
+    }
+    return total;
+}
+document.write(getTotal(1, 10));
+</script>

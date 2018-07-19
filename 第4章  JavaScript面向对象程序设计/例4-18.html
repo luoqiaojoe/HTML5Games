@@ -1,0 +1,16 @@
+<html>
+<HEAD><TITLE>演示使用appendChild()方法的例子</TITLE></HEAD>
+<body>
+<div id="abc"><p>DIV的子对象1</p><p>DIV的子对象2</p><p>DIV的子对象3</p></div>
+<div id="board"></div>
+<script type="text/javascript">
+    var p = document.getElementById("abc");
+    var e = document.createElement("p");		//产生新的元素节点e
+    e.innerHTML = "DIV的子对象4";
+    p.appendChild(e);					//添加子节点e
+</script>
+</body>
+</html>
+
+
+

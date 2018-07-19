@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <canvas id="demoCanvas" width="500" height="500">您的浏览器不支持canvas。</canvas>
+    <!---下面将演示一种绘制矩形的demo--->
+    <script type="text/javascript">
+        var c = document.getElementById("demoCanvas"); // 获取网页中的canvas对象
+        var context = c.getContext('2d');                // 获取上下文
+        context.strokeStyle = "red";                    //指定绘制线样式、颜色
+        context.strokeRect(10, 10, 190, 100);            //绘制矩形线条，内容是空的
+        //以下填充矩形
+        context.fillStyle = "blue";
+        context.fillRect(110,110,100,100);              // 绘制填充矩形
+    </script>
+</body>
+
+
+

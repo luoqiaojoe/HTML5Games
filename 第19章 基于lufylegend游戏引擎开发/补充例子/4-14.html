@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="lufylegend-1.9.7.min.js"></script> 
+</head>
+<body>
+<div id="mylegend">loading...</div>
+<script type="text/javascript">
+var loader;  
+init(50,"mylegend",500,350,main);
+
+function main(){  
+    loader = new LLoader();  
+    loader.addEventListener(LEvent.COMPLETE,loadBitmapdata);  
+    loader.load("face.jpg","bitmapData");  
+}  
+function loadBitmapdata(event){  
+    var bitmapdata = new LBitmapData(loader.content);  
+    var backLayer = new LSprite();
+    addChild(backLayer);
+    backLayer.graphics.beginBitmapFill(bitmapdata);
+    backLayer.graphics.drawVertices(1,"#000",[[120,50],[100,200],[200,150]]);
+}
+</script>
+
+</body>
+</html>

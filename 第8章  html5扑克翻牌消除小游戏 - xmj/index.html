@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>html5扑克翻牌消除小游戏</title>
+<link href="matchgame.css" rel="stylesheet">
+</head>
+<body>
+
+<script type="text/javascript" src="htm5game.matchgame.js"></script>
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+
+<section id="game">
+    <div id="cards">
+        <div class="card">
+            <div class="face front"></div>
+            <div class="face back"></div>
+        </div>
+    </div>
+</section>
+	
+<script type="text/javascript">
+$(function(){
+	//实现随机洗牌
+	matchingGame.deck.sort(shuffle);
+	//alert(matchingGame.deck);
+	var $card=$(".card");
+	for(var i= 0;i<23;i++)
+	{
+		$card.clone().appendTo($("#cards"));
+	}
+	//对每张牌进行设置
+	$(".card").each(function(index)
+	{
+		//调整坐标
+		$(this).css({
+			"left":(matchingGame.cardWidth+20)*(index%8)+"px",
+			"top":(matchingGame.cardHeight+20)*Math.floor(index/8)+"px"
+		});
+		//吐出一个牌号
+		var pattern=matchingGame.deck.pop();
+		//暂存牌号
+		$(this).data("pattern",pattern);
+		//把其翻牌后的对应牌面附加上去
+		$(this).find(".back").addClass(pattern);
+		//点击牌的功能函数挂接
+		$(this).click(selectCard);
+	});
+});
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 44px/56px ">
+<p>扑克翻牌游戏</p>
+<div id="timer"></div>
+</div>
+<script type="text/javascript" language="javascript">
+var success=false;
+var d1=new Date();//年月日时分秒
+var d2=d1.getTime()+2*60*1000
+var endDate=new Date(d2);
+function daoJiShi()
+{
+    var now=new Date();
+    var oft=Math.round((endDate-now)/1000);
+    var ofd=parseInt(oft/3600/24);
+    var ofh=parseInt((oft%(3600*24))/3600);
+    var ofm=parseInt((oft%3600)/60);
+    var ofs=oft%60;
+    document.getElementById('timer').innerHTML='还有 '+ofm+ ' 分钟 ' +ofs+ ' 秒';
+    if(success==true) return;//停止计时
+    if(ofs<0){
+        document.getElementById('timer').innerHTML='倒计时结束！';
+        if(success==false)alert('你挑战失败了！');
+        return;
+    };
+    setTimeout('daoJiShi()',1000);
+};
+daoJiShi();
+</script>
+
+</body>
+</html>

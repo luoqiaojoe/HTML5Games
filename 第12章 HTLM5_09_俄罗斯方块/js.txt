@@ -1,0 +1,4 @@
+Display.prototype.draw=function(a,b,c){
+this.ctx=a.canvas.getContext("2d");
+this.ctx.drawImage(a.canvas,b,c)};
+}

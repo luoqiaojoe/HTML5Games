@@ -1,0 +1,24 @@
+<html>
+<body>
+<div id="div1"><p id="p1"> 我是第一个P</p><p id="p2"> 我是第二个P</p></div>
+<script language="JavaScript">
+
+        var str = document.getElementsByTagName("p")[1].innerHTML;
+        document.write("1:"+str+"<BR>");   //输出我是第二个P，因为获取的是索引为1的P，索引从0开始
+
+        var arr = document.getElementsByTagName("p");
+        for (var i = 0; i < arr.length; i++) 					//循环遍历
+            document.write(arr[i].innerHTML+"<BR>");
+
+        var node = document.getElementById("div1");
+        var node1 = document.getElementsByTagName("p")[1];  //从获取到的元素再获取
+        document.write("2:"+node1.innerHTML+"<BR>");				//输出我是第二个P
+
+
+</script>
+</body>
+</html>
+
+
+
+

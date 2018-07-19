@@ -1,0 +1,23 @@
+<html>
+<body>
+<div id="abc"><p>DIV的子对象1</p><p>DIV的子对象2</p><p>DIV的子对象3</p></div>
+<script language="javascript">
+   var  node1= document.getElementById('abc');              //Node对象
+   document.write(node1.hasChildNodes()+"<BR>");            //输出true
+   var  nodes=node1.childNodes;                             //当前节点node1的子节点数组
+
+   document.write("子节点数量:"+nodes.length+"<BR>");       //子节点数量
+   for(var i=0,len=nodes.length;i<len;i++){                 //遍历所有子节点
+         if(nodes[i].nodeType==1){                         //元素节点
+             document.write("第"+i+"个子节点:"+nodes[i].innerHTML+"<BR>");  //输出第i个节点 
+         }
+   }
+   document.write(nodes[1].innerHTML+"<BR>");               //输出 "DIV的子对象2" 
+   document.write(node1.firstChild+"<BR>");                 //输出 [object HTMLParagraphElement]
+   document.write(node1.firstChild.nodeType+"<BR>");        //输出 1，1表示此节点是元素标记（tag）
+   document.write(node1.lastChild+"<BR>");                  //输出 [object HTMLParagraphElement]
+   document.write(node1.lastChild.innerHTML+"<BR>");        //输出 "DIV的子对象3"
+</script>
+</body>
+</html>
+
