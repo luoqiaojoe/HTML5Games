@@ -1,39 +1,63 @@
 ﻿<!DOCTYPE html>  
 <html>
+<!--由于一直在加载这个js文件，但是加载失败了，导致界面卡这-->
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>  
+
+<!-- 下面是定义的具体获取地理位置的实现 -->
 <script>  
+
 var x=document.getElementById("demo");  
+
+//获取地理位置
 function getLocation()  
 {  
-  if (navigator.geolocation)  
-    {  
-    navigator.geolocation.getCurrentPosition(showPosition,showError);  
-    }  
-  else{x.innerHTML="Geolocation is not supported by this browser.";}  
+  //浏览器支持获取地理位置
+  if (navigator.geolocation){  
+    /**
+     * 弹出提示:
+     *  获取您的位置  ‘禁止’、‘允许’ 2个选择
+     *  展示位置 和 获取失败原因
+     */
+    navigator.geolocation.getCurrentPosition(showPosition, showError);  
+
+  }  
+  else{
+
+    x.innerHTML="Geolocation is not supported by this browser.";
+
+  }  
 }  
-  
-function showPosition(position)  
-  {  
+
+// 
+function showPosition(position){  
+
   lat=position.coords.latitude;  
-  lon=position.coords.longitude;  
-  latlon=new google.maps.LatLng(lat, lon)  
+
+  lon=position.coords.longitude; 
+
+  latlon=new google.maps.LatLng(lat, lon)
+
   mapholder=document.getElementById('mapholder')  
   mapholder.style.height='250px';  
   mapholder.style.width='500px';  
   
-  var myOptions={  
-  center:latlon,zoom:14,  
-  mapTypeId:google.maps.MapTypeId.ROADMAP,  
-  mapTypeControl:false,  
-  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}  
-  };  
+  var myOptions = {  
+
+    center:latlon,zoom:14,  
+    mapTypeId:google.maps.MapTypeId.ROADMAP,  
+    mapTypeControl:false,  
+    navigationControlOptions: {
+      style:google.maps.NavigationControlStyle.SMALL
+    }  
+
+  };
+
   var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);  
   var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});  
-  }  
+}  
   
-function showError(error)  
-  {  
+function showError(error) {  
   switch(error.code)   
     {  
     case error.PERMISSION_DENIED:  
@@ -49,11 +73,19 @@ function showError(error)
       x.innerHTML="An unknown error occurred."  
       break;  
     }  
-  }  
-</script>   
+}  
+
+</script>  
+
 <body>  
+
 <p id="demo">点击这个按钮，获得您的位置：</p>  
+
+<!-- 添加按钮，点击则获取地理位置 -->
 <button onclick="getLocation()">试一下</button>  
+
 <div id="mapholder"></div>   
+
 </body>  
+
 </html>  

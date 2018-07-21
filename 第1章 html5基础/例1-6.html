@@ -1,9 +1,13 @@
-����1-5��������Ƶʵ����
+【例1-5】播放视频实例。
 <!DOCTYPE HTML>
 <html>
   <body>
-    <video src="movie.avi" controls="controls">
+
+    <!-- 发现在chrome下面播放只有声音没图像  在safari下面播放有图像，但是文字乱码 -->
+    <video width="640" height="320" controls="controls">
+      <source src="video.mp4" type="video/mp4"/>
       your browser does not support the video tag
     </video>
+
   </body>
 </html>

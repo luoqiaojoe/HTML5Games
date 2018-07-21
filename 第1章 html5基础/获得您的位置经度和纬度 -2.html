@@ -1,29 +1,29 @@
 ﻿<!DOCTYPE html>
 <html>
 <body>
+  
 <p id="demo">点击这个按钮，获得您的坐标：</p>
 <button onclick="getLocation()">试一下</button>
+
 <div id="mapholder"></div>
+
 <script>
 var x=document.getElementById("demo");
-function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition);
-    }
-  else{x.innerHTML="Geolocation is not supported by this browser.";}
+
+function getLocation(){
+  if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(showPosition);
+  }else{
+    x.innerHTML="Geolocation is not supported by this browser.";
   }
-function showPosition(position)
-{
-var latlon=position.coords.latitude+","+position.coords.longitude;
-
-var img_url="http://www.5hjz/maps/api/staticmap?center="
-+latlon+"&zoom=14&size=400x300&sensor=false";
-
-document.getElementById("mapholder").innerHTML="<img src='"+img_url+"' />";
 }
 
+function showPosition(position){
+  var latlon=position.coords.latitude+","+position.coords.longitude;
+  var img_url="http://www.5hjz/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300&sensor=false";
+  document.getElementById("mapholder").innerHTML="<img src='"+img_url+"' />";
+}
 </script>
+
 </body>
 </html>

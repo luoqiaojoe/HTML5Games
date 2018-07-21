@@ -4,29 +4,45 @@
 <meta charset="utf-8"/>  
 </head>  
 <body>  
-<h1>html5-坦克大战</h1>  
+    
+<!--一个标题，换成h2的话，会小一点-->
+<h1>html5-坦克大战</h1> 
+
 <!--坦克大战的战场-->  
 <canvas id="tankMap" width="400px" height="300px" style="background-color:black"></canvas>  
+
 <script type="text/javascript">  
+
     //得到画布  
-    var canvas1 = document.getElementById("tankMap");      
+    var canvas1 = document.getElementById("tankMap");   
+
     //定义一个位置变量  
     var heroX = 80;  
-    var heroY = 80;       
-    //得到绘图上下文  
+    var heroY = 80;     
+
+    /**
+     * 得到绘图上下文  
+     * 2d
+     */
     var cxt = canvas1.getContext("2d");  
+
     //设置颜色  
     cxt.fillStyle="#BA9658";  
+
     //左边的矩形  
     cxt.fillRect(heroX,heroY,5,30);  
+
     //右边的矩形  
     cxt.fillRect(heroX+17,heroY,5,30);  
+
     //画中间的矩形  
     cxt.fillRect(heroX+6,heroY+5,10,20);  
+
     //画出坦克的盖子  
     cxt.fillStyle="#FEF26E";  
     cxt.arc(heroX+11,heroY+15,5,0,360,true);  
     cxt.fill();  
+
     //画出炮筒  
     cxt.strokeStyle="#FEF26E";  
     cxt.lineWidth=1.5;  
@@ -35,6 +51,7 @@
     cxt.lineTo(heroX+11,heroY);  
     cxt.closePath();  
     cxt.stroke();
+
 </script>  
 </body>  
 </html>  
