@@ -1,16 +1,17 @@
 <HTML>
-<HEAD><TITLE>��ʾʹ��Window.confirm()��ʹ��</TITLE></HEAD>
+<HEAD><TITLE>演示使用Window.confirm()的使用</TITLE></HEAD>
 <BODY>
 <Script LANGUAGE = JavaScript>
-function Checkme() 
-  {
-    if (confirm("�Ƿ�ȷ��ɾ������?") == true) 
-       alert("�ɹ�ɾ������");    
+
+// 弹出个框，并且确定点击的是或者否
+function Checkme() {
+    if (confirm("是否确定删除数据?") == true) 
+       alert("成功删除数据");    
     else
-       alert("û��ɾ������");  
+       alert("没有删除数据");  
   }
 </Script>
-<p><a href=# onclick="Checkme()">ɾ������</a></p>
+<p><a href=# onclick="Checkme()">删除数据</a></p>
 </BODY>
 </HTML>
 

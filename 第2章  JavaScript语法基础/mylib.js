@@ -1,9 +1,9 @@
-// mylib.js º¯Êı¿â
-function PrintString(str) // ´òÓ¡×Ö·û´®
+// mylib.js å‡½æ•°åº“
+function PrintString(str) // æ‰“å°å­—ç¬¦ä¸²
 {
 	document.write (str);
 }
-function sum(num1, num2) //ÇóºÍ
+function sum(num1, num2) //æ±‚å’Œ
 {
 	document.write (num1 + num2);
 }

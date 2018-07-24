@@ -1,35 +1,40 @@
 <html>
 <head>
-<title>¼ÆËãÇø¼äÊý×ÖµÄºÍ</title>
+<title>è®¡ç®—åŒºé—´æ•°å­—çš„å’Œ</title>
 </head>
 <body>
 <table style="width:350px;">
+	<!-- è¿™é‡Œæ˜¯è§†å›¾ -->
 	<tbody>
 		<tr>
 			<td style="text-align: center; ">
-			¼ÆËã´Ó<input id="demo1" size="4" type="text" />µ½
-				<input id="demo2" size="4" type="text" />µÄÖµ
+			è®¡ç®—ä»Ž<input id="demo1" size="4" type="text" />åˆ°
+				<input id="demo2" size="4" type="text" />çš„å€¼
 			</td>
 		</tr>
 		<tr>
-		   <td style="text-align: center;"><input id="calc" type="button" value="ÏÔÊ¾½á¹û"/></td>
+		   <td style="text-align: center;"><input id="calc" type="button" value="æ˜¾ç¤ºç»“æžœ"/></td>
 		</tr>
 	</tbody>
 </table>
+
 <script type="text/javascript">
+// è¿™é‡Œæ˜¯jsé€»è¾‘æŽ§åˆ¶ä»£ç 
 document.getElementById("calc").onclick=function(){
 	var beginNum=parseInt(document.getElementById("demo1").value);
 	var endNum=parseInt(document.getElementById("demo2").value);
 	var total=0;
+	// isNaN trueè¡¨ç¤ºéžæ•°å­—
 	if( !isNaN(beginNum) && !isNaN(endNum) && (endNum>beginNum) ){
 		for(var i=beginNum; i<=endNum; i++){
 			total+=i;
 		}
 		alert(total);
 	}else{
-		alert("ÄãÊäÈëµÄÊý×ÖÃ»ÓÐÒâÒå£¡");
+		alert("ä½ è¾“å…¥çš„æ•°å­—æ²¡æœ‰æ„ä¹‰ï¼");
 	}
 }
 </script>
+
 </body>
 </html>
