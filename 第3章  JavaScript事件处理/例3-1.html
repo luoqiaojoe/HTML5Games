@@ -1,22 +1,27 @@
 <html>
 <head>
-<title>»ñÈ¡Êó±êµÄ×ø±êĞÅÏ¢</title>
+<title>è·å–é¼ æ ‡çš„åæ ‡ä¿¡æ¯</title>
 </head>
 <body>
-<div>»ñÈ¡Êó±êµÄ×ø±êĞÅÏ¢</div>
-<div id="demo">µã»÷ÕâÀï</div>
+<div>è·å–é¼ æ ‡çš„åæ ‡ä¿¡æ¯</div>
+<div id="demo">ç‚¹å‡»è¿™é‡Œ</div>
 <script type="text/javascript">
 document.getElementById("demo").onclick=function(e){
     var eve = e || window.event;
-    var x = eve.clientX,  // Ïà¶ÔÓÚ¿Í»§¶ËµÄX×ø±ê
-        y = eve.clientY,  // Ïà¶ÔÓÚ¿Í»§¶ËµÄY×ø±ê
-        x1 = eve.screenX,  // Ïà¶ÔÓÚ¼ÆËã»úÆÁÄ»µÄX×ø±ê
-        y1 = eve.screenY;  // Ïà¶ÔÓÚ¼ÆËã»úÆÁÄ»µÄY×ø±ê
+
+    /**
+     * åæ ‡åŸç‚¹æ˜¯å·¦ä¸Šè§’(0, 0)
+     */
+    var x = eve.clientX,   // ç›¸å¯¹äºå®¢æˆ·ç«¯çš„Xåæ ‡
+        y = eve.clientY,   // ç›¸å¯¹äºå®¢æˆ·ç«¯çš„Yåæ ‡
+        x1 = eve.screenX,  // ç›¸å¯¹äºè®¡ç®—æœºå±å¹•çš„Xåæ ‡
+        y1 = eve.screenY;  // ç›¸å¯¹äºè®¡ç®—æœºå±å¹•çš„Yåæ ‡
+    
     alert(
-        "Ïà¶Ô¿Í»§¶ËµÄ×ø±ê£º\n"+
+        "ç›¸å¯¹å®¢æˆ·ç«¯çš„åæ ‡ï¼š\n"+
         "x = "+x+"\n"+
         "y = "+y+"\n\n"+
-        "Ïà¶ÔÆÁÄ»µÄ×ø±ê£º\n"+
+        "ç›¸å¯¹å±å¹•çš„åæ ‡ï¼š\n"+
         "x = "+x1+"\n"+
         "y = "+y1
     );

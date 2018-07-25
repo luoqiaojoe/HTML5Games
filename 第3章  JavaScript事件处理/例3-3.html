@@ -1,18 +1,20 @@
 <html>
 <head>
-<title>È¡Ïû<a>±ê¼ÇµÄÄ¬ÈÏ¶¯×÷</title>
+<title>å–æ¶ˆ<a>æ ‡è®°çš„é»˜è®¤åŠ¨ä½œ</title>
 </head>
 <body>
-<a id="demo" href="http://www.baidu.com" target="_blank">µã»÷ÕâÀïÊÔÊÔ</a>
+<a id="demo" href="http://www.baidu.com" target="_blank">ç‚¹å‡»è¿™é‡Œè¯•è¯•</a>
+
 <script type="text/javascript">
     document.getElementById("demo").onclick=function(e){
         var eve = e || window.event;
-        try{  // Ê¹ÓÃ try...catch Óï¾ä±ÜÃâä¯ÀÀÆ÷³öÏÖ´íÎóÌáÊ¾
-            eve.preventDefault();  // ·Ç IE ä¯ÀÀÆ÷
+        try{                          // ä½¿ç”¨ try...catch è¯­å¥é¿å…æµè§ˆå™¨å‡ºç°é”™è¯¯æç¤º
+            eve.preventDefault();     // é IE æµè§ˆå™¨
         }catch(e){
-            eve.returnValue = false;  // IE8.0 ¼°ÆäÒÔÏÂ°æ±¾
+            eve.returnValue = false;  // IE8.0 åŠå…¶ä»¥ä¸‹ç‰ˆæœ¬
         }
     }
 </script>
+
 </body>
 </html>
