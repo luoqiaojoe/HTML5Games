@@ -6,22 +6,29 @@
         this.age=age;  
     }  
     Person.prototype.sayHello=function(){  
-        alert("Ê¹ÓÃÔ­ĞÍµÃµ½Name£º"+this.name);  
+        alert("ä½¿ç”¨åŸå‹å¾—åˆ°Nameï¼š"+this.name);  
     }  
-    var per=new Person("ÂíĞ¡Ù»",21);  
-    per.sayHello(); //Êä³ö£ºÊ¹ÓÃÔ­ĞÍµÃµ½Name:ÂíĞ¡Ù»  
+    var per=new Person("é©¬å°å€©",21);  
+    per.sayHello(); //è¾“å‡ºï¼šä½¿ç”¨åŸå‹å¾—åˆ°Name:é©¬å°å€©  
 
-    function Student(name,age,grade){      //×ÓÀàStudent
-        Person.call(this,name,age)         //ÔÚ×ÓÀàÖĞ¸ø¸¸Àà´«²ÎÊı
+
+    //æ›´å¥½çš„ç»§æ‰¿
+    function Student(name,age,grade){      //å­ç±»Student
+        Person.call(this,name,age)         //åœ¨å­ç±»ä¸­ç»™çˆ¶ç±»ä¼ å‚æ•°
         this.grade=grade;
     }
-    Student.prototype=new Person();  //½«Person¶¨ÒåÎªStudentµÄ¸¸Àà
+    Student.prototype=new Person();         //å°†Personå®šä¹‰ä¸ºStudentçš„çˆ¶ç±»
+
+
+
+
     Student.prototype.intr=function(){  
-        alert("ĞÕÃû "+this.name+",Äê¼¶ "+this.grade);  
+        alert("å§“å "+this.name+",å¹´çº§ "+this.grade);  
     }
-    var stu=new Student("ÕÅº£",21,5);                  //´´½¨Student¶ÔÏó  
-    stu.sayHello();//µ÷ÓÃ¼Ì³ĞµÄsayHello()·½·¨Êä³ö£ºÊ¹ÓÃÔ­ĞÍµÃµ½Name:ÕÅº£  
-    stu.intr();//Êä³ö£ºĞÕÃû ÕÅº££¬Äê¼¶ 5  
+
+    var stu=new Student("å¼ æµ·",21,5);                  //åˆ›å»ºStudentå¯¹è±¡  
+    stu.sayHello();//è°ƒç”¨ç»§æ‰¿çš„sayHello()æ–¹æ³•è¾“å‡ºï¼šä½¿ç”¨åŸå‹å¾—åˆ°Name:å¼ æµ·  
+    stu.intr();//è¾“å‡ºï¼šå§“å å¼ æµ·ï¼Œå¹´çº§ 5  
 </script>  
 </body>  
 </html>

@@ -6,26 +6,27 @@
         this.age=age;  
     }  
     Person.prototype.sayHello=function(){  
-        alert("Ê¹ÓÃÔ­ĞÍµÃµ½Name£º"+this.name);  
+        alert("ä½¿ç”¨åŸå‹å¾—åˆ°Nameï¼š"+this.name);  
     }  
-    var per=new Person("ÂíĞ¡Ù»",21);  
-    per.sayHello(); //Êä³ö£ºÊ¹ÓÃÔ­ĞÍµÃµ½Name:ÂíĞ¡Ù»  
+    var per=new Person("é©¬å°å€©",21);  
+    per.sayHello(); //è¾“å‡ºï¼šä½¿ç”¨åŸå‹å¾—åˆ°Name:é©¬å°å€©  
 
-    function Student(name,age,grade){      //×ÓÀàStudent
-        Person.call(this,name,age)         //ÔÚ×ÓÀàÖĞ¸ø¸¸Àà´«²ÎÊı
+    function Student(name,age,grade){      //å­ç±»Student
+        Person.call(this,name,age)         //åœ¨å­ç±»ä¸­ç»™çˆ¶ç±»ä¼ å‚æ•°
         this.grade=grade;
     }
-    Student.prototype=new Person();  //½«Person¶¨ÒåÎªStudentµÄ¸¸Àà
+    Student.prototype=new Person();  //å°†Personå®šä¹‰ä¸ºStudentçš„çˆ¶ç±»
     Student.prototype.intr=function(){  
-        alert("ĞÕÃû "+this.name+",Äê¼¶ "+this.grade);  
+        alert("å§“å "+this.name+",å¹´çº§ "+this.grade);  
     }
+    
     Student.prototype.sayHello=function(){  
-        alert("Ê¹ÓÃ×ÓÀàµÃµ½Name£º"+this.name);  
+        alert("ä½¿ç”¨å­ç±»å¾—åˆ°Nameï¼š"+this.name);  
     }  
 
-    var stu=new Student("ÕÅº£",21,5);                  //´´½¨Student¶ÔÏó  
-    stu.sayHello();//µ÷ÓÃ×Ô¼ºµÄsayHello()·½·¨Êä³ö£ºÊ¹ÓÃ×ÓÀàµÃµ½Name:ÕÅº£ 
-    stu.intr();//Êä³ö£ºĞÕÃû ÕÅº££¬Äê¼¶ 5  
+    var stu=new Student("å¼ æµ·",21,5);                  //åˆ›å»ºStudentå¯¹è±¡  
+    stu.sayHello();//è°ƒç”¨è‡ªå·±çš„sayHello()æ–¹æ³•è¾“å‡ºï¼šä½¿ç”¨å­ç±»å¾—åˆ°Name:å¼ æµ· 
+    stu.intr();    //Student.intrçš„è¯ï¼Œç›¸ç­‰äºé™æ€æ–¹æ³•ï¼Œé€šè¿‡stuæ˜¯å¾—ä¸åˆ°è¿™ä¸ªçš„.   è¾“å‡ºï¼šå§“å å¼ æµ·ï¼Œå¹´çº§ 5  
 </script>  
 </body>  
 </html>

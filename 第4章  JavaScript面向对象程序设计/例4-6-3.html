@@ -1,25 +1,29 @@
 <html>  
 <body>  
 <script type="text/javascript">  
-    function  Parent(name){      //¸¸Àà
+    function  Parent(name){      //çˆ¶ç±»
         this.name=name;  
         this.sayParent=function(){  
             alert("Parent:"+this.name);  
         }  
     }  
 
-    function  Child(name,age){    //×ÓÀà
-        this.tempMethod=Parent;  
-        this.tempMethod(name);  
+    function  Child(name,age){    //å­ç±»
+
+        //è¿™æ ·æŠŠçˆ¶ç±»çš„ä¸œè¥¿æ‹¿è¿‡æ¥ï¼Œå°±æ˜¯ç»§æ‰¿äº†.
+        this.tempMethod=Parent;  //
+        this.tempMethod(name);   //this...
+
         this.age=age;  
         this.sayChild=function(){  
             alert("Child:"+this.name+"age:"+this.age);  
         }  
     }  
 
-    var parent=new Parent("ÕÅº£");  
-    parent.sayParent(); //Êä³ö£º¡°Parent:ÕÅº£¡±  
-    var child=new Child("ÀîÃù",24); //Êä³ö£º¡°Child:ÀîÃù age:24¡±  
+    var parent=new Parent("å¼ æµ·");  
+    parent.sayParent(); //è¾“å‡ºï¼šâ€œParent:å¼ æµ·â€  
+
+    var child=new Child("æé¸£",24); //è¾“å‡ºï¼šâ€œChild:æé¸£ age:24â€  
     child.sayChild();
     child.sayParent();  
 </script>  

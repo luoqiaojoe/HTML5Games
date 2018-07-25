@@ -1,19 +1,28 @@
 <HTML>
-<HEAD><TITLE>��ʾֱ�ӳ�ʼ������</TITLE></HEAD>
+<HEAD><TITLE>演示直接初始化对象</TITLE></HEAD>
 <BODY>
 <script>
-//ֱ�ӳ�ʼ������
+
+
+//直接初始化对象
 var zhangsan={
-     name:"����",
-     sex:"��",
+     name:"张三",
+     sex:"男",
      say:say
 };
-//�������ķ���
+
+//定义对象的方法
 function say()
 {
-    document.write("��Һã��ҵ������� " + this.name + " ���Ա��� " + this.sex);
+    document.write("大家好，我的名字是 " + this.name + " ，性别是 " + this.sex);
 }
+
+/**
+ * 数据和操作数据的方法没有绑定在一块，不是好的做法。
+ * 但是虽然这个say也是全局的函数，zhangsan调用了这个函数，里面的this就是张三
+ */
 zhangsan.say();
+
 </script>
 
 <br/>

@@ -1,21 +1,27 @@
 <HTML>
 <HEAD>
-    <TITLE>ÑİÊ¾·ÃÎÊzhangsan¶ÔÏóÊôĞÔºÍ·½·¨</TITLE>
+    <TITLE>æ¼”ç¤ºè®¿é—®zhangsanå¯¹è±¡å±æ€§å’Œæ–¹æ³•</TITLE>
 </HEAD>
 <BODY>
 <script>
-//Ö±½Ó³õÊ¼»¯¶ÔÏó
+//ç›´æ¥åˆå§‹åŒ–å¯¹è±¡
 var zhangsan={}
-zhangsan.name = "ÕÅÈı";
-zhangsan.sex = "ÄĞ";
+zhangsan.name = "å¼ ä¸‰";
+zhangsan.sex = "ç”·";
 zhangsan.say = function(){
-    return "àË£¡´ó¼ÒºÃ£¬ÎÒÀ´ÁË¡£";
+    return "å—¨ï¼å¤§å®¶å¥½ï¼Œæˆ‘æ¥äº†ã€‚";
 }
-var strTem="";  // ÁÙÊ±±äÁ¿
+
+/**
+ * éå†ä¸€ä¸ªå¯¹è±¡é‡Œé¢ å¯æšä¸¾çš„ æ™®é€šå˜é‡ å’Œ å‡½æ•°å˜é‡
+ */
+var strTem="";       // ä¸´æ—¶å˜é‡
 for(value in zhangsan){
-    strTem+=value+'£º'+zhangsan[value]+"\n";
+    strTem+=value+'ï¼š'+zhangsan[value]+"\n";
 }
+
 alert(strTem);
+
 </script>
 <br/>
 </BODY>

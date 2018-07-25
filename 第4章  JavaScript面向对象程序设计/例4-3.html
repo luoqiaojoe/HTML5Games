@@ -1,36 +1,38 @@
 <HTML>
 <HEAD>
-    <TITLE>Ìí¼ÓÔ­ĞÍÊôĞÔºÍÔ­ĞÍ·½·¨</TITLE>
+    <TITLE>æ·»åŠ åŸå‹å±æ€§å’ŒåŸå‹æ–¹æ³•</TITLE>
 </HEAD>
 <BODY>
 
 <script>
-// ¶¨ÒåÀà
+// å®šä¹‰ç±»
 function Person(name,sex) {
-    this.name=name;  // ¶¨ÒåÒ»¸öÊôĞÔ name
-    this.sex=sex;  // ¶¨ÒåÒ»¸öÊôĞÔ sex
-    this.say=function(){  // ¶¨ÒåÒ»¸ö·½·¨ say()
-        return "´ó¼ÒºÃ£¬ÎÒµÄÃû×ÖÊÇ " + this.name + " £¬ĞÔ±ğÊÇ " + this.sex + " ¡£";
+    this.name=name;  // å®šä¹‰ä¸€ä¸ªå±æ€§ name
+    this.sex=sex;  // å®šä¹‰ä¸€ä¸ªå±æ€§ sex
+    this.say=function(){  // å®šä¹‰ä¸€ä¸ªæ–¹æ³• say()
+        return "å¤§å®¶å¥½ï¼Œæˆ‘çš„åå­—æ˜¯ " + this.name + " ï¼Œæ€§åˆ«æ˜¯ " + this.sex + " ã€‚";
     }
 }
-// ´´½¨¶ÔÏó
-var zhangsan=new Person("ÕÅÈı","ÄĞ");
+
+//***********å¼ ä¸‰åˆ›å»ºå‡ºæ¥ï¼Œå¹¶ä¸”ç»™åŠ¨æ€æ·»åŠ runå±æ€§**********//
+// åˆ›å»ºå¯¹è±¡
+var zhangsan=new Person("å¼ ä¸‰","ç”·");
 zhangsan.say();
-// ¶¯Ì¬Ìí¼ÓÊôĞÔºÍ·½·¨
+// åŠ¨æ€æ·»åŠ å±æ€§å’Œæ–¹æ³•
 zhangsan.tel="029-81892332";
 zhangsan.run=function(){
-   return  " ÎÒÅÜµÃºÜ¿ì£¡ ";
+   return  " æˆ‘è·‘å¾—å¾ˆå¿«ï¼ ";
 }
-// µ¯³ö¾¯¸æ¿ò
-alert("ĞÕÃû£º"+zhangsan.name);
-alert("ĞÕ±ğ£º"+zhangsan.sex);
+// å¼¹å‡ºè­¦å‘Šæ¡†
+alert("å§“åï¼š"+zhangsan.name);
+alert("å§“åˆ«ï¼š"+zhangsan.sex);
 alert(zhangsan.say());
-alert("µç»°£º"+zhangsan.tel);
+alert("ç”µè¯ï¼š"+zhangsan.tel);
 alert(zhangsan.run());
-var lisi=new Person("ÀîËÄ","ÄĞ");
-alert(lisi.run());//³öÏÖ´íÎó
 
-
+//*******æå››******//
+var lisi=new Person("æå››","ç”·");
+alert(lisi.run());          //å‡ºç°é”™è¯¯ã€‚ æå››æ²¡æœ‰runå±æ€§
 
 </script>
 <br/>
