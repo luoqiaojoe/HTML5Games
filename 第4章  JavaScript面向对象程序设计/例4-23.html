@@ -1,16 +1,26 @@
 <!DOCTYPE HTML>
 <html>
   <head> <title>setAttribute </title> </head>
+
   <body>
+
   <script language="JavaScript">
     function change() {
-        var input = document.getElementById("p1");        
+
+        //得到p1标签
+        var input = document.getElementById("p1");   
+
+        //设置属性
         input.setAttribute("style", "color:yellow");
+
+        //得到属性
         alert(input.getAttribute("style"));
     }
   </script>
-  <p id="p1" style="color:red;">���</p>
-  <input type="button" value="�ı���ɫ" onclick="change();">
+
+  <p id="p1" style="color:red;">你好</p>
+  <input type="button" value="改变颜色" onclick="change();">
+
   </body>
 </html>
 

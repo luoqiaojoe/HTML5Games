@@ -1,13 +1,21 @@
 <html>
 <body>
 <div id="demo">
-    <div id="thisNode">µã»÷ÕâÀïÌí¼ÓÐÂ½Úµã</div>
+    <div id="thisNode">ç‚¹å‡»è¿™é‡Œæ·»åŠ æ–°èŠ‚ç‚¹</div>
 </div>
 <script type="text/javascript">
 document.getElementById("thisNode").onclick=function(){
+
+    //æ–°å»ºdiv
     var ele_div=document.createElement("div");
-    var ele_text=document.createTextNode("ÕâÊÇÐÂ½Úµã");
+
+    //æ–°å»ºtextNode
+    var ele_text = document.createTextNode("è¿™æ˜¯æ–°èŠ‚ç‚¹");
+
+    //divæ·»åŠ ä¸€ä¸ªtext
     ele_div.appendChild(ele_text);
+
+    //çˆ¶èŠ‚ç‚¹
     this.parentNode.insertBefore(ele_div , this);
 }
 </script>

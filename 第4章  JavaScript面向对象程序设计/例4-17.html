@@ -1,22 +1,22 @@
 <html>
 <body>
-<div id="abc"><p>DIVµÄ×Ó¶ÔÏó1</p><p>DIVµÄ×Ó¶ÔÏó2</p><p>DIVµÄ×Ó¶ÔÏó3</p></div>
+<div id="abc"><p>DIVçš„å­å¯¹è±¡1</p><p>DIVçš„å­å¯¹è±¡2</p><p>DIVçš„å­å¯¹è±¡3</p></div>
 <script language="javascript">
-   var  node1= document.getElementById('abc');              //Node¶ÔÏó
-   document.write(node1.hasChildNodes()+"<BR>");            //Êä³ötrue
-   var  nodes=node1.childNodes;                             //µ±Ç°½Úµãnode1µÄ×Ó½ÚµãÊı×é
+   var  node1= document.getElementById('abc');              //Nodeå¯¹è±¡
+   document.write(node1.hasChildNodes()+"<BR>");            //è¾“å‡ºtrue
+   var  nodes=node1.childNodes;                             //å½“å‰èŠ‚ç‚¹node1çš„å­èŠ‚ç‚¹æ•°ç»„
 
-   document.write("×Ó½ÚµãÊıÁ¿:"+nodes.length+"<BR>");       //×Ó½ÚµãÊıÁ¿
-   for(var i=0,len=nodes.length;i<len;i++){                 //±éÀúËùÓĞ×Ó½Úµã
-         if(nodes[i].nodeType==1){                         //ÔªËØ½Úµã
-             document.write("µÚ"+i+"¸ö×Ó½Úµã:"+nodes[i].innerHTML+"<BR>");  //Êä³öµÚi¸ö½Úµã 
+   document.write("å­èŠ‚ç‚¹æ•°é‡:"+nodes.length+"<BR>");       //å­èŠ‚ç‚¹æ•°é‡
+   for(var i=0,len=nodes.length;i<len;i++){                 //éå†æ‰€æœ‰å­èŠ‚ç‚¹
+         if(nodes[i].nodeType==1){                         //å…ƒç´ èŠ‚ç‚¹
+             document.write("ç¬¬"+i+"ä¸ªå­èŠ‚ç‚¹:"+nodes[i].innerHTML+"<BR>");  //è¾“å‡ºç¬¬iä¸ªèŠ‚ç‚¹ 
          }
    }
-   document.write(nodes[1].innerHTML+"<BR>");               //Êä³ö "DIVµÄ×Ó¶ÔÏó2" 
-   document.write(node1.firstChild+"<BR>");                 //Êä³ö [object HTMLParagraphElement]
-   document.write(node1.firstChild.nodeType+"<BR>");        //Êä³ö 1£¬1±íÊ¾´Ë½ÚµãÊÇÔªËØ±ê¼Ç£¨tag£©
-   document.write(node1.lastChild+"<BR>");                  //Êä³ö [object HTMLParagraphElement]
-   document.write(node1.lastChild.innerHTML+"<BR>");        //Êä³ö "DIVµÄ×Ó¶ÔÏó3"
+   document.write(nodes[1].innerHTML+"<BR>");               //è¾“å‡º "DIVçš„å­å¯¹è±¡2" 
+   document.write(node1.firstChild+"<BR>");                 //è¾“å‡º [object HTMLParagraphElement]
+   document.write(node1.firstChild.nodeType+"<BR>");        //è¾“å‡º 1ï¼Œ1è¡¨ç¤ºæ­¤èŠ‚ç‚¹æ˜¯å…ƒç´ æ ‡è®°ï¼ˆtagï¼‰
+   document.write(node1.lastChild+"<BR>");                  //è¾“å‡º [object HTMLParagraphElement]
+   document.write(node1.lastChild.innerHTML+"<BR>");        //è¾“å‡º "DIVçš„å­å¯¹è±¡3"
 </script>
 </body>
 </html>

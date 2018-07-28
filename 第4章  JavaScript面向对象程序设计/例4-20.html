@@ -1,12 +1,19 @@
 <html>
-<HEAD><TITLE>��ʾ�ڵ㱾��</TITLE></HEAD>
+<HEAD><TITLE>演示节点本身</TITLE></HEAD>
 <body>
+
 <div id="demo">
-    <div id="thisNode">���ɾ����</div>
+    <div id="thisNode">点击删除我</div>
 </div>
+
 <script type="text/javascript">
+
+    //直接跳过父节点查找子节点
     document.getElementById("thisNode").onclick=function(){
+
+        //移除自己
         this.parentNode.removeChild(this);
+
     }
 </script>
 </body>

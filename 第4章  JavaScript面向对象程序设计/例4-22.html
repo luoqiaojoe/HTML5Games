@@ -5,14 +5,24 @@
     <title>getAttribute </title>
   </head>
   <body>
+
   <div id="div1">
        <div id="div2">div2</div>
        <div id="div3">div3</div>
   </div>
+
   <script language="javascript">
+
+  //divçš„æ‰€æœ‰å­©å­èŠ‚ç‚¹  
   var list=document.getElementsByTagName("div");
+  // alert(list);
+
+  //
   var mydiv=list["div2"].getAttribute("id");
-  alert('ÓÃlist["div2"]È¡µ½µÚ2¸öidµÄÊôĞÔµÄÊôĞÔÖµ:'+mydiv);
+
+  //
+  alert('ç”¨list["div2"]å–åˆ°ç¬¬2ä¸ªidçš„å±æ€§çš„å±æ€§å€¼:' + mydiv);
+
   </script>
   </body>
 </html>

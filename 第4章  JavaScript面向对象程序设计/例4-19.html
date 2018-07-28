@@ -1,12 +1,19 @@
 <html>
-<HEAD><TITLE>ÑİÊ¾Ê¹ÓÃremoveChild()·½·¨µÄÀı×Ó</TITLE></HEAD>
+<HEAD><TITLE>æ¼”ç¤ºä½¿ç”¨removeChild()æ–¹æ³•çš„ä¾‹å­</TITLE></HEAD>
 <body>
-<div id="abc"><p>DIVµÄ×Ó¶ÔÏó1</p><p>DIVµÄ×Ó¶ÔÏó2</p><p>DIVµÄ×Ó¶ÔÏó3</p></div>
+<div id="abc"><p>DIVçš„å­å¯¹è±¡1</p><p>DIVçš„å­å¯¹è±¡2</p><p>DIVçš„å­å¯¹è±¡3</p></div>
 <div id="board"></div>
 <script type="text/javascript">
-    var p = document.getElementById("abc");	//»ñÈ¡idÎª"abc"µÄÔªËØ
-    var  nodes=p.childNodes;
-    p. removeChild(nodes[0]);			//É¾³ıµÚÒ»¸ö×Ó½Úµãe
+
+    //è·å–idä¸º"abc"çš„å…ƒç´ 
+    var p = document.getElementById("abc");	
+
+    //å¾—åˆ°æ‰€æœ‰å­©å­èŠ‚ç‚¹
+    var  nodes = p.childNodes;
+
+    //åˆ é™¤ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹
+    p. removeChild(nodes[1]);	 //åˆ é™¤ä¸å­˜åœ¨çš„æç¤ºï¼š Uncaught TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.
+
 </script>
 </body>
 </html>

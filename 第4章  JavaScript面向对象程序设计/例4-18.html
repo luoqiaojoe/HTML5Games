@@ -1,13 +1,16 @@
 <html>
-<HEAD><TITLE>ÑİÊ¾Ê¹ÓÃappendChild()·½·¨µÄÀı×Ó</TITLE></HEAD>
+<HEAD><TITLE>æ¼”ç¤ºä½¿ç”¨appendChild()æ–¹æ³•çš„ä¾‹å­</TITLE></HEAD>
 <body>
-<div id="abc"><p>DIVµÄ×Ó¶ÔÏó1</p><p>DIVµÄ×Ó¶ÔÏó2</p><p>DIVµÄ×Ó¶ÔÏó3</p></div>
+<div id="abc"><p>DIVçš„å­å¯¹è±¡1</p><p>DIVçš„å­å¯¹è±¡2</p><p>DIVçš„å­å¯¹è±¡3</p></div>
 <div id="board"></div>
 <script type="text/javascript">
     var p = document.getElementById("abc");
-    var e = document.createElement("p");		//²úÉúĞÂµÄÔªËØ½Úµãe
-    e.innerHTML = "DIVµÄ×Ó¶ÔÏó4";
-    p.appendChild(e);					//Ìí¼Ó×Ó½Úµãe
+
+
+    //é€šè¿‡ä»£ç åˆ›å»ºï¼šäº§ç”Ÿæ–°çš„å…ƒç´ èŠ‚ç‚¹e
+    var e = document.createElement("p");		
+    e.innerHTML = "DIVçš„å­å¯¹è±¡4";
+    p.appendChild(e);	//æ·»åŠ å­èŠ‚ç‚¹e
 </script>
 </body>
 </html>

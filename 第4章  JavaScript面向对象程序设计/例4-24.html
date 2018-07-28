@@ -1,19 +1,23 @@
 <html>
 <body>
-<div id="div1"><p id="p1"> ÎÒÊÇµÚÒ»¸öP</p><p id="p2"> ÎÒÊÇµÚ¶ş¸öP</p></div>
+
+<div id="div1"><p id="p1"> æˆ‘æ˜¯ç¬¬ä¸€ä¸ªP</p><p id="p2"> æˆ‘æ˜¯ç¬¬äºŒä¸ªP</p></div>
+
 <script language="JavaScript">
 
+        //ç›´æ¥å¾—åˆ°æ‰€æœ‰p
         var str = document.getElementsByTagName("p")[1].innerHTML;
-        document.write("1:"+str+"<BR>");   //Êä³öÎÒÊÇµÚ¶ş¸öP£¬ÒòÎª»ñÈ¡µÄÊÇË÷ÒıÎª1µÄP£¬Ë÷Òı´Ó0¿ªÊ¼
+        document.write("1:"+str+"<BR>");   //è¾“å‡ºæˆ‘æ˜¯ç¬¬äºŒä¸ªPï¼Œå› ä¸ºè·å–çš„æ˜¯ç´¢å¼•ä¸º1çš„Pï¼Œç´¢å¼•ä»0å¼€å§‹
 
+        //å¾ªç¯éå†
         var arr = document.getElementsByTagName("p");
-        for (var i = 0; i < arr.length; i++) 					//Ñ­»·±éÀú
+        for (var i = 0; i < arr.length; i++) 					
             document.write(arr[i].innerHTML+"<BR>");
 
+        //div1->div1çš„æ‰€æœ‰å­©å­èŠ‚ç‚¹
         var node = document.getElementById("div1");
-        var node1 = document.getElementsByTagName("p")[1];  //´Ó»ñÈ¡µ½µÄÔªËØÔÙ»ñÈ¡
-        document.write("2:"+node1.innerHTML+"<BR>");				//Êä³öÎÒÊÇµÚ¶ş¸öP
-
+        var node1 = document.getElementsByTagName("p")[1];    //ä»è·å–åˆ°çš„å…ƒç´ å†è·å–
+        document.write("2:"+node1.innerHTML+"<BR>");		  //è¾“å‡ºæˆ‘æ˜¯ç¬¬äºŒä¸ªP
 
 </script>
 </body>
