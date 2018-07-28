@@ -1,22 +1,30 @@
-<canvas id="myCanvas" height=500 width=500>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=500 width=500>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw()
 {     
    var canvas=document.getElementById("myCanvas");
-   if(canvas == null)
-         return false;
+
+   if(canvas == null){
+       return false;
+   }
+         
+
     var context = canvas.getContext("2d");
-     //ÏÈ»æÖÆ»­²¼µÄµ×Í¼
+
+     //å…ˆç»˜åˆ¶ç”»å¸ƒçš„åº•å›¾
      context.fillStyle="yellow";
-     context.fillRect(0,0,400,350);     
-     //ÓÃÑ­»·»æÖÆ10¸öÔ²ĞÎ
+     context.fillRect(0,0,400,350);   
+
+     //ç”¨å¾ªç¯ç»˜åˆ¶10ä¸ªåœ†å½¢
      var n = 0;
      for(var i=0 ;i<10;i++){
-         //¿ªÊ¼´´½¨Â·¾¶£¬ÒòÎªÔ²±¾ÖÊÉÏÒ²ÊÇÒ»¸öÂ·¾¶£¬ÕâÀïÏòcanvasËµÃ÷Òª¿ªÊ¼»­ÁË£¬ÕâÊÇÆğµã
+         //å¼€å§‹åˆ›å»ºè·¯å¾„ï¼Œå› ä¸ºåœ†æœ¬è´¨ä¸Šä¹Ÿæ˜¯ä¸€ä¸ªè·¯å¾„ï¼Œè¿™é‡Œå‘canvasè¯´æ˜è¦å¼€å§‹ç”»äº†ï¼Œè¿™æ˜¯èµ·ç‚¹
         context.beginPath();
         context.arc(i*25,i*25,i*10,0,Math.PI*2,true);
-        context.fillStyle="rgba(255,0,0,0.25)";
-        context.fill();        //Ìî³ä¸Õ²ÅËù»­µÄÔ²ĞÎ
+
+        context.fillStyle="rgba(255, 0, 0, 0.3)";
+        
+        context.fill();        //å¡«å……åˆšæ‰æ‰€ç”»çš„åœ†å½¢
      }
   }
 window.addEventListener("load", draw, true);

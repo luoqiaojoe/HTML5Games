@@ -1,21 +1,29 @@
-<canvas id="myCanvas" height=550 width=550>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=550 width=550>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw()
 {
-  var canvas=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var context = canvas.getContext("2d"); //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
-  context.save(); //±£´æÁËµ±Ç°contextµÄ×´Ì¬
+  var canvas=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var context = canvas.getContext("2d"); //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
+
+  context.save(); //ä¿å­˜äº†å½“å‰contextçš„çŠ¶æ€
+
+  //ç»˜åˆ¶åœ°æ¿
   context.fillStyle = "#EEEEFF";
   context.fillRect(0, 0, 400, 300);
+
+  //ç»˜åˆ¶å››è¾¹å½¢
   context.fillStyle = "rgba(255,0,0,0.1)";
-  context.fillRect(0, 0, 100, 100);      //Õı·½ĞÎ
-  //Æ½ÒÆ Ëõ·Å Ğı×ª  1 2 3        
-  context.translate(100, 100);           //×ø±êÔ­µãÆ½ÒÆ(100, 100)
-  context.scale(0.5, 0.5);               //x,yÖáÊÇÔ­À´Ò»°ë
-  context.rotate(Math.PI / 4);           //Ğı×ª45¶È
-  context.fillRect(0, 0, 100, 100);      //Æ½ÒÆ Ëõ·Å Ğı×ªºóµÄÕı·½ĞÎ
-  context.restore(); // »Ö¸´Ö®Ç°±£´æµÄ»æÍ¼×´Ì¬
-  context.beginPath();  //  ¿ªÊ¼»æÍ¼Â·¾¶
+  context.fillRect(0, 0, 100, 100);      //æ­£æ–¹å½¢
+
+  //ç»˜åˆ¶æ—‹è½¬åçš„å››è¾¹å½¢ å¹³ç§» ç¼©æ”¾ æ—‹è½¬  1 2 3        
+  context.translate(100, 100);           //åæ ‡åŸç‚¹å¹³ç§»(100, 100)
+  context.scale(0.5, 0.5);               //x,yè½´æ˜¯åŸæ¥ä¸€åŠ
+  context.rotate(Math.PI / 4);           //æ—‹è½¬45åº¦
+  context.fillRect(0, 0, 100, 100);      //å¹³ç§» ç¼©æ”¾ æ—‹è½¬åçš„æ­£æ–¹å½¢
+
+  //ç»˜åˆ¶åœ†
+  context.restore(); // æ¢å¤ä¹‹å‰ä¿å­˜çš„ç»˜å›¾çŠ¶æ€
+  context.beginPath();  //  å¼€å§‹ç»˜å›¾è·¯å¾„
   context.arc(200, 50, 50, 0,  2 * Math.PI, false); 
   context.stroke();
   context.fill();

@@ -4,11 +4,15 @@ function draw()
 {
   var c=document.getElementById("myCanvas");  // 获取网页中的canvas对象
   var ctx=c.getContext("2d");  //获取canvas对象的上下文
+
   // 对角线上的渐变
   var Colordiagonal = ctx.createRadialGradient(100,100, 0, 100,100, 100);
+
+  //渐变
   Colordiagonal.addColorStop(0, "red");
   Colordiagonal.addColorStop(0.5, "green");
   Colordiagonal.addColorStop(1, "yellow"); 
+
   var centerX = 100;
   var centerY = 100;
   var radius = 100;
@@ -17,6 +21,9 @@ function draw()
   ctx.beginPath();  //  开始绘图路径
   ctx.arc(centerX, centerY, radius, startingAngle, endingAngle, false); 
   ctx.fillStyle = Colordiagonal;
+
+
+  //stroke() 方法会实际地绘制出通过 moveTo() 和 lineTo() 方法定义的路径。默认颜色是黑色。
   ctx.stroke();
   ctx.fill();
 }

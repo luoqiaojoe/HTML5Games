@@ -2,13 +2,20 @@
 <script type="text/javascript">
 function draw() {
 var ctx = document.getElementById('myCanvas').getContext('2d');
+
 ctx.fillStyle = 'red'
-ctx.fillRect(0,0,150,150); // Ê¹ÓÃºìÉ«Ìî³ä¾ØĞÎ
-ctx.save(); // ±£´æµ±Ç°µÄ»æÍ¼×´Ì¬
+
+//
+ctx.fillRect(0,0,150,150); // ä½¿ç”¨çº¢è‰²å¡«å……çŸ©å½¢
+ctx.save(); // ä¿å­˜å½“å‰çš„ç»˜å›¾çŠ¶æ€
+
+//
 ctx.fillStyle = 'green' // 
-ctx.fillRect(45,45,60,60); //Ê¹ÓÃÂÌÉ«Ìî³ä¾ØĞÎ
-ctx.restore(); //  »Ö¸´ÔÙÖ®Ç°±£´æµÄ»æÍ¼×´Ì¬£¬¼´ctx.fillStyle = 'red'
-ctx.fillRect(60,60,30,30); //  Ê¹ÓÃºìÉ«Ìî³ä¾ØĞÎ
+ctx.fillRect(45,45,60,60); //ä½¿ç”¨ç»¿è‰²å¡«å……çŸ©å½¢
+
+//
+ctx.restore(); //  æ¢å¤å†ä¹‹å‰ä¿å­˜çš„ç»˜å›¾çŠ¶æ€ï¼Œå³ctx.fillStyle = 'red'
+ctx.fillRect(60,60,30,30); //  ä½¿ç”¨çº¢è‰²å¡«å……çŸ©å½¢
 }
 window.addEventListener("load", draw, true);
 </script>

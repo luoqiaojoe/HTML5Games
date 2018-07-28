@@ -1,16 +1,19 @@
-<canvas id="myCanvas" height=1000 width=1000>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=1000 width=1000>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw()
 {
-  var c=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var ctx=c.getContext("2d");  //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
-  var imageObj = new Image();  // ´´½¨Í¼Ïñ¶ÔÏó
+  var c=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var ctx=c.getContext("2d");  //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
+  var imageObj = new Image();  // åˆ›å»ºå›¾åƒå¯¹è±¡
   imageObj.src = "cover.jpg";
+
+  //imageèµ„æºå‡†å¤‡å®Œæ¯•åï¼Œç”»3å‰¯å›¾
   imageObj.onload = function(){   
       ctx.drawImage(imageObj, 0, 0); 
       ctx.drawImage(imageObj, 250, 0, 120, 160);
       ctx.drawImage(imageObj, 0, 100, 240, 160, 400, 0, 240, 160);   
    }; 
+
 }
 window.addEventListener("load", draw, true);
 </script>

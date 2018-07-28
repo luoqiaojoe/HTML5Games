@@ -1,15 +1,15 @@
-<canvas id="myCanvas" height=500 width=500>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=500 width=500>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw(){
-  var c=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var ctx=c.getContext("2d");  //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
+  var c=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var ctx=c.getContext("2d");  //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
   var Colordiagonal = ctx.createLinearGradient(100,100, 300,100);
   Colordiagonal.addColorStop(0, "yellow");
   Colordiagonal.addColorStop(0.5, "green");
   Colordiagonal.addColorStop(1, "red"); 
   ctx.fillStyle = Colordiagonal;
-  ctx.font = "60pt Á¥Êé";
-  ctx.fillText("ÖĞÔ­¹¤Ñ§Ôº", 100, 100);  
+  ctx.font = "60pt éš¶ä¹¦";
+  ctx.fillText("ä¸­åŸå·¥å­¦é™¢", 100, 100);  
 }
 window.addEventListener("load", draw, true);
 </script>

@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HTML5 CanvasÊµÏÖÓÎÏ·ÈËÎïµÄÅÜ²½¶¯»­</title>
+    <title>HTML5 Canvaså®ç°æ¸¸æˆäººç‰©çš„è·‘æ­¥åŠ¨ç”»</title>
   </head>
   <script type="text/javascript"> 
-    var imageObj = new Image(); // ´´½¨Í¼Ïñ¶ÔÏó
+    var imageObj = new Image(); // åˆ›å»ºå›¾åƒå¯¹è±¡
     var x =300; 
-    var n =0;                   // ¼ÆÊıÆ÷
+    var n =0;                   // è®¡æ•°å™¨
     function init(){
       imageObj.src = 'Snap1.jpg';
       imageObj.onload = function(){
-         setInterval(draw,100);// ¶¨Ê±Æ÷£¬Ã¿0.1ÃëÖ´ĞĞÒ»´Îdraw()º¯Êı
+         setInterval(draw,100);// å®šæ—¶å™¨ï¼Œæ¯0.1ç§’æ‰§è¡Œä¸€æ¬¡draw()å‡½æ•°
       };
     }
     function draw()
     {
-        var canvas=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-        var ctx = canvas.getContext("2d"); //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
+        var canvas=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+        var ctx = canvas.getContext("2d"); //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
          
-           ctx.clearRect(0,0,300,300); // Çå³ıcanvas»­²¼  
-           //´ÓÔ­Í¼(60*n)Î»ÖÃ¿ªÊ¼½ØÈ¡ÖĞ¼äÒ»¿é¿í60*¸ß80µÄÇøÓò£¬ÏÔÊ¾ÔÚÆÁÄ»(x,0)´¦           
+           ctx.clearRect(0,0,300,300); // æ¸…é™¤canvasç”»å¸ƒ  
+           //ä»åŸå›¾(60*n)ä½ç½®å¼€å§‹æˆªå–ä¸­é—´ä¸€å—å®½60*é«˜80çš„åŒºåŸŸï¼Œæ˜¾ç¤ºåœ¨å±å¹•(x,0)å¤„           
            ctx.drawImage(imageObj, 60*n, 0, 60, 80, x, 0, 60, 80);
+
            if(n>=8){
               n=0;
            }else{
               n++;
            }
            if(x>=0){
-              x=x-30;  //Ç°ÒÆ30ÏñËØ
+              x=x-30;  //å‰ç§»30åƒç´ 
            }else{
-              x=300;   //»Øµ½ÓÒ²à
+              x=300;   //å›åˆ°å³ä¾§
            }       
     }
     window.addEventListener("load", init, true);

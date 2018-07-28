@@ -1,15 +1,19 @@
-<canvas id="myCanvas" height=250 width=250>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=250 width=250>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw()
 {
-  var canvas=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var ctx = canvas.getContext("2d"); //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
-  var imageObj = new Image();  // ´´½¨Í¼Ïñ¶ÔÏó
+  var canvas=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var ctx = canvas.getContext("2d"); //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
+
+  //å¤§çš„å›¾åƒå¯¹è±¡
+  var imageObj = new Image();  // åˆ›å»ºå›¾åƒå¯¹è±¡
   imageObj.src = "Snap1.jpg";
+
   imageObj.onload = function(){   
-      //´ÓÔ­Í¼(120, 0)Î»ÖÃ¿ªÊ¼½ØÈ¡ÖĞ¼äÒ»¿é¿í60*¸ß80µÄÇøÓò£¬Ô­´óĞ¡ÏÔÊ¾ÔÚÆÁÄ»(0,0)´¦
+
+      //è£å‰ªå…¶ä¸­ä¸€éƒ¨åˆ†: ä»åŸå›¾(120, 0)ä½ç½®å¼€å§‹æˆªå–ä¸­é—´ä¸€å—å®½60*é«˜80çš„åŒºåŸŸï¼ŒåŸå¤§å°æ˜¾ç¤ºåœ¨å±å¹•(0,0)å¤„
       ctx.drawImage(imageObj, 120, 0, 60, 80, 0, 0, 60, 80);
-     };
+  };
 }
 window.addEventListener("load", draw, true);
 </script>
