@@ -13,15 +13,22 @@
    <div>&nbsp;</div>
    <p>用于测试尺寸的段落。</p>
    <script>  
+
+   //
    function showHeight(ele, h) {
       $("div").text(ele + " 的高度为 " + h + "px." );
-     }
+   }
+
+   //
    $("#getp").click(function () {
       showHeight("段落", $("p").height());
-      });
+   });
+
+   //
    $("#getd").click(function () {
       showHeight("文档", $(document).height());
-      });
+   });
+
    </script> 
 </body>
 </html>

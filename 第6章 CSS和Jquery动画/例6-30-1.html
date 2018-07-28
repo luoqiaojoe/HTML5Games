@@ -3,14 +3,18 @@
 <script type="text/javascript" src="jquery.js"></script>
 </head>
 <body>
-<button id="btnlinear">ÏßĞÔÇĞ»»</button>
-<button id="btnfast">¿ìËÙÇĞ»»</button>
+<button id="btnlinear">çº¿æ€§åˆ‡æ¢</button>
+<button id="btnfast">å¿«é€Ÿåˆ‡æ¢</button>
  <br>
 <img src="01.jpg">
 <script>
+
+  //
   $("#btnlinear").click(function() {
     $("img").fadeToggle("slow", "linear");
   });
+
+  //
   $("#btnfast").click(function () {
     $("img").fadeToggle("fast");
   });

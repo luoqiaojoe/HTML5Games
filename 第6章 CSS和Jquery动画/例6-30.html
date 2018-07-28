@@ -3,14 +3,18 @@
 <script type="text/javascript" src="jquery.js"></script>
 </head>
 <body>
-  <button>ÏßĞÔÇĞ»»</button>
-  <button>¿ìËÙÇĞ»»</button>
-  <p>ÎÒÊÇp1.ÎÒ»áÒÔÂıËÙ¡¢ÏßĞÔµÄ·½Ê½ÇĞ»»ÏÔÊ¾ºÍÒş²Ø¡£</p>
-  <p>ÎÒÊÇp2.ÎÒ»á¿ìËÙµØÇĞ»»ÏÔÊ¾ºÍÒş²Ø¡£</p>
+  <button>çº¿æ€§åˆ‡æ¢</button>
+  <button>å¿«é€Ÿåˆ‡æ¢</button>
+  <p>æˆ‘æ˜¯p1.æˆ‘ä¼šä»¥æ…¢é€Ÿã€çº¿æ€§çš„æ–¹å¼åˆ‡æ¢æ˜¾ç¤ºå’Œéšè—ã€‚</p>
+  <p>æˆ‘æ˜¯p2.æˆ‘ä¼šå¿«é€Ÿåœ°åˆ‡æ¢æ˜¾ç¤ºå’Œéšè—ã€‚</p>
   <script>
+
+  //  
   $("button:first").click(function() {
     $("p:first").fadeToggle("slow", "linear");
   });
+
+  //
   $("button:last").click(function () {
     $("p:last").fadeToggle("fast");
   });

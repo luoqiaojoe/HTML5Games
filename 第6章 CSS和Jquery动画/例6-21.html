@@ -6,9 +6,13 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+  //按下时一种颜色
   $("input").keydown(function(){
     $("input").css("background-color","#FFFFCC");
   });
+
+  //抬起时一种颜色
   $("input").keyup(function(){
     $("input").css("background-color","#D6D6FF");
   });

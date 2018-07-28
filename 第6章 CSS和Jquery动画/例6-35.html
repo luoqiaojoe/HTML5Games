@@ -6,11 +6,15 @@
 	      position:absolute; left:0px; top:60px;        
 		  background:green; display:none;
    }  
-</style>  
+</style> 
+ 
 <script src=" jquery.js"></script>  
+
 <script type="text/javascript">  
 $(function() {  
     var div = $('#count');  
+
+    //
     var list = [  
         function() {div.show("slow"); get();},  
         function() {div.animate({left:'+=200'},2000); get();},  
@@ -20,19 +24,26 @@ $(function() {
         function() {div.show(1200); get();},  
         function() {div.slideUp("normal"); get();}  
     ];  
+
+    //
     div.queue('testList', list); 
+
+    //
     var get = function() {  
         div.dequeue('testList');  
     }  
+
+    //
     $('#btn').bind('click', function() {  
           div.dequeue('testList');     
     });  
 });  
 </script>  
+
 </head>  
 <body>  
 <div id="count"></div>  
-<input id="btn" type="button" value="¿ªÊ¼" />  
+<input id="btn" type="button" value="å¼€å§‹" />  
 </body>  
 </html>
 

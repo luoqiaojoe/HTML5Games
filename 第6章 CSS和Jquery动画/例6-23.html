@@ -3,9 +3,13 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+  //放上去时一种样式。如何监听鼠标事件呢？不可能一直在检测啊
   $("p").mouseenter(function(){
     $("p").css("background-color","yellow");
   });
+
+  //离开时一种样式
   $("p").mouseleave(function(){
     $("p").css("background-color","#E9E9E4");
   });

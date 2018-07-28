@@ -3,10 +3,16 @@
 <head>
   <script type="text/javascript" src="jquery.js"></script>
   <script>
+
+    //
     function handler(event) {
       alert(event.data.sex);
     }
+
+    //
     $(document).ready(function(){
+
+       //输入框绑定点击事件。 同时让handler拦截
        $("input").bind("click", { sex: "男" }, handler);
     });
   </script>
