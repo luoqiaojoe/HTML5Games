@@ -1,10 +1,10 @@
-<canvas id="myCanvas" height=500 width=500>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=500 width=500>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
 function draw()
 {
-  var c=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var ctx=c.getContext("2d");  //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
-  // ¶Ô½ÇÏßÉÏµÄ½¥±ä
+  var c=document.getElementById("myCanvas");  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var ctx=c.getContext("2d");  //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
+  // å¯¹è§’çº¿ä¸Šçš„æ¸å˜
   var Colordiagonal = ctx.createRadialGradient(100,100, 0, 100,100, 100);
   Colordiagonal.addColorStop(0, "red");
   Colordiagonal.addColorStop(0.5, "green");
@@ -14,7 +14,7 @@ function draw()
   var radius = 100;
   var startingAngle = 0;
   var endingAngle = 2 * Math.PI;
-  ctx.beginPath();  //  ¿ªÊ¼»æÍ¼Â·¾¶
+  ctx.beginPath();  //  å¼€å§‹ç»˜å›¾è·¯å¾„
   ctx.arc(centerX, centerY, radius, startingAngle, endingAngle, false); 
   ctx.fillStyle = Colordiagonal;
   ctx.stroke();

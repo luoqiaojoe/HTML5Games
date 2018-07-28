@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <canvas id="demoCanvas" width="500" height="500">ÄúµÄä¯ÀÀÆ÷²»Ö§³Öcanvas¡£</canvas>
-    <!---ÏÂÃæ½«ÑİÊ¾Ò»ÖÖ»æÖÆ¾ØĞÎµÄdemo--->
+    <canvas id="demoCanvas" width="500" height="500">æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒcanvasã€‚</canvas>
+    <!-- ä¸‹é¢å°†æ¼”ç¤ºä¸€ç§ç»˜åˆ¶çŸ©å½¢çš„demo -->
     <script type="text/javascript">
-        var c = document.getElementById("demoCanvas"); // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-        var context = c.getContext('2d');                // »ñÈ¡ÉÏÏÂÎÄ
-        context.strokeStyle = "red";                    //Ö¸¶¨»æÖÆÏßÑùÊ½¡¢ÑÕÉ«
-        context.strokeRect(10, 10, 190, 100);            //»æÖÆ¾ØĞÎÏßÌõ£¬ÄÚÈİÊÇ¿ÕµÄ
-        //ÒÔÏÂÌî³ä¾ØĞÎ
+        var c = document.getElementById("demoCanvas");   // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+        var context = c.getContext('2d');                // è·å–ä¸Šä¸‹æ–‡
+
+        //æŒ‡å®šç»˜åˆ¶çº¿æ ·å¼ã€é¢œè‰²
+        context.strokeStyle = "red";  
+
+        //ç»˜åˆ¶çŸ©å½¢çº¿æ¡ï¼Œå†…å®¹æ˜¯ç©ºçš„                
+        context.strokeRect(10, 10, 190, 100);            
+        
+        //ä»¥ä¸‹å¡«å……çŸ©å½¢
         context.fillStyle = "blue";
-        context.fillRect(110,110,100,100);              // »æÖÆÌî³ä¾ØĞÎ
+        
+        // ç»˜åˆ¶å¡«å……çŸ©å½¢
+        context.fillRect(110,110,100,100);               
     </script>
 </body>
 

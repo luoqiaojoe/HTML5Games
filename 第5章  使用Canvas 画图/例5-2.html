@@ -1,29 +1,135 @@
 <!DOCTYPE html>
 <html>
 <body>
-<canvas id="myCanvas" height=1000 width=1000>ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö canvas¡£</canvas>
+<canvas id="myCanvas" height=1000 width=1000>æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒ canvasã€‚</canvas>
 <script type="text/javascript">
+
+// beganX=150 beganY=250
+// beganX=224.31448254773943 beganY=83.08693936411422
+// beganX=50.54781046317267 beganY=139.5471536732346
+// beganX=208.77852522924724 beganY=230.9016994374948
+// beganX=170.79116908177608 beganY=52.18523992661946
+// beganX=63.397459621555996 beganY=199.99999999999977
+// beganX=245.1056516295153 beganY=180.90169943749495
+// beganX=109.32633569242014 beganY=58.645454235739834
+// beganX=109.32633569241969 beganY=241.35454576425997
+// beganX=245.10565162951548 beganY=119.09830056250567
+// beganX=63.39745962155642 beganY=99.99999999999952
+// beganX=170.7911690817756 beganY=247.81476007338063
+// beganX=208.7785252292477 beganY=69.09830056250553
+// beganX=50.54781046317261 beganY=160.45284632676476
+// beganX=224.31448254773917 beganY=216.9130606358861
+// beganX=150.00000000000048 beganY=50
+// beganX=75.68551745226017 beganY=216.91306063588536
+// beganX=249.45218953682723 beganY=160.4528463267661
+// beganX=91.22147477075339 beganY=69.09830056250475
+// beganX=129.2088309182231 beganY=247.81476007338034
+// beganX=236.60254037844442 beganY=100.00000000000098
+// beganX=54.894348370484806 beganY=119.09830056250473
+// beganX=190.6736643075794 beganY=241.35454576426037
+// beganX=190.67366430758074 beganY=58.64545423574023
+// beganX=54.89434837048435 beganY=180.90169943749387
+// beganX=236.60254037844334 beganY=200.0000000000009
+// beganX=129.20883091822523 beganY=52.18523992661919
+// beganX=91.22147477075163 beganY=230.90169943749396
+// beganX=249.4521895368274 beganY=139.54715367323539
+// beganX=75.68551745226114 beganY=83.08693936411355
+
+
+
 function drawline()
 {
-  var c=document.getElementById("myCanvas");  // »ñÈ¡ÍøÒ³ÖĞµÄcanvas¶ÔÏó
-  var ctx=c.getContext("2d");  //»ñÈ¡canvas¶ÔÏóµÄÉÏÏÂÎÄ
-  var dx=150;
-  var dy=150;
+  // è·å–ç½‘é¡µä¸­çš„canvaså¯¹è±¡
+  var c=document.getElementById("myCanvas");  
+
+  //è·å–canvaså¯¹è±¡çš„ä¸Šä¸‹æ–‡
+  var ctx=c.getContext("2d");                 
+
+  var totalNum = 30;
+
+  //èµ·å§‹ç‚¹
+  var dx = 300;
+  var dy = 300;
+
+  //åŠå¾„
   var s = 100;
-  ctx.beginPath();  //  ¿ªÊ¼»æÍ¼Â·¾¶
-  var x = Math.sin(0);
-  var y = Math.cos(0);
-  var dig=Math.PI/15*11;
-  for(var i = 0;i<30;i++){
-     var x = Math.sin(i*dig); 
-     var y = Math.cos(i*dig);
-    //ÓÃÈı½Çº¯Êı¼ÆËã¶¥µã
-     ctx.lineTo(dx+x*s,dy+y*s);
+
+  //å¼€å§‹ç»˜å›¾è·¯å¾„
+  ctx.beginPath();  
+
+  var dig = Math.PI / 15 * 11;
+  /**
+   * digçš„å€¼:
+   * Math.PI/15*11->2.3038346126325147
+   * 180/15*11->132
+   */
+
+  for(var i = 0; i < totalNum; i++){
+
+     var x = Math.sin(i * dig); 
+     var y = Math.cos(i * dig);
+
+    // document.writeln("x=" + x + " y=" + y + "</br>");
+    // x=0 y=1
+    // x=0.7431448254773945 y=-0.6691306063588579
+    // x=-0.9945218953682733 y=-0.10452846326765423
+
+     var beganX = dx + x * s;
+     var beganY = dy + y * s;
+
+    //ç”¨ä¸‰è§’å‡½æ•°è®¡ç®—é¡¶ç‚¹
+     ctx.lineTo(beganX, beganY);
+
+    // document.writeln("beganX=" + (x * s) + " beganY=" + (y * s) + "</br>");
+
   }  
+
+  // ctx.lineTo(dx+0, dx+00);
+  // ctx.lineTo(dx+0, dx+100);
+  // ctx.lineTo(dx+74, dx-66.9);
+
+
+  //å…³é—­ç»˜å›¾è·¯å¾„
   ctx.closePath();
+  ctx.stroke();  
+
+
+
+
+
+  //ç¬¬äºŒæ¬¡ç»˜åˆ¶
+  //èµ·å§‹ç‚¹
+  var dx = 0;
+  var dy = 0;
+
+  //åŠå¾„
+  var s = 100;
+
+  //å¼€å§‹ç»˜å›¾è·¯å¾„
+  ctx.beginPath();	
+
+  // ctx.moveTo(0, 100);
+
+  for(var i = 0; i < totalNum; i++){
+
+    var x = Math.sin(i * dig); 
+    var y = Math.cos(i * dig);
+    var beganX =  x * s;
+    var beganY =  y * s;
+
+    //ç”¨ä¸‰è§’å‡½æ•°è®¡ç®—é¡¶ç‚¹
+    ctx.lineTo(beganX, beganY);
+  }  
+
+
+  //å…³é—­ç»˜å›¾è·¯å¾„
+  ctx.closePath();
+
+  //
   ctx.stroke();  
 }
 window.addEventListener("load", drawline, true);
 </script>
 </body>
 </html>
+

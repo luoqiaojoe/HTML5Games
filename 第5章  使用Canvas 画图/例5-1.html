@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html>
 <body>
-<canvas id="myCanvas" height=200 width=200>�����������֧�� canvas��</canvas>
+
+<!--canvas元素-->
+<canvas id="myCanvas" height=200 width=200>您的浏览器不支持 canvas。</canvas>
+
 <script type="text/javascript">
-  function drawtriangle()
-  {
-    var c=document.getElementById("myCanvas");	//��ȡ��ҳ�е�canvas����
-    var ctx=c.getContext("2d");			//��ȡcanvas�����������
-    ctx.beginPath();				//��ʼ��ͼ·��
-    ctx.moveTo(100,0);			// ����������ֱ�����
-    ctx.lineTo(50,100); 			// ����ֱ��
-    ctx.lineTo(150,100);			// ����ֱ��
-    ctx.lineTo(100,0);			// ����ֱ��
-    ctx.stroke();				// �رջ�ͼ·��
+ 
+  /**
+   *    X
+   *   
+   *  X    X
+   */
+  function drawtriangle(){
+      //获取body下面 网页中的canvas对象
+      var c=document.getElementById("myCanvas");	
+
+      //获取canvas对象的上下文。 2d的
+      var ctx=c.getContext("2d");			 
+
+      //开始绘图路径
+      ctx.beginPath();		
+
+      //ctx就是一个画笔，先把笔放到(100,0)这个位置		                    
+      ctx.moveTo(100,0);			                    // 将坐标移至直线起点
+
+      //绘制直线: 从起始位置(100, 0)绘制直线到点(50, 100)
+      ctx.lineTo(50,100); 			              
+
+      //绘制直线: 绘制完毕后，画笔位于(50,100)位置，然后再次划线到(150, 100)位置    
+      ctx.lineTo(150,100);			                  
+
+      //绘制直线: 同上一步，画笔从当前位置(150, 100)画到(100, 0)
+      ctx.lineTo(100,0);	
+
+      //关闭绘图路径		??? 不是ctx.closePath();???                   
+      ctx.stroke();			
   }
+
+  //添加监听事件，window在load完后，立马开始绘图
   window.addEventListener("load", drawtriangle, true);
 </script>
 </body>
