@@ -11,14 +11,14 @@
     <script type="text/javascript">
         var canvas;
         var context;
-        var isWhite = false;//ÉèÖÃÊÇ·ñ¸ÃÂÖµ½°×Æå
-        var isWell = false;//ÉèÖÃ¸Ã¾ÖÆåÅÌÊÇ·ñÓ®ÁË£¬Èç¹ûÓ®ÁË¾Í²»ÄÜÔÙ×ßÁË
+        var isWhite = false;//è®¾ç½®æ˜¯å¦è¯¥è½®åˆ°ç™½æ£‹
+        var isWell = false;//è®¾ç½®è¯¥å±€æ£‹ç›˜æ˜¯å¦èµ¢äº†ï¼Œå¦‚æœèµ¢äº†å°±ä¸èƒ½å†èµ°äº†
         var img_b = new Image();
-        img_b.src = "images/w.png";//°×ÆåÍ¼Æ¬
+        img_b.src = "images/w.png";//ç™½æ£‹å›¾ç‰‡
         var img_w = new Image();
-        img_w.src = "images/b.png";//ºÚÆåÍ¼Æ¬
+        img_w.src = "images/b.png";//é»‘æ£‹å›¾ç‰‡
 
-        var chessData = new Array(15);//Õâ¸öÎªÆåÅÌµÄ¶şÎ¬Êı×éÓÃÀ´±£´æÆåÅÌĞÅÏ¢£¬³õÊ¼»¯0ÎªÃ»ÓĞ×ß¹ıµÄ£¬1Îª°×Æå×ßµÄ£¬2ÎªºÚÆå×ßµÄ
+        var chessData = new Array(15);//è¿™ä¸ªä¸ºæ£‹ç›˜çš„äºŒç»´æ•°ç»„ç”¨æ¥ä¿å­˜æ£‹ç›˜ä¿¡æ¯ï¼Œåˆå§‹åŒ–0ä¸ºæ²¡æœ‰èµ°è¿‡çš„ï¼Œ1ä¸ºç™½æ£‹èµ°çš„ï¼Œ2ä¸ºé»‘æ£‹èµ°çš„
         for (var x = 0; x < 15; x++) {
             chessData[x] = new Array(15);
             for (var y = 0; y < 15; y++) {
@@ -26,13 +26,13 @@
             }
         }
 
-        function drawRect() {//Ò³Ãæ¼ÓÔØÍê±Ïµ÷ÓÃº¯Êı£¬³õÊ¼»¯ÆåÅÌ
+        function drawRect() {//é¡µé¢åŠ è½½å®Œæ¯•è°ƒç”¨å‡½æ•°ï¼Œåˆå§‹åŒ–æ£‹ç›˜
             canvas = document.getElementById("canvas");
             context = canvas.getContext("2d");
             context.fillStyle = "orange";
             context.fillRect(0,0,640,640);
             context.fillStyle = "#000000";;
-            for (var i = 0; i <= 640; i += 40) {//»æÖÆÆåÅÌµÄÏß
+            for (var i = 0; i <= 640; i += 40) {//ç»˜åˆ¶æ£‹ç›˜çš„çº¿
                 context.beginPath();
                 context.moveTo(0, i);
                 context.lineTo(640, i);
@@ -46,33 +46,36 @@
                 context.stroke();
             }
         }
-        function play(e) {//Êó±êµã»÷Ê±·¢Éú
-            var x = parseInt((e.clientX - 20) / 40);//¼ÆËãÊó±êµã»÷µÄÇøÓò£¬Èç¹ûµã»÷ÁË£¨65£¬65£©£¬ÄÇÃ´¾ÍÊÇµã»÷ÁË£¨1£¬1£©µÄÎ»ÖÃ
+
+        //
+        function play(e) {//é¼ æ ‡ç‚¹å‡»æ—¶å‘ç”Ÿ
+            var x = parseInt((e.clientX - 20) / 40);//è®¡ç®—é¼ æ ‡ç‚¹å‡»çš„åŒºåŸŸï¼Œå¦‚æœç‚¹å‡»äº†ï¼ˆ65ï¼Œ65ï¼‰ï¼Œé‚£ä¹ˆå°±æ˜¯ç‚¹å‡»äº†ï¼ˆ1ï¼Œ1ï¼‰çš„ä½ç½®
             var y = parseInt((e.clientY - 20) / 40);
 
-            if (chessData[x][y] != 0) {//ÅĞ¶Ï¸ÃÎ»ÖÃÊÇ·ñ±»ÏÂ¹ıÁË
-                alert("Äã²»ÄÜÔÚÕâ¸öÎ»ÖÃÏÂÆå");
+            if (chessData[x][y] != 0) {//åˆ¤æ–­è¯¥ä½ç½®æ˜¯å¦è¢«ä¸‹è¿‡äº†
+                alert("ä½ ä¸èƒ½åœ¨è¿™ä¸ªä½ç½®ä¸‹æ£‹");
                 return;
             }
 
             if (isWhite) {
                 isWhite = false;
-                drawChess(1, x, y);//»æÖÆ°×Æå
+                drawChess(1, x, y);//ç»˜åˆ¶ç™½æ£‹
             }
             else {
                 isWhite = true;
-                drawChess(2, x, y);//»æÖÆºÚÆå
+                drawChess(2, x, y);//ç»˜åˆ¶é»‘æ£‹
             }
-
         }
-        function drawChess(chess, x, y) {//²ÎÊıÎª£¬Æå£¨1Îª°×Æå£¬2ÎªºÚÆå£©£¬Êı×éÎ»ÖÃ
+
+        //
+        function drawChess(chess, x, y) {//å‚æ•°ä¸ºï¼Œæ£‹ï¼ˆ1ä¸ºç™½æ£‹ï¼Œ2ä¸ºé»‘æ£‹ï¼‰ï¼Œæ•°ç»„ä½ç½®
             if (isWell == true) {
-                alert("ÒÑ¾­½áÊøÁË£¬Èç¹ûĞèÒªÖØĞÂÍæ£¬ÇëË¢ĞÂ");
+                alert("å·²ç»ç»“æŸäº†ï¼Œå¦‚æœéœ€è¦é‡æ–°ç©ï¼Œè¯·åˆ·æ–°");
                 return;
             }
             if (x >= 0 && x < 15 && y >= 0 && y < 15) {
                 if (chess == 1) {
-                    context.drawImage(img_w, x * 40 + 20, y * 40 + 20);//»æÖÆ°×Æå
+                    context.drawImage(img_w, x * 40 + 20, y * 40 + 20);//ç»˜åˆ¶ç™½æ£‹
                     chessData[x][y] = 1;
                 }
                 else {
@@ -82,13 +85,15 @@
                 judge(x, y, chess);
             }
         }
-        function judge(x, y, chess) {//ÅĞ¶Ï¸Ã¾ÖÆåÅÌÊÇ·ñÓ®ÁË
+
+        //
+        function judge(x, y, chess) {//åˆ¤æ–­è¯¥å±€æ£‹ç›˜æ˜¯å¦èµ¢äº†
             var count1 = 0;
             var count2 = 0;
             var count3 = 0;
             var count4 = 0;
 
-            //×óÓÒÅĞ¶Ï
+            //å·¦å³åˆ¤æ–­
             for (var i = x; i >= 0; i--) {
                 if (chessData[i][y] != chess) {
                     break;
@@ -101,7 +106,7 @@
                 }
                 count1++;
             }
-            //ÉÏÏÂÅĞ¶Ï
+            //ä¸Šä¸‹åˆ¤æ–­
             for (var i = y; i >= 0; i--) {
                 if (chessData[x][i] != chess) {
                     break;
@@ -114,7 +119,7 @@
                 }
                 count2++;
             }
-            //×óÉÏÓÒÏÂÅĞ¶Ï
+            //å·¦ä¸Šå³ä¸‹åˆ¤æ–­
             for (var i = x, j = y; i >= 0, j >= 0; i--, j--) {
                 if (chessData[i][j] != chess) {
                     break;
@@ -127,7 +132,7 @@
                 }
                 count3++;
             }
-            //ÓÒÉÏ×óÏÂÅĞ¶Ï
+            //å³ä¸Šå·¦ä¸‹åˆ¤æ–­
             for (var i = x, j = y; i >= 0, j < 15; i--, j++) {
                 if (chessData[i][j] != chess) {
                     break;
@@ -143,19 +148,19 @@
 
             if (count1 >= 5 || count2 >= 5 || count3 >= 5 || count4 >= 5) {
                 if (chess == 1) {
-                    alert("°×ÆåÓ®ÁË");
+                    alert("ç™½æ£‹èµ¢äº†");
                 }
                 else {
-                    alert("ºÚÆåÓ®ÁË");
+                    alert("é»‘æ£‹èµ¢äº†");
                 }
-                isWell = true;//ÉèÖÃ¸Ã¾ÖÆåÅÌÒÑ¾­Ó®ÁË£¬²»¿ÉÒÔÔÙ×ßÁË
+                isWell = true;//è®¾ç½®è¯¥å±€æ£‹ç›˜å·²ç»èµ¢äº†ï¼Œä¸å¯ä»¥å†èµ°äº†
             }
         }
     </script>
 </head>
 <body onload="drawRect()">
     <div>
-        <canvas width="640" id="canvas" onmousedown="play(event)" height="640">ÄãµÄä¯ÀÀÆ÷²»Ö§³ÖHTML5 canvas £¬ÇëÊ¹ÓÃ google chrome ä¯ÀÀÆ÷ ´ò¿ª.
+        <canvas width="640" id="canvas" onmousedown="play(event)" height="640">ä½ çš„æµè§ˆå™¨ä¸æ”¯æŒHTML5 canvas ï¼Œè¯·ä½¿ç”¨ google chrome æµè§ˆå™¨ æ‰“å¼€.
         </canvas>
     </div>
 

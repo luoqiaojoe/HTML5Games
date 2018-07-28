@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-    <title>ÈË»úÎå×ÓÆå¶ÔÕ½</title>
+    <title>äººæœºäº”å­æ£‹å¯¹æˆ˜</title>
     <style type="text/css">
         body {
             margin: 10px;
@@ -12,30 +12,40 @@
     <script type="text/javascript">
         var canvas;
         var context;
-        var isWhite = false;//ÉèÖÃÊÇ·ñ¸ÃÂÖµ½°×Æå
-        var isWell = false;//ÉèÖÃ¸Ã¾ÖÆåÅÌÊÇ·ñÓ®ÁË£¬Èç¹ûÓ®ÁË¾Í²»ÄÜÔÙ×ßÁË
-        var img_b = new Image();
-        img_b.src = "images/w.png";//°×ÆåÍ¼Æ¬
-        var img_w = new Image();
-        img_w.src = "images/b.png";//ºÚÆåÍ¼Æ¬
 
-        var chessData = new Array(15);//Õâ¸öÎªÆåÅÌµÄ¶şÎ¬Êı×éÓÃÀ´±£´æÆåÅÌĞÅÏ¢£¬³õÊ¼»¯0ÎªÃ»ÓĞ×ß¹ıµÄ£¬1Îª°×Æå×ßµÄ£¬2ÎªºÚÆå×ßµÄ
+		//è®¾ç½®æ˜¯å¦è¯¥è½®åˆ°ç™½æ£‹
+        var isWhite = false; 
+
+		//è®¾ç½®è¯¥å±€æ£‹ç›˜æ˜¯å¦èµ¢äº†ï¼Œå¦‚æœèµ¢äº†å°±ä¸èƒ½å†èµ°äº†
+        var isWell = false; 
+
+		//2å¼ å›¾ç‰‡
+        var img_b = new Image();
+        img_b.src = "images/w.png";//ç™½æ£‹å›¾ç‰‡
+        var img_w = new Image();
+        img_w.src = "images/b.png";//é»‘æ£‹å›¾ç‰‡
+
+        var chessData = new Array(15);//è¿™ä¸ªä¸ºæ£‹ç›˜çš„äºŒç»´æ•°ç»„ç”¨æ¥ä¿å­˜æ£‹ç›˜ä¿¡æ¯ï¼Œåˆå§‹åŒ–0ä¸ºæ²¡æœ‰èµ°è¿‡çš„ï¼Œ1ä¸ºç™½æ£‹èµ°çš„ï¼Œ2ä¸ºé»‘æ£‹èµ°çš„
         for (var x = 0; x < 15; x++) {
             chessData[x] = new Array(15);
             for (var y = 0; y < 15; y++) {
                 chessData[x][y] = 0;
             }
         }
-       		var KONG = 0;//¿ÕÎ»ÖÃKONG
-		var BLACK = 1;//ºÚÉ«Æå×Ó
-		var WHITE = 2;//°×É«Æå×Ó
-		var N = 0;//¿ÕÎ»ÖÃ
-		var B = 1;//ÓĞºÚÉ«Æå×Ó£¨ÈËµÄÆå£©
-		var W = 2;//ÓĞ°×É«Æå×Ó£¨µçÄÔµÄÆå£©
-		var S = 3;//ĞèÒªÏÂ×ÓµÄÎ»ÖÃ
-		//Êı×éChess´æ´¢ÆåÆ×
+
+        var KONG = 0;//ç©ºä½ç½®KONG
+		var BLACK = 1;//é»‘è‰²æ£‹å­
+		var WHITE = 2;//ç™½è‰²æ£‹å­
+
+		var N = 0;//ç©ºä½ç½®
+		var B = 1;//æœ‰é»‘è‰²æ£‹å­ï¼ˆäººçš„æ£‹ï¼‰
+		var W = 2;//æœ‰ç™½è‰²æ£‹å­ï¼ˆç”µè„‘çš„æ£‹ï¼‰
+		var S = 3;//éœ€è¦ä¸‹å­çš„ä½ç½®
+
+		//æ•°ç»„Chesså­˜å‚¨æ£‹è°±
 		var Chess  =  [	
-			//Ò»¸öÆå×ÓµÄÇé¿ö
+
+			//ä¸€ä¸ªæ£‹å­çš„æƒ…å†µ
 			[   N,	N,	N,	S,	B ],
 			[   B,	S,	N,	N,	N ],
 			[   N,	N,	N,	S,	B ],	
@@ -48,7 +58,8 @@
 			[   N,	W,	S,	N,	N ],		
 			[   N,	N,	S,	W,	N ],
 			[   N,	N,	W,	S,	N ],
-			//Á½¸öÆå×ÓµÄÇé¿ö
+
+			//ä¸¤ä¸ªæ£‹å­çš„æƒ…å†µ
 			[ B,	B,	S,	N,	N ],
 			[ N,	N,	S,	B,	B ],
 			[ B,	S,	B,	N,	N ],
@@ -63,7 +74,8 @@
 			[ N,	W,	S,	W,	N ],
 			[ N,	W,	W,	S,	N ],
 			[ N,	S,	W,	W,	N ],
-			//Èı¸öÆå×ÓµÄÇé¿ö
+
+			//ä¸‰ä¸ªæ£‹å­çš„æƒ…å†µ
 			[N,	S,	B,	B,	B ],
 			[B,	B,	B,	S,	N ],
 			[N,	B,	B,	B,	S ],	
@@ -74,7 +86,8 @@
 			[N,	W,	W,	W,	S ],	
 			[N,	W,	S,	W,	W ],
 			[W,	W,	S,	W,	N ],
-			//ËÄ¸öÆå×ÓµÄÇé¿ö
+
+			//å››ä¸ªæ£‹å­çš„æƒ…å†µ
 			[   S, 	B,  B,  B,  B 	],	
 			[   B, 	S,  B,  B,  B 	],
 			[   B,  B,  S,	B,  B 	],
@@ -84,79 +97,105 @@
 			[   W, 	S,  W,  W,  W 	],
 			[   W,  W,  S, 	W,  W 	],
 			[   W,  W,  W, 	S,  W 	],
-			[   W,  W,  W,  W,  S 	]];
-		 var m_nCurCol = -1;//µçÄÔ×î½üÒ»´ÎÏÂÆåÎ»ÖÃµÄÁĞºÅ
-		 var m_nCurRow = -1;//µçÄÔ×î½üÒ»´ÎÏÂÆåÎ»ÖÃµÄĞĞºÅ
+			[   W,  W,  W,  W,  S 	]
+		];
+			
+		var m_nCurCol = -1; //ç”µè„‘æœ€è¿‘ä¸€æ¬¡ä¸‹æ£‹ä½ç½®çš„åˆ—å·
+		var m_nCurRow = -1; //ç”µè„‘æœ€è¿‘ä¸€æ¬¡ä¸‹æ£‹ä½ç½®çš„è¡Œå·
 
+		//æ£‹ç‰Œä¸­ä¸€ä¸ªç‚¹
 		function Point(x,y)
 		{ 
-		   this.x=x;
-		   this.y=y;
+		   this.x = x;
+		   this.y = y;
 		}
 
-		//»ñÈ¡µçÄÔÏÂ×ÓÎ»ÖÃ
-		function GetComputerPos()//Point
-	        {
-			return  new Point(m_nCurCol,m_nCurRow);
+		//è·å–ç”µè„‘ä¸‹å­ä½ç½®
+		function GetComputerPos(){ //Point
+			return new Point(m_nCurCol,m_nCurRow);
 		}
-		//µçÄÔµÄÊäÈë£¬²ÎÊıgridÎªÆåÅÌ¸ñ×Ó
-		 function Input(grid){//gridÊÇArray
-			var rowSel,colSel,nLevel;
+
+		/**
+		 * åŠŸèƒ½ï¼šç”µè„‘çš„è¾“å…¥ï¼Œå‚æ•°gridä¸ºæ£‹ç›˜æ ¼å­
+		 * æ ¹æ®ç”µè„‘çš„è¾“å…¥ï¼Œè¿”å›ä¸€ä¸ªæœ€ä½³ç”µè„‘åº”è¯¥ä¸‹æ£‹çš„ä½ç½®
+		 */
+		function Input(grid){ //gridæ˜¯Array
+
+			var rowSel, colSel, nLevel;
 			var index,nLevel;
 			var j;
-			m_nCurCol = -1;//´æ´¢ÁÙÊ±µÄÑ¡ÔñÎ»ÖÃ
+
+			m_nCurCol = -1; //å­˜å‚¨ä¸´æ—¶çš„é€‰æ‹©ä½ç½®
 			m_nCurRow = -1;
-			nLevel = -1;//´æ´¢ÁÙÊ±Ñ¡ÔñµÄÆåÆ×¼¶±ğ
-			var bFind;//ÊÇ·ñ·ûºÏÆåÆ×µÄ±êÖ¾
-			for (var row = 0; row < 15; row ++)
-			{//±éÀúÆåÅÌµÄËùÓĞĞĞ
-				for (var col = 0; col < 15; col ++)
-				{//±éÀúÆåÅÌµÄËùÓĞÁĞ
-					for (var i = Chess.length - 1; i >= 0; i --)
-					{//±éÀúËùÓĞ¼¶±ğµÄÆåÆ×
-					//²é¿´´Óµ±Ç°Æå×Ó¿ªÊ¼µÄºáÏòÎå¸öÆå×ÓÊÇ·ñ·ûºÏ¸Ã¼¶±ğµÄÆåÆ×
-						if ( col + 4 < 15 )
-						{
+
+			//å­˜å‚¨ä¸´æ—¶é€‰æ‹©çš„æ£‹è°±çº§åˆ«,é€‰æ‹©æœ€é«˜çš„çº§åˆ«ä¸‹æ£‹
+			nLevel = -1;   
+
+			//æ˜¯å¦ç¬¦åˆæ£‹è°±çš„æ ‡å¿—
+			var bFind = false;     
+
+			//
+			for (var row = 0; row < 15; row ++) {
+
+				//éå†æ£‹ç›˜çš„æ‰€æœ‰è¡Œ
+				for (var col = 0; col < 15; col ++) {
+
+					//éå†æ£‹ç›˜çš„æ‰€æœ‰åˆ—
+					for (var i = Chess.length - 1; i >= 0; i --){
+
+						//éå†æ‰€æœ‰çº§åˆ«çš„æ£‹è°±
+						//æŸ¥çœ‹ä»å½“å‰æ£‹å­å¼€å§‹çš„æ¨ªå‘äº”ä¸ªæ£‹å­æ˜¯å¦ç¬¦åˆè¯¥çº§åˆ«çš„æ£‹è°±
+						if ( col + 4 < 15 ){
+
 							rowSel = -1;
 							colSel = -1;
 							bFind = true;
-							for ( j = 0; j < 5; j ++)
-							{
+
+							for ( j = 0; j < 5; j ++) {
+
+								//å…ˆè·å–æ£‹ç›˜ä¸Šçš„æ£‹å­
 								index = grid[col + j][row];
-								if ( index == KONG )
-								{//Èç¹û¸ÃÎ»ÖÃÃ»ÓĞÆå×Ó£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÖ»ÄÜÊÇS»òN
-									if (Chess[i][j] == S)
-									{//Èç¹ûÊÇS£¬Ôò±£´æÎ»ÖÃ
+
+								//å¦‚æœå½“å‰æ£‹ç›˜ä¸Šæ²¡æœ‰æ£‹å­
+								if ( index == KONG ){
+									
+									//å¦‚æœè¯¥ä½ç½®æ²¡æœ‰æ£‹å­ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåªèƒ½æ˜¯Sæˆ–N
+									if (Chess[i][j] == S) {//å¦‚æœæ˜¯Sï¼Œåˆ™ä¿å­˜ä½ç½®
 										rowSel = row;
 										colSel = col + j;
 									}
-									else if ( Chess[i][j] != N )
-									{//²»ÊÇSÒ²²»ÊÇN£¬Ôò²»·ûºÏÕâ¸öÆåÆ×£¬½áÊøÑ­»·
+									else if ( Chess[i][j] != N ) {
+										//ä¸æ˜¯Sä¹Ÿä¸æ˜¯Nï¼Œåˆ™ä¸ç¬¦åˆè¿™ä¸ªæ£‹è°±ï¼Œç»“æŸå¾ªç¯
 										bFind = false;
 										break;
 									}
 								}
-								if ( index == BLACK && Chess[i][j] != B )
-								{//Èç¹ûÊÇºÚÉ«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇB£¬·ñÔò½áÊøÑ­»·
+
+								//å¦‚æœæ˜¯é»‘è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯B(å› ä¸ºè¦å®Œå…¨ç¬¦åˆæ£‹è°±)ï¼Œå¦åˆ™ç»“æŸå¾ªç¯
+								if ( index == BLACK && Chess[i][j] != B ) {
+									
 									bFind = false;
 									break;
 								}
-								if ( index == WHITE && Chess[i][j] != W )
-								{//Èç¹ûÊÇ°×É«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇW£¬·ñÔò½áÊøÑ­»·
+
+								//å¦‚æœæ˜¯ç™½è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Wï¼Œå¦åˆ™ç»“æŸå¾ªç¯
+								if ( index == WHITE && Chess[i][j] != W ) {
 									bFind = false;
 									break;
 								}
 							}
-							if ( bFind && i > nLevel )
-							{//Èç¹û·ûºÏ´ËÆåÆ×£¬ÇÒ¸ÃÆåÆ×±ÈÉÏ´ÎÕÒµ½ÆåÆ×µÄ¼¶±ğ¸ß
-								nLevel = i;//±£´æ¼¶±ğ
-								m_nCurCol = colSel;//±£´æÎ»ÖÃ
+
+							//
+							if ( bFind && i > nLevel ) {
+								//å¦‚æœç¬¦åˆæ­¤æ£‹è°±ï¼Œä¸”è¯¥æ£‹è°±æ¯”ä¸Šæ¬¡æ‰¾åˆ°æ£‹è°±çš„çº§åˆ«é«˜
+								nLevel = i;//ä¿å­˜çº§åˆ«
+								m_nCurCol = colSel;//ä¿å­˜ä½ç½®
 								m_nCurRow = rowSel;
-								break;//±éÀúÆäËû¼¶±ğµÄÆåÆ×
+								break;//éå†å…¶ä»–çº§åˆ«çš„æ£‹è°±
 							}
 						}
 
-						//²é¿´´Óµ±Ç°Æå×Ó¿ªÊ¼µÄ×İÏòÎå¸öÆå×ÓÊÇ·ñ·ûºÏ¸Ã¼¶±ğµÄÆåÆ×
+						//æŸ¥çœ‹ä»å½“å‰æ£‹å­å¼€å§‹çš„çºµå‘äº”ä¸ªæ£‹å­æ˜¯å¦ç¬¦åˆè¯¥çº§åˆ«çš„æ£‹è°±
 						if ( row + 4 < 15 )
 						{
 							rowSel = -1;
@@ -166,20 +205,20 @@
 							{
 								index = grid[col][row + j];
 								if ( index == KONG )
-								{//Èç¹û¸ÃÎ»ÖÃÃ»ÓĞÆå×Ó£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÖ»ÄÜÊÇS»òN
+								{//å¦‚æœè¯¥ä½ç½®æ²¡æœ‰æ£‹å­ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåªèƒ½æ˜¯Sæˆ–N
 									if (Chess[i][j] == S)
-									{//Èç¹ûÊÇS£¬Ôò±£´æÎ»ÖÃ
+									{//å¦‚æœæ˜¯Sï¼Œåˆ™ä¿å­˜ä½ç½®
 										rowSel = row + j;
 										colSel = col;
 									}
 									else if ( Chess[i][j] != N )
-									{//²»ÊÇSÒ²²»ÊÇN£¬Ôò²»·ûºÏÕâ¸öÆåÆ×£¬½áÊøÑ­»·
+									{//ä¸æ˜¯Sä¹Ÿä¸æ˜¯Nï¼Œåˆ™ä¸ç¬¦åˆè¿™ä¸ªæ£‹è°±ï¼Œç»“æŸå¾ªç¯
 										bFind = false;
 										break;
 									}
 								}
 								if ( index == BLACK )
-								{//Èç¹ûÊÇºÚÉ«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇB£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯é»‘è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Bï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									if (Chess[i][j] != B)
 									{
 										bFind = false;
@@ -187,21 +226,21 @@
 									}
 								}
 								if ( index == WHITE && Chess[i][j] != W )
-								{//Èç¹ûÊÇ°×É«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇW£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯ç™½è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Wï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									bFind = false;
 									break;
 								}
 							}
 							if ( bFind && i > nLevel )
-							{//Èç¹û·ûºÏ´ËÆåÆ×£¬ÇÒ¸ÃÆåÆ×±ÈÉÏ´ÎÕÒµ½ÆåÆ×µÄ¼¶±ğ¸ß
-								nLevel = i;//±£´æ¼¶±ğ
-								m_nCurCol = colSel;//±£´æÎ»ÖÃ
+							{//å¦‚æœç¬¦åˆæ­¤æ£‹è°±ï¼Œä¸”è¯¥æ£‹è°±æ¯”ä¸Šæ¬¡æ‰¾åˆ°æ£‹è°±çš„çº§åˆ«é«˜
+								nLevel = i;//ä¿å­˜çº§åˆ«
+								m_nCurCol = colSel;//ä¿å­˜ä½ç½®
 								m_nCurRow = rowSel;
-								break;//±éÀúÆäËû¼¶±ğµÄÆåÆ×
+								break;//éå†å…¶ä»–çº§åˆ«çš„æ£‹è°±
 							}
 						}
 
-						//²é¿´´Óµ±Ç°Æå×Ó¿ªÊ¼µÄĞ±45¶ÈÏòÏÂµÄÎå¸öÆå×ÓÊÇ·ñ·ûºÏ¸Ã¼¶±ğµÄÆåÆ×
+						//æŸ¥çœ‹ä»å½“å‰æ£‹å­å¼€å§‹çš„æ–œ45åº¦å‘ä¸‹çš„äº”ä¸ªæ£‹å­æ˜¯å¦ç¬¦åˆè¯¥çº§åˆ«çš„æ£‹è°±
 						if ( col - 4 >= 0 && row + 4 < 15 )
 						{
 							rowSel = -1;
@@ -209,43 +248,49 @@
 							bFind = true;
 							for (j = 0; j < 5; j ++)
 							{
+
 								index = grid[col - j][row + j];
+
 								if ( index == KONG )
-								{//Èç¹û¸ÃÎ»ÖÃÃ»ÓĞÆå×Ó£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÖ»ÄÜÊÇS»òN
+								{//å¦‚æœè¯¥ä½ç½®æ²¡æœ‰æ£‹å­ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåªèƒ½æ˜¯Sæˆ–N
 									if (Chess[i][j] == S)
-									{//Èç¹ûÊÇS£¬Ôò±£´æÎ»ÖÃ
+									{//å¦‚æœæ˜¯Sï¼Œåˆ™ä¿å­˜ä½ç½®
 										rowSel = row + j;
 										colSel = col - j;
 									}
 									else if ( Chess[i][j] != N )
-									{//²»ÊÇSÒ²²»ÊÇN£¬Ôò²»·ûºÏÕâ¸öÆåÆ×£¬½áÊøÑ­»·
+									{//ä¸æ˜¯Sä¹Ÿä¸æ˜¯Nï¼Œåˆ™ä¸ç¬¦åˆè¿™ä¸ªæ£‹è°±ï¼Œç»“æŸå¾ªç¯
 										bFind = false;
 										break;
 									}
 								}
+
 								if ( index == BLACK && Chess[i][j] != B )
-								{//Èç¹ûÊÇºÚÉ«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇB£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯é»‘è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Bï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									bFind = false;
 									break;
 								}
+
 								if ( index == WHITE && Chess[i][j] != W )
-								{//Èç¹ûÊÇ°×É«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇW£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯ç™½è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Wï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									bFind = false;
 									break;
 								}
 							}
-							if ( bFind && i > nLevel )
-							{//Èç¹û·ûºÏ´ËÆåÆ×£¬ÇÒ¸ÃÆåÆ×±ÈÉÏ´ÎÕÒµ½ÆåÆ×µÄ¼¶±ğ¸ß
-								nLevel = i;//±£´æ¼¶±ğ
-								m_nCurCol = colSel;//±£´æÎ»ÖÃ
+
+
+							if ( bFind && i > nLevel ) {
+								//å¦‚æœç¬¦åˆæ­¤æ£‹è°±ï¼Œä¸”è¯¥æ£‹è°±æ¯”ä¸Šæ¬¡æ‰¾åˆ°æ£‹è°±çš„çº§åˆ«é«˜
+								nLevel = i;//ä¿å­˜çº§åˆ«
+								m_nCurCol = colSel;//ä¿å­˜ä½ç½®
 								m_nCurRow = rowSel;
-								break;//±éÀúÆäËû¼¶±ğµÄÆåÆ×
+								break;//éå†å…¶ä»–çº§åˆ«çš„æ£‹è°±
 							}
 						}
 
-						//Ğ±135¶ÈµÄÎå¸öÆå×Ó
+						//æ–œ135åº¦çš„äº”ä¸ªæ£‹å­
 						if ( col + 4 < 15 && row + 4 < 15 )
-						{//²é¿´´Óµ±Ç°Æå×Ó¿ªÊ¼µÄĞ±135¶ÈÏòÏÂµÄÎå¸öÆå×ÓÊÇ·ñ·ûºÏ¸Ã¼¶±ğµÄÆåÆ×
+						{//æŸ¥çœ‹ä»å½“å‰æ£‹å­å¼€å§‹çš„æ–œ135åº¦å‘ä¸‹çš„äº”ä¸ªæ£‹å­æ˜¯å¦ç¬¦åˆè¯¥çº§åˆ«çš„æ£‹è°±
 							rowSel = -1;
 							colSel = -1;
 							bFind = true;
@@ -253,72 +298,81 @@
 							{
 								index = grid[col + j][row + j];
 								if ( index == KONG )
-								{//Èç¹û¸ÃÎ»ÖÃÃ»ÓĞÆå×Ó£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÖ»ÄÜÊÇS»òN
+								{//å¦‚æœè¯¥ä½ç½®æ²¡æœ‰æ£‹å­ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåªèƒ½æ˜¯Sæˆ–N
 									if (Chess[i][j] == S)
-									{//Èç¹ûÊÇS£¬Ôò±£´æÎ»ÖÃ
+									{//å¦‚æœæ˜¯Sï¼Œåˆ™ä¿å­˜ä½ç½®
 										rowSel = row + j;
 										colSel = col + j;
 									}
 									else if ( Chess[i][j] != N )
-									{//²»ÊÇSÒ²²»ÊÇN£¬Ôò²»·ûºÏÕâ¸öÆåÆ×£¬½áÊøÑ­»·
+									{//ä¸æ˜¯Sä¹Ÿä¸æ˜¯Nï¼Œåˆ™ä¸ç¬¦åˆè¿™ä¸ªæ£‹è°±ï¼Œç»“æŸå¾ªç¯
 										bFind = false;
 										break;
 									}
 								}
 								if ( index == BLACK && Chess[i][j] != B )
-								{//Èç¹ûÊÇºÚÉ«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇB£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯é»‘è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Bï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									bFind = false;
 									break;
 								}
 								if ( index == WHITE && Chess[i][j] != W )
-								{//Èç¹ûÊÇ°×É«Æå£¬¶ÔÓ¦µÄÆåÆ×Î»ÖÃÉÏÓ¦ÊÇW£¬·ñÔò½áÊøÑ­»·
+								{//å¦‚æœæ˜¯ç™½è‰²æ£‹ï¼Œå¯¹åº”çš„æ£‹è°±ä½ç½®ä¸Šåº”æ˜¯Wï¼Œå¦åˆ™ç»“æŸå¾ªç¯
 									bFind = false;
 									break;
 								}
 							}
+
 							if ( bFind && i > nLevel )
-							{//Èç¹û·ûºÏ´ËÆåÆ×£¬ÇÒ¸ÃÆåÆ×±ÈÉÏ´ÎÕÒµ½ÆåÆ×µÄ¼¶±ğ¸ß
-								nLevel = i;//±£´æ¼¶±ğ
-								m_nCurCol = colSel;//±£´æÎ»ÖÃ
+							{//å¦‚æœç¬¦åˆæ­¤æ£‹è°±ï¼Œä¸”è¯¥æ£‹è°±æ¯”ä¸Šæ¬¡æ‰¾åˆ°æ£‹è°±çš„çº§åˆ«é«˜
+								nLevel = i;//ä¿å­˜çº§åˆ«
+								m_nCurCol = colSel;//ä¿å­˜ä½ç½®
 								m_nCurRow = rowSel;
-								break;//±éÀúÆäËû¼¶±ğµÄÆåÆ×
+								break;//éå†å…¶ä»–çº§åˆ«çš„æ£‹è°±
 							}
 						}
 					}
 				}
 			}
-			if ( m_nCurRow != -1 )
-			{//Èç¹ûÑ¡ÔñÁËÒ»¸ö×î¼ÑÎ»ÖÃ
-				grid[m_nCurCol][m_nCurRow]= WHITE ;
+
+			//å¦‚æœé€‰æ‹©äº†ä¸€ä¸ªæœ€ä½³ä½ç½®
+			if ( m_nCurRow != -1 ) {
+
+				grid[m_nCurCol][m_nCurRow] = WHITE ;
+
 				return true;
 			}
-			//Èç¹ûËùÓĞÆåÆ×¶¼²»·ûºÏ,ÔòËæ±ãÕÒÒ»¸ö¿ÕÎ»ÖÃ			
-			while(true)
-			{
+
+			//å¦‚æœæ‰€æœ‰æ£‹è°±éƒ½ä¸ç¬¦åˆ,åˆ™éšä¾¿æ‰¾ä¸€ä¸ªç©ºä½ç½®			
+			while(true) {
 				var col;
 				var row;
+
 				col=parseInt(Math.random()*15);
 				row=parseInt(Math.random()*15);
-				if (grid[col][row] == KONG)
-				{
+
+				if (grid[col][row] == KONG){
+
 					grid[col][row] = WHITE ;
 					m_nCurCol = col;
 					m_nCurRow = row;
+
 					return true;
 				}
 			}
+
 			return false;
 		}
 
+        function drawRect() {//é¡µé¢åŠ è½½å®Œæ¯•è°ƒç”¨å‡½æ•°ï¼Œåˆå§‹åŒ–æ£‹ç›˜
 
-
-        function drawRect() {//Ò³Ãæ¼ÓÔØÍê±Ïµ÷ÓÃº¯Êı£¬³õÊ¼»¯ÆåÅÌ
             canvas = document.getElementById("canvas");
             context = canvas.getContext("2d");
             context.fillStyle = "orange";
             context.fillRect(0,0,640,640);
-            context.fillStyle = "#000000";;
-            for (var i = 0; i <= 640; i += 40) {//»æÖÆÆåÅÌµÄÏß
+            context.fillStyle = "#000000";
+
+            for (var i = 0; i <= 640; i += 40) {//ç»˜åˆ¶æ£‹ç›˜çš„çº¿
+
                 context.beginPath();
                 context.moveTo(0, i);
                 context.lineTo(640, i);
@@ -332,53 +386,66 @@
                 context.stroke();
             }
         }
-        function play(e) {//Êó±êµã»÷Ê±·¢Éú
-            var x = parseInt((e.clientX - 20) / 40);//¼ÆËãÊó±êµã»÷µÄÇøÓò£¬Èç¹ûµã»÷ÁË£¨65£¬65£©£¬ÄÇÃ´¾ÍÊÇµã»÷ÁË£¨1£¬1£©µÄÎ»ÖÃ
+
+        function play(e) {//é¼ æ ‡ç‚¹å‡»æ—¶å‘ç”Ÿ
+            var x = parseInt((e.clientX - 20) / 40);//è®¡ç®—é¼ æ ‡ç‚¹å‡»çš„åŒºåŸŸï¼Œå¦‚æœç‚¹å‡»äº†ï¼ˆ65ï¼Œ65ï¼‰ï¼Œé‚£ä¹ˆå°±æ˜¯ç‚¹å‡»äº†ï¼ˆ1ï¼Œ1ï¼‰çš„ä½ç½®
             var y = parseInt((e.clientY - 20) / 40);
 
-            if (chessData[x][y] != 0) {//ÅĞ¶Ï¸ÃÎ»ÖÃÊÇ·ñ±»ÏÂ¹ıÁË
-                alert("Äã²»ÄÜÔÚÕâ¸öÎ»ÖÃÏÂÆå");
+            if (chessData[x][y] != 0) {//åˆ¤æ–­è¯¥ä½ç½®æ˜¯å¦è¢«ä¸‹è¿‡äº†
+                alert("ä½ ä¸èƒ½åœ¨è¿™ä¸ªä½ç½®ä¸‹æ£‹");
                 return;
             }
 
+			//è‡ªå·±æ˜¯é»‘è‰²ï¼Œè½®åˆ°ç™½è‰²ä¸‹æ£‹ï¼Œåˆ™è·³è¿‡
             if (isWhite) {
-                //isWhite = false;
-                //drawChess(1, x, y);
+				
             }
             else {
+
                 drawChess(2, x, y);
-                //isWhite = true;
-                //ÂÖµ½µçÄÔ£¨°×·½£©×ß
+
+    
+                //è½®åˆ°ç”µè„‘ï¼ˆç™½æ–¹ï¼‰èµ°
+				/**
+				 * è½®åˆ°ç”µè„‘ä¸‹æ£‹ï¼Œåˆ™è¾“å…¥å½“å‰æ£‹ç‰ŒçŠ¶æ€ï¼Œè®¾ç½®ä¸‹æ£‹ä½ç½®
+				 */
                 Input(chessData);
-                var p=GetComputerPos();//»ñÈ¡µçÄÔÂä×ÓÎ»ÖÃP
+
+
+                var p = GetComputerPos();//è·å–ç”µè„‘è½å­ä½ç½®P
                 drawChess(1,p.x,p.y);
             }
-
         }
-        function drawChess(chess, x, y) {//²ÎÊıÎª£¬Æå£¨1Îª°×Æå£¬2ÎªºÚÆå£©£¬Êı×éÎ»ÖÃ
+
+        function drawChess(chess, x, y) {//å‚æ•°ä¸ºï¼Œæ£‹ï¼ˆ1ä¸ºç™½æ£‹ï¼Œ2ä¸ºé»‘æ£‹ï¼‰ï¼Œæ•°ç»„ä½ç½®
+
             if (isWell == true) {
-                alert("ÒÑ¾­½áÊøÁË£¬Èç¹ûĞèÒªÖØĞÂÍæ£¬ÇëË¢ĞÂ");
+                alert("å·²ç»ç»“æŸäº†ï¼Œå¦‚æœéœ€è¦é‡æ–°ç©ï¼Œè¯·åˆ·æ–°");
                 return;
             }
+
+			//
             if (x >= 0 && x < 15 && y >= 0 && y < 15) {
                 if (chess == 1) {
-                    context.drawImage(img_w, x * 40 + 20, y * 40 + 20);//»æÖÆ°×Æå
+                    context.drawImage(img_w, x * 40 + 20, y * 40 + 20);//ç»˜åˆ¶ç™½æ£‹
                     chessData[x][y] = 1;
                 }
                 else {
                     context.drawImage(img_b, x * 40 + 20, y * 40 + 20);
                     chessData[x][y] = 2;
                 }
+
+				//
                 judge(x, y, chess);
             }
         }
-        function judge(x, y, chess) {//ÅĞ¶Ï¸Ã¾ÖÆåÅÌÊÇ·ñÓ®ÁË
+        function judge(x, y, chess) {//åˆ¤æ–­è¯¥å±€æ£‹ç›˜æ˜¯å¦èµ¢äº†
             var count1 = 0;
             var count2 = 0;
             var count3 = 0;
             var count4 = 0;
 
-            //×óÓÒÅĞ¶Ï
+            //å·¦å³åˆ¤æ–­
             for (var i = x; i >= 0; i--) {
                 if (chessData[i][y] != chess) {
                     break;
@@ -391,7 +458,7 @@
                 }
                 count1++;
             }
-            //ÉÏÏÂÅĞ¶Ï
+            //ä¸Šä¸‹åˆ¤æ–­
             for (var i = y; i >= 0; i--) {
                 if (chessData[x][i] != chess) {
                     break;
@@ -404,7 +471,7 @@
                 }
                 count2++;
             }
-            //×óÉÏÓÒÏÂÅĞ¶Ï
+            //å·¦ä¸Šå³ä¸‹åˆ¤æ–­
             for (var i = x, j = y; i >= 0, j >= 0; i--, j--) {
                 if (chessData[i][j] != chess) {
                     break;
@@ -417,7 +484,7 @@
                 }
                 count3++;
             }
-            //ÓÒÉÏ×óÏÂÅĞ¶Ï
+            //å³ä¸Šå·¦ä¸‹åˆ¤æ–­
             for (var i = x, j = y; i >= 0, j < 15; i--, j++) {
                 if (chessData[i][j] != chess) {
                     break;
@@ -433,20 +500,20 @@
 
             if (count1 >= 5 || count2 >= 5 || count3 >= 5 || count4 >= 5) {
                 if (chess == 1) {
-                    alert("°×ÆåÓ®ÁË");
+                    alert("ç™½æ£‹èµ¢äº†");
                 }
                 else {
-                    alert("ºÚÆåÓ®ÁË");
+                    alert("é»‘æ£‹èµ¢äº†");
                 }
-                isWell = true;//ÉèÖÃ¸Ã¾ÖÆåÅÌÒÑ¾­Ó®ÁË£¬²»¿ÉÒÔÔÙ×ßÁË
+                isWell = true;//è®¾ç½®è¯¥å±€æ£‹ç›˜å·²ç»èµ¢äº†ï¼Œä¸å¯ä»¥å†èµ°äº†
             }
         }
     </script>
 </head>
 <body onload="drawRect()">
-    <script type="text/javascript" src="computer.js"></script>
+    <!-- <script type="text/javascript" src="computer.js"></script> -->
     <div>
-        <canvas width="640" id="canvas" onmousedown="play(event)" height="640">ÄãµÄä¯ÀÀÆ÷²»Ö§³ÖHTML5 canvas £¬ÇëÊ¹ÓÃ google chrome ä¯ÀÀÆ÷ ´ò¿ª.
+        <canvas width="640" id="canvas" onmousedown="play(event)" height="640">ä½ çš„æµè§ˆå™¨ä¸æ”¯æŒHTML5 canvas ï¼Œè¯·ä½¿ç”¨ google chrome æµè§ˆå™¨ æ‰“å¼€.
         </canvas>
     </div>
     
